@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>Página Administrativa</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<link rel="icon" href="/image/favicon.png" />
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../static/js/js.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+	<!-- Bootstrap core CSS -->
+	<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet" />
+	
+	<!-- Custom styles for this template -->
+	<link href="/css/style.css" rel="stylesheet" />
+</head>
+<body>
+	<header>
+		<div class="topoPagina">
+			<div class="botaoMenu">
+				<button type="button" class="btn btn-dark navbar-toggle pull-left">
+					<i class="oi oi-menu"></i>
+				</button>
+			</div>
+			<div class="tituloPagina">
+				<p>Painel de controle administrativo</p>
+			</div>
+		</div>
+	</header>
+	
+	<div class="layout-main">	
+		
+		<nav class="nav-menu">
+			<ul id="ul-principal">
+				<li class="li-p"><a href="/administrativo">Home</a></li>
+				<li class="li-p">
+					<a class="bt1" href="javascript://">Funcionários</a>
+					<ul class="ul-funcionarios">
+						<li><a href="/administrativo/funcionarios/cadastrar">Novo funcionário</a></li>
+						<li><a href="/administrativo/funcionarios/listar">Lista de funcionários</a></li>
+					</ul>
+				</li>
+				<li class="li-p">
+					<a class="bt2" href="javascript://">Produtos</a>
+					<ul class="ul-produtos">
+						<li><a href="/administrativo/produtos/cadastrar">Cadastrar Novo</a></li>
+						<li><a href="/administrativo/produtos/listar">Listar Produtos</a></li>
+						<li><a href="/administrativo/entrada/cadastrar">Entrada no Estoque</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+		
+			
+		<section class="layout-content" layout:fragment="corpo">
+			Principal		
+		</section>		
+	
+	</div>
+
+	<footer class="layout-footer">
+		<div class="container">
+			<span class="footer-copy">&copy; 2023 ACST. Todos os direitos reservados.</span>
+		</div>
+	</footer> 
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+
+	
+	    
+		$(function() {
+			$('[data-toggle="popover"]').popover();
+		});
+		
+		$(document).ready(function(){
+		    $(".navbar-toggle").click(function(){
+		        $(".sidebar").toggleClass("sidebar-open");
+		    })
+		});
+
+	</script>
+</body>
+</html>

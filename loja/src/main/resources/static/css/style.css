@@ -1,0 +1,197 @@
+/*
+ * Base structure
+ */
+html, body {
+	height: 100%;
+}
+
+header {
+    color: #fff;
+    font-size: x-large;
+    background-color: #212529;
+}
+
+/* header */
+
+.topoPagina {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.botaoMenu {
+    width: 5%;
+    margin-left: 25px;
+}
+
+.tituloPagina {
+    width: 70%;
+}
+
+
+/*
+ * main layout
+ */
+
+.page-header {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    color: #000;
+    line-height: 50px;
+    font-size: large;
+}
+
+.obs {
+    width: 20%;
+}
+
+.tituloConteudo {
+    width: 80%;
+    margin-left: 20px;
+    margin-top: 10px;
+    font-size: x-large;
+}
+
+#atalho {
+    width: 20%;
+    margin-top: 10px;
+    margin-right: 0;
+    margin-left: 20px;
+}
+
+.layout-main {
+    display: flex;
+    min-height: calc(100vh - 52px);
+    overflow: hidden;
+}
+
+/*
+ * Content
+ */
+.layout-content {
+    width: 100%;
+    padding-top: 0px;
+    margin-bottom: 50px;
+}
+
+
+#btnClear {
+    padding: 0%;
+    height: 30px;
+    float: right;
+    margin-top: 30px;
+    margin-left: 135px;
+}
+
+#form-row-bottom {
+    width: 102%;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    float: left;
+}
+
+#cadastro {
+    margin-left: 20px;
+}
+
+.modalMeu {
+    display:none;
+    vertical-align:middle;
+    position:relative;
+    max-width:500px;
+    height: 100px;
+    box-sizing:border-box;
+    width:90%;
+    background:#fff;
+    padding:15px 30px;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    -o-border-radius:8px;
+    -ms-border-radius:8px;
+    border-radius:8px;
+    -webkit-box-shadow:0 0 10px #000;
+    -moz-box-shadow:0 0 10px #000;
+    -o-box-shadow:0 0 10px #000;
+    -ms-box-shadow:0 0 10px #000;
+    box-shadow:0 0 10px #000;
+    text-align:left;
+    margin-right: 20px;
+}
+
+.modalButton {
+    float: right;
+    top: -10px;
+    margin-right: 10px;
+    width: 40px;
+    height: 30px;
+    color: #fff;
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+    background: #1e94d2;
+    border: 2px solid #030303;
+    -moz-box-shadow:    1px 1px 5px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    box-shadow:         1px 1px 5px rgba(0,0,0,0.5);
+  }
+
+/*
+ * Sidebar
+ */
+
+ul {
+    list-style: none;
+    color: #fff;
+}
+
+a {
+    text-decoration: none;
+    color:#fff;
+    display: block;
+}
+
+a:hover {
+    color: #777777;
+}
+
+.nav-menu {
+    background-color: #212529;   
+    width: 20%;
+}
+
+.li-p {
+    line-height: 50px;
+}
+
+ul ul {
+    display:none;
+}
+
+ul li:hover > ul {
+    display:block;    
+}
+
+
+
+/*
+ * Footer
+ */
+.layout-footer {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 0;
+	height: 50px;
+}
+
+.footer-copy {
+	font-size: 92%;
+	display: block;
+	color: #777777;
+	text-align: center;
+}
+

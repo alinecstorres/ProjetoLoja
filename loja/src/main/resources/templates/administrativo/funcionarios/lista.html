@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{administrativo/fragments/layout}">
+<head>
+	<title>Página Lista de Funcionários do Administrativo</title>
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+			<div class="page-header">
+				<div class="tituloConteudo">
+					Lista de Funcionários
+				</div>
+	
+				<a class="atalho" href="/administrativo/funcionarios/cadastrar" role="button">
+					<span>Cadastrar Funcionários</span>
+				</a>				
+			</div>
+	        
+	
+	        <div class="container">
+	
+	            <p>
+	                <i class="oi oi-magnifying-glass"></i><span></span>
+	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
+	                        aria-controls="collapseNome">Nome
+	                </button>
+	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseCargo"
+	                        aria-controls="collapseCargo">Cargo
+	                </button>
+	            </p>
+	            <div class="row">
+	                <div class="col">
+	                    <div class="collapse" id="collapseNome">
+	
+	                        <nav class="navbar navbar-light bg-light">
+	                            <form class="form-inline" method="GET" action="/administrativo/funcionarios/buscar/nome">
+	                                <input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
+	                                       name="nome" />
+	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+	                            </form>
+	                        </nav>
+	
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="row">
+	                <div class="col">
+	                    <div class="collapse" id="collapseCargo">
+	
+	                        <nav class="navbar navbar-light bg-light">
+	                            <form class="form-inline" method="GET" action="/administrativo/funcionarios/buscar/cargo">
+	                                <select class="form-control mr-sm-2" name="cargo" aria-label="Search">
+	                                    <option value="">Cargo</option>
+	                                    <option value="1">Auxiliar de Produção</option>
+	                                    <option value="2">Auxiliar Administrativo</option>
+	                                    <option value="3">Contador</option>
+	                                    <option value="4">Administrador</option>
+	                                    <option value="5">Desenvolvedor Java Senior</option>
+	                                </select>
+	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+	                            </form>
+	                        </nav>
+	
+	                    </div>
+	                </div>
+	            </div>
+	
+	
+	            <div class="table-responsive">
+	                <table class="table table-striped table-hover table-sm">
+	                    <thead>
+	                    <tr>
+	                        <th>#</th>
+	                        <th>Nome</th>
+	                        <th>Cargo</th>
+	                        <th>Ação</th>
+	                    </tr>
+	                    </thead>
+	                    <tbody>
+							<tr th:each="funcionario : ${listaFuncionarios}">
+								<td th:text="${funcionario.id}"></td>
+								<td th:text="${funcionario.nome}"></td>
+								<td th:text="${funcionario.cargo}"></td>
+
+								<td colspan="2"><a class="btn btn-info btn-sm" th:href="@{/administrativo/funcionarios/editar/{id}(id=${funcionario.id})}" role="button"><span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
+								</a>
+
+								<a class="btn btn-danger btn-sm" href="#caixa" rel="modal:open" role="button"><span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
+
+								</a>
+
+								<div id="caixa" class="modalMeu">
+									<p>Tem certeza que deseja excluir?</p>
+									<a class="modalButton" th:href="@{/administrativo/funcionarios/listar}">Não</a>
+									<a class="modalButton" th:href="@{/administrativo/funcionarios/remover/{id}(id=${funcionario.id})}">Sim</a>
+								</div>
+								</td>
+							</tr>
+	                    </tbody>
+	                </table>
+	            </div>
+	        </div>
+	    </section>
+</body>
+</html>		

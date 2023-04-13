@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{administrativo/fragments/layout}">
+<head>
+<title>Página Entrada de Produtos da loja virtual</title>
+<script>
+	function associaInput() {
+    var variavel;
+    //pega o value do select
+    var e = document.getElementById("tipo_entrada");
+    var itemSelecionado = e.options[e.selectedIndex].value;
+     //injeta no value no input
+    if (itemSelecionado=="novo"){
+        variavel="NOVO";
+    }else if (itemSelecionado=="quebrado"){
+        variavel="QUEBRADO";
+    }
+    document.getElementById('observacao').value = variavel;
+    console.log(variavel);
+}
+</script>
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+		<div class="row">
+			<div class="col-9">
+				<div class="tituloConteudo">
+					Nova Entrada no Estoque
+				</div>
+			</div>
+			<div class="col-1" id="atalho">
+				<a class="btn btn-primary" href="/administrativo/entrada/listar" role="button">
+					<span>Listar Entradas no Estoque</span>
+				</a>
+			</div>
+		</div>
+		<br/>
+		<div class="col-12" id="cadastro">
+
+			<div class="obs">
+				<label for="tipo_entrada">Tipo de entrada<span class="required"></span></label>
+				<select class="form-control" name="tipo_entrada" id="tipo_entrada" onchange="associaInput()" autofocus="autofocus">
+				   <option value="">Selecione</option>
+				   <option value="novo">PRODUTO NOVO</option>
+				   <option value="quebrado">PRODUTO QUEBRADO</option>
+				</select>
+			</div>
+
+			<form action="/administrativo/entrada/salvar" th:object="${entrada}"
+				method="POST">
+				
+				<div class="row" >
+
+					<div class="col-4">
+						<label>Funcionário</label> 
+						<select th:field="*{funcionario}"
+							class="form-control" >
+							<option th:each="fun: ${listaFuncionarios}" th:value="${fun.id}"
+								th:text="${fun.nome}"></option>
+						</select>
+
+						<div class="invalid-feedback"></div>
+					</div>
+
+					<div class="col-3" th:object="${entradaItens}">
+						<label>Produto</label> 
+						<select th:field="*{produto}"
+							class="form-control">
+							<option th:each="prod: ${listaProdutos}" th:value="${prod.id}"
+								th:text="${prod.nomeCompletoProduto}"></option>
+						</select>
+
+						<div class="invalid-feedback"></div>
+					</div>
+
+					<div class="col-1"th:object="${entradaItens}">
+						<label for="quantidade">Quantidade</label> <input type="number"
+							class="form-control" id="quantidade" placeholder="Quantidade" th:field="*{quantidade}" value="" />
+						<div class="invalid-feedback"></div>
+					</div>
+
+					<div class="col-1">
+						<br />
+						<button id="add" name="acao" th:value="itens" type="submit"
+							class="btn btn-primary">Adicionar</button>
+					</div>
+
+					<div class="col-1" id="btnClear">
+						<button id="clear" name="acao" th:value="clear" type="submit"
+						class="btn btn-danger btn-sm">Limpar lista</button>
+					</div>
+				</div>
+				<br/>
+				<div class="col-12">
+
+					<div >
+						<table class="table table-striped table-hover table-sm">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Nome</th>
+									<th>Observação</th>
+									<th>Quantidade</th>
+									<th>Estoque</th>
+									<th>Ação</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="itens : ${listaEntradaItens}">
+									<td th:text="${itens.produto.id}"></td>
+									<td th:text="${itens.produto.nomeCompletoProduto}"></td>
+									<td th:text="${itens.observacao}"></td>
+									<td th:text="${itens.quantidade}"></td>
+									<td th:text="${itens.produto.quantEstoque}"></td>
+									<td>
+										<button class="btn btn-danger btn-sm" name="acao" th:value="${itens.produto.nomeCompletoProduto}"><span class="oi oi-circle-x" title="Excluir"></span></button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+				</div>
+				<div class="col-6" th:object="${entradaItens}">
+					<label for="observacao"></label> <input type="hidden"
+						class="form-control" id="observacao" placeholder="Selecione" th:field="*{observacao}" value="" >
+					<div class="invalid-feedback"></div>
+				</div>
+				<input type="hidden" id="id" th:field="*{id}" value="" />
+				<button type="submit" class="btn btn-primary btn-sm" style="width: 93%;" name="acao" th:value="salvar">Salvar</button>
+			</form>
+
+		</div>
+	</section>
+</body>
+</html>	

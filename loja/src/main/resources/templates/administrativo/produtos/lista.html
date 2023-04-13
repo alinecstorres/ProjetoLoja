@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{administrativo/fragments/layout}">
+<head>
+	<title>Página Lista de Produtos do Administrativo</title>
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+			<div class="page-header">
+				<div class="tituloConteudo">
+					Lista de Produtos
+				</div>
+
+				<a class="atalho" href="/administrativo/produtos/cadastrar" role="button">
+					<span>Cadastrar Produtos</span>
+				</a>
+			</div>
+	        
+	
+	        <div class="container">
+	
+	            <p>
+	                <i class="oi oi-magnifying-glass"></i><span></span>
+	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
+	                        aria-controls="collapseNome">Nome
+	                </button>
+	            </p>
+	            <div class="row">
+	                <div class="col">
+	                    <div class="collapse" id="collapseNome">
+	
+	                        <nav class="navbar navbar-light bg-light">
+	                            <form class="form-inline" method="GET" action="/administrativo/produtos/buscar/nome">
+	                                <input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
+	                                       name="nome" />
+	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+	                            </form>
+	                        </nav>
+	
+	                    </div>
+	                </div>
+	            </div>
+	            	
+	            <div class="table-responsive">
+	                <table class="table table-striped table-hover table-sm">
+	                    <thead>
+	                    <tr>
+	                        <th>#</th>
+	                        <th>Nome</th>
+	                        <th>Tamanho</th>
+							<th>Valor</th>
+							<th>Estoque</th>
+							<th>Imagem</th>
+	                        <th>Ação</th>
+	                    </tr>
+	                    </thead>
+	                    <tbody>
+							<tr th:each="produto : ${listaProdutos}">
+								<td th:text="${produto.id}"></td>
+								<td th:text="${produto.nomeProduto}"></td>
+								<td th:text="${produto.tamanhoProduto}"></td>
+								<td th:text="${produto.valorProduto}"></td>
+								<td th:text="${produto.quantEstoque}"></td>
+								<td><img th:src="@{/administrativo/produtos/mostrarImagem/{imagem}(imagem=${produto.nomeImagem})}" width="100"></td>
+
+								<td colspan="2"><a class="btn btn-info btn-sm" th:href="@{/administrativo/produtos/editar/{id}(id=${produto.id})}" role="button"><span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
+								</a>
+
+								<a class="btn btn-danger btn-sm" href="#caixa" rel="modal:open" role="button"><span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
+
+								</a>
+
+								<div id="caixa" class="modalMeu">
+									<p>Tem certeza que deseja excluir?</p>
+									<a class="modalButton" th:href="@{/administrativo/produtos/listar}">Não</a>
+									<a class="modalButton" th:href="@{/administrativo/produtos/remover/{id}(id=${produto.id})}">Sim</a>
+								</div>
+								</td>
+							</tr>
+	                    </tbody>
+	                </table>
+	            </div>
+	        </div>
+	    </section>
+</body>
+</html>		
