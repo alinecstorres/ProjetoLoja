@@ -4,95 +4,111 @@
 	<title>Página de Cadastro de Produtos do Administrativo</title>
 </head>
 <body>
-	<section class="layout-content" layout:fragment="corpo">
-	        <div class="page-header">
+	<section layout:fragment="corpo">
+	        
+		<div class="row">
+			<div class="col-9">
 				<div class="tituloConteudo">
-					Cadastrar Produtos
+					Cadastro de Novo Produto
 				</div>
-
-				<a class="atalho" href="/administrativo/produtos/listar" role="button">
+			</div>
+			<div class="col-1" id="atalho">
+				<a class="btn btn-primary" href="/administrativo/produtos/listar" role="button">
 					<span>Listar Produtos</span>
 				</a>
-	        </div>
-	
-	        <div class="container" id="cadastro">
-	            <form action="/administrativo/produtos/salvar" enctype="multipart/form-data" th:object="${produto}" method="POST">
-	                <div class="form-row" id="form-row-left">
-	                    <div class="form-group col-md-6">
-	                        <label for="nome">Nome do Produto</label>
-	                        <input type="text" class="form-control" id="nome" placeholder="Nome"
-	                               autofocus="autofocus" th:field="*{nomeProduto}" value=""/>
-	                        <div class="invalid-feedback">
-	
-	                        </div>
-	                    </div>
-						<div class="form-group col-md-6">
-	                        <label for="tamanhoProduto">Tamanho</label>
-							<select id="tamanhoProduto" class="form-control" th:field="*{tamanhoProduto}">
-								<option value="">Selecione...</option>
-								<option value="P">P</option>
-								<option value="M">M</option>
-								<option value="G">G</option>
-							</select>
-	                        <div class="invalid-feedback">
-	
-	                        </div>
-	                    </div>
+			</div>
+		</div>
+			
+		<div class="row" id="cadastro">
 
-						<div class="form-group col-md-6">
-	                        <label for="valorProduto">Valor</label>
-	                        <input type="text" class="form-control" id="valorProduto" data-mask="##0.00"
-	                               data-mask-reverse="true" th:field="*{valorProduto}" value=""/>
-	                        <div class="invalid-feedback">
-	
-	                        </div>
-	                    </div>
+			<form action="/administrativo/produtos/salvar" enctype="multipart/form-data" th:object="${produto}" method="POST">
 
-						<div class="form-group col-md-6">
-	                        <label for="alturaProduto">Altura</label>
-	                        <input type="text" class="form-control" id="alturaProduto" data-mask="##0.00"
-	                               data-mask-reverse="true" th:field="*{alturaProduto}" value=""/>
-	                        <div class="invalid-feedback">
-	
-	                        </div>
-	                    </div>
+				<div class="row" id="linha1">
 
-						<div class="form-group col-md-6">
-	                        <label for="larguraProduto">Largura</label>
-	                        <input type="text" class="form-control" id="larguraProduto" data-mask="##0.00"
-	                               data-mask-reverse="true" th:field="*{larguraProduto}" value=""/>
-	                        <div class="invalid-feedback">
-	
-	                        </div>
-	                    </div>
+					<div class="col-6">
+						<label for="nome">Nome do Produto</label>
+						<input type="text" class="form-control" id="nome" placeholder="Nome"
+								autofocus="autofocus" th:field="*{nomeProduto}" value=""/>
+						<div class="invalid-feedback">
 
-						<div class="form-group col-md-6">
-	                        <label for="profundidadeProduto">Profundidade</label>
-	                        <input type="text" class="form-control" id="profundidadeProduto" data-mask="##0.00"
-	                               data-mask-reverse="true" th:field="*{profundidadeProduto}" value=""/>
-	                        <div class="invalid-feedback">
-	
-	                        </div>
-	                    </div>
-
-						<div class="form-group col-md-6">
-	                        <label for="pesoProduto">Peso</label>
-	                        <input type="text" class="form-control" id="pesoProduto" data-mask="##0.00"
-	                               data-mask-reverse="true" th:field="*{pesoProduto}" value=""/>
-	                        <div class="invalid-feedback">
-	
-	                        </div>
-	                    </div>
-					</div>
-					<div class="form-row" id="form-row-right">
-	                    <div class="form-group col-md-6">
-							<input type="file" name="file"/>
 						</div>
 					</div>
-	                <input type="hidden" id="id" th:field="*{id}" value=""/>
-	                <button type="submit" class="btn btn-primary" style="margin-top: 10px; width: 95%;">Salvar</button>
-	            </form>
-	        </div>
-	    </section>
+
+					<div class="col-2">
+						<label for="tamanhoProduto">Tamanho</label>
+						<select id="tamanhoProduto" class="form-control" th:field="*{tamanhoProduto}">
+							<option value="">Selecione...</option>
+							<option value="P">P</option>
+							<option value="M">M</option>
+							<option value="G">G</option>
+						</select>
+						<div class="invalid-feedback">
+
+						</div>
+					</div>
+
+					<div class="col-3">
+						<label for="valorProduto">Valor</label>
+						<input type="text" class="form-control" id="valorProduto" data-mask="##0.00"
+								data-mask-reverse="true" th:field="*{valorProduto}" value=""/>
+						<div class="invalid-feedback">
+
+						</div>
+					</div>
+
+				</div>
+
+				<div class="row" id="linha2">
+
+					<div class="col-2">
+						<label for="alturaProduto">Altura (Cm)</label>
+						<input type="text" class="form-control" id="alturaProduto" data-mask="##0.00"
+								data-mask-reverse="true" th:field="*{alturaProduto}" value=""/>
+						<div class="invalid-feedback">
+
+						</div>
+					</div>
+
+					<div class="col-2">
+						<label for="larguraProduto">Largura (Cm)</label>
+						<input type="text" class="form-control" id="larguraProduto" data-mask="##0.00"
+								data-mask-reverse="true" th:field="*{larguraProduto}" value=""/>
+						<div class="invalid-feedback">
+
+						</div>
+					</div>
+
+					<div class="col-2">
+						<label for="profundidadeProduto">Profundidade (Cm)</label>
+						<input type="text" class="form-control" id="profundidadeProduto" data-mask="##0.00"
+								data-mask-reverse="true" th:field="*{profundidadeProduto}" value=""/>
+						<div class="invalid-feedback">
+
+						</div>
+					</div>
+
+					<div class="col-2">
+						<label for="pesoProduto">Peso (Kgs)</label>
+						<input type="text" class="form-control" id="pesoProduto" data-mask="##0.00"
+								data-mask-reverse="true" th:field="*{pesoProduto}" value=""/>
+						<div class="invalid-feedback">
+
+						</div>
+					</div>
+
+					<div class="col-2">
+						Foto do Produto
+						<input type="file" name="file"/>
+					</div>
+
+				</div>
+					
+				<br/>
+
+				<input type="hidden" id="id" th:field="*{id}" value=""/>
+				<button type="submit" class="btn btn-primary" style="margin-top: 10px; width: 95%;">Salvar</button>
+			</form>
+		</div>
+	</section>
 </body>
 </html>		
