@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{administrativo/fragments/layout}">
+<head>
+	<title>Página Lista de Vendas do Administrativo</title>
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+			<div class="page-header">
+				<div class="tituloConteudo">
+					Lista de Vendas de Produtos
+				</div>
+
+				<a class="atalho" href="/administrativo/venda/cadastrar" role="button">
+					<span>Nova Venda</span>
+				</a>
+			</div>
+	        
+	
+	        <div class="container">
+	
+	            <p>
+	                <i class="oi oi-magnifying-glass"></i><span></span>
+	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
+	                        aria-controls="collapseNome">Nome do Cliente
+	                </button>
+	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseCargo"
+	                        aria-controls="collapseCargo">Nome do Funcionário
+	                </button>
+	            </p>
+	            <div class="row">
+	                <div class="col">
+	                    <div class="collapse" id="collapseNome">
+	
+	                        <nav class="navbar navbar-light bg-light">
+	                            <form class="form-inline" method="GET" action="/administrativo/venda/buscar/nomeCliente">
+	                                <input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
+	                                       name="nomeCliente" />
+	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+	                            </form>
+	                        </nav>
+	
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="row">
+	                <div class="col">
+	                    <div class="collapse" id="collapseCargo">
+	
+	                        <nav class="navbar navbar-light bg-light">
+	                            <form class="form-inline" method="GET" action="/administrativo/venda/buscar/nomeFuncionario">
+	                                <input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
+	                                       name="nomeCliente" />
+	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+	                            </form>
+	                        </nav>
+	
+	                    </div>
+	                </div>
+	            </div>
+	
+	
+	            <div class="table-responsive">
+	                <table class="table table-striped table-hover table-sm">
+	                    <thead>
+	                    <tr>
+	                        <th>#</th>
+	                        <th>Cliente</th>
+	                        <th>Funcionário</th>
+	                        <th>Data</th>
+							<th>Valor</th>
+							<th>Produtos</th>
+	                    </tr>
+	                    </thead>
+	                    <tbody>
+							<tr th:each="venda : ${listaVendas}">
+								<td th:text="${venda.id}"></td>
+								<td th:text="${venda.cliente.nome}"></td>
+								<td th:text="${venda.funcionario.nome}"></td>
+								<td th:text="${venda.dataEntrada}"></td>
+								<td th:text="${venda.valorTotal}"></td>
+								<td colspan="2"><a class="btn btn-info btn-sm" th:href="@{/administrativo/venda/itens/{id}(id=${venda.id})}" role="button"><span class="oi oi-eye" title="Editar" aria-hidden="true"></span>
+								</a>
+							</tr>
+	                    </tbody>
+	                </table>
+	            </div>
+	        </div>
+	    </section>
+</body>
+</html>		

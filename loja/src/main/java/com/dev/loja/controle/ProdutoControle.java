@@ -75,8 +75,10 @@ public class ProdutoControle {
             return cadastrar(produto);
         }
 
+        
         produtoRepositorio.saveAndFlush(produto);
         produto.setNomeCompletoProduto(produto.getNomeProduto().concat(" - ").concat(produto.getTamanhoProduto()));
+        
 
         try {
             if (!arquivo.isEmpty()) {
@@ -93,6 +95,7 @@ public class ProdutoControle {
             e.printStackTrace();
         }
 
+        
         return cadastrar(new Produto());
     }
 }

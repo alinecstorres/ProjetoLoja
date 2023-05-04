@@ -65,7 +65,7 @@
 								<td colspan="2"><a class="btn btn-info btn-sm" th:href="@{/administrativo/produtos/editar/{id}(id=${produto.id})}" role="button"><span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
 								</a>
 
-								<a class="btn btn-danger btn-sm" href="#caixa" rel="modal:open" role="button"><span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
+								<a class="btn btn-danger btn-sm" th:href="@{/administrativo/produtos/remover/{id}(id=${produto.id})}"  role="button"><span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
 
 								</a>
 

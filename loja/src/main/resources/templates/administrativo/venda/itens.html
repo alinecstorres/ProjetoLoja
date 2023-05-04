@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{administrativo/fragments/layout}">
+<head>
+	<title>Página Lista de Itens da Venda do Administrativo</title>
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+			<div class="page-header">
+				<div class="tituloConteudo">
+					Lista de Itens da Venda
+				</div>
+
+				<a class="atalho" href="/administrativo/venda/lista" role="button">
+					<span>Vendas</span>
+				</a>
+			</div>
+	        
+	
+	        <div class="container">	
+	
+	            <div class="table-responsive">
+	                <table class="table table-striped table-hover table-sm">
+	                    <thead>
+	                    <tr>
+	                        <th>#</th>
+	                        <th>Produto</th>
+	                        <th>Quantidade</th>
+	                    </tr>
+	                    </thead>
+	                    <tbody>
+							<tr th:each="item : ${itens}">
+								<td th:text="${item.id}"></td>
+								<td th:text="${item.produto.getNome()}"></td>
+								<td th:text="${item.quantidade}"></td>
+							</tr>
+	                    </tbody>
+	                </table>
+	            </div>
+	        </div>
+	    </section>
+</body>
+</html>		

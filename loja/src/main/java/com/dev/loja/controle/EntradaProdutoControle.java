@@ -45,28 +45,7 @@ public class EntradaProdutoControle {
 		mv.addObject("listaFuncionarios", funcionarioRepositorio.findAll());
 		mv.addObject("listaProdutos", produtoRepositorio.findAll());
         return mv;
-    }
-
-    // @GetMapping("/administrativo/funcionarios/listar")
-    // public ModelAndView listar() {
-    //     ModelAndView mv = new ModelAndView("administrativo/funcionarios/lista");
-    //     mv.addObject("listaFuncionarios",funcionarioRepositorio.findAll());
-    //     return mv;
-    // }
-
-    // @GetMapping("/administrativo/funcionarios/editar/{id}")
-    // public ModelAndView editar(@PathVariable("id") Long id) {
-    //     Optional<Funcionario> funcionario = funcionarioRepositorio.findById(id);
-    //     return cadastrar(funcionario.get());
-    // }
-
-    // @GetMapping("/administrativo/entrada/remover/{data-id}")
-    // public ModelAndView delete(@PathVariable("id") Long id, EntradaProduto entradaProduto, EntradaItens entradaItens) {
-    //     this.listaEntrada.remove(entradaItens);    
-    //      return cadastrar(entradaProduto, new EntradaItens());
-    // }
-
-  
+    }  
 
     @PostMapping("administrativo/entrada/salvar")
     public ModelAndView salvar(String acao, EntradaProduto entradaProduto, EntradaItens entradaItens) {
@@ -74,8 +53,6 @@ public class EntradaProdutoControle {
         if (acao.equals("itens")) {
             for (EntradaItens it : listaEntrada) {
                 if (it.getProduto().getId().equals(entradaItens.getProduto().getId())&&it.getObservacao().equals(entradaItens.getObservacao())) {
-                    System.out.println("OBSERVAÇÃO QUE CONSTA -----------> " + it.getObservacao());
-                    System.out.println("OBSERVAÇÃO QUE QUER ENTRAR -----------> " + entradaItens.getObservacao());
                     return cadastrar(entradaProduto, entradaItens);
                 } 
             }
