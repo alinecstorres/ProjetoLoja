@@ -10,21 +10,20 @@
 					Lista de Vendas de Produtos
 				</div>
 
-				<a class="atalho" href="/administrativo/venda/cadastrar" role="button">
+				<a class="btn btn-outline-dark" href="/administrativo/venda/cadastrar" role="button" style="margin-top: 45px">
 					<span>Nova Venda</span>
 				</a>
 			</div>
 	        
-	
 	        <div class="container">
 	
 	            <p>
 	                <i class="oi oi-magnifying-glass"></i><span></span>
-	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
-	                        aria-controls="collapseNome">Nome do Cliente
+	                <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseCliente"
+	                        aria-controls="collapseCliente">Cliente
 	                </button>
-	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseCargo"
-	                        aria-controls="collapseCargo">Nome do Funcionário
+	                <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseFuncionario"
+	                        aria-controls="collapseFuncionario">Funcionário
 	                </button>
 	            </p>
 	            <div class="row">
@@ -78,7 +77,7 @@
 								<td th:text="${venda.funcionario.nome}"></td>
 								<td th:text="${venda.dataEntrada}"></td>
 								<td th:text="${venda.valorTotal}"></td>
-								<td colspan="2"><a class="btn btn-info btn-sm" th:href="@{/administrativo/venda/itens/{id}(id=${venda.id})}" role="button"><span class="oi oi-eye" title="Editar" aria-hidden="true"></span>
+								<td colspan="2"><a style="margin-left: 15px" class="btn btn-outline-dark" th:href="@{/administrativo/venda/itens/{id}(id=${venda.id})}" role="button"><span class="oi oi-eye" title="Editar" aria-hidden="true"></span>
 								</a>
 							</tr>
 	                    </tbody>

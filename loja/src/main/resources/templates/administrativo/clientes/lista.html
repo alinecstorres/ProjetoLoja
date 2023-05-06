@@ -5,26 +5,26 @@
 </head>
 <body>
 	<section class="layout-content" layout:fragment="corpo">
-			<div class="page-header">
-				<div class="tituloConteudo">
-					Lista de Clientes
-				</div>
-	
-				<a class="atalho" href="/administrativo/clientes/cadastrar" role="button">
-					<span>Cadastrar Cliente</span>
-				</a>				
+		<div class="page-header">
+			<div class="tituloConteudo">
+				Lista de Clientes
 			</div>
-	        
+
+			<a class="btn btn-outline-dark" href="/administrativo/clientes/cadastrar" role="button" style="margin-top: 45px">
+				<span>Novo Cliente</span>
+			</a>
+		</div>
+	    <br/>
 	
 	        <div class="container">
 	
 	            <p>
 	                <i class="oi oi-magnifying-glass"></i><span></span>
-	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
+	                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
 	                        aria-controls="collapseNome">Nome
 	                </button>
-	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseDocumento"
-	                        aria-controls="collapseCargo">Documento
+	                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseDocumento"
+	                        aria-controls="collapseDocumento">Documento
 	                </button>
 	            </p>
 	            <div class="row">
@@ -44,7 +44,7 @@
 	            </div>
 	            <div class="row">
 	                <div class="col">
-	                    <div class="collapse" id="collapseCargo">
+	                    <div class="collapse" id="collapseDocumento">
 	
 	                        <nav class="navbar navbar-light bg-light">
 	                            <form class="form-inline" method="GET" action="/administrativo/clientes/buscar/documento">
@@ -66,6 +66,7 @@
 	                        <th>#</th>
 	                        <th>Nome</th>
 	                        <th>Documento</th>
+							<th>Ação</th>
 	                    </tr>
 	                    </thead>
 	                    <tbody>
@@ -74,10 +75,10 @@
 								<td th:text="${cliente.nome}"></td>
 								<td th:text="${cliente.documento}"></td>
 
-								<td colspan="2"><a class="btn btn-info btn-sm" th:href="@{/administrativo/clientes/editar/{id}(id=${cliente.id})}" role="button"><span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
+								<td colspan="2"><a class="btn btn-outline-primary" th:href="@{/administrativo/clientes/editar/{id}(id=${cliente.id})}" role="button"><span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
 								</a>
 
-								<a class="btn btn-danger btn-sm" href="#caixa" rel="modal:open" role="button"><span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
+								<a class="btn btn-outline-danger" href="#caixa" rel="modal:open" role="button"><span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
 
 								</a>
 

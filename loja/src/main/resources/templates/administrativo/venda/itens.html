@@ -25,16 +25,19 @@
 	                        <th>#</th>
 	                        <th>Produto</th>
 	                        <th>Quantidade</th>
+							<th>Valor</th>
 	                    </tr>
 	                    </thead>
 	                    <tbody>
 							<tr th:each="item : ${itens}">
 								<td th:text="${item.id}"></td>
-								<td th:text="${item.produto.getNome()}"></td>
+								<td th:text="${item.produto.nomeProduto}"></td>
 								<td th:text="${item.quantidade}"></td>
+								<td th:text="${item.produto.valorProduto*item.quantidade}"></td>
 							</tr>
 	                    </tbody>
 	                </table>
+					<a href="/administrativo/venda/listar" class="btn btn-outline-dark" role="button" aria-disabled="true"><i class="oi oi-account-logout"></i></a>
 	            </div>
 	        </div>
 	    </section>

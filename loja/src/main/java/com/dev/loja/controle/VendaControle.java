@@ -65,7 +65,7 @@ public class VendaControle {
     @GetMapping("/administrativo/venda/itens/{id}")
     public ModelAndView listarItens(@PathVariable("id") Long id) {
         ModelAndView mv = new ModelAndView("administrativo/venda/itens");
-        mv.addObject("itens", vendaItensRepositorio.findById(id));
+        mv.addObject("itens", vendaItensRepositorio.findByVendaId(id));
         return mv;
     }
 

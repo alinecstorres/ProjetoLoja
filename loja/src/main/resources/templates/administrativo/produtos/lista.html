@@ -5,22 +5,22 @@
 </head>
 <body>
 	<section class="layout-content" layout:fragment="corpo">
-			<div class="page-header">
-				<div class="tituloConteudo">
-					Lista de Produtos
-				</div>
-
-				<a class="atalho" href="/administrativo/produtos/cadastrar" role="button">
-					<span>Cadastrar Produtos</span>
-				</a>
+		<div class="page-header">
+			<div class="tituloConteudo">
+				Lista de Produtos
 			</div>
-	        
+			
+			<a class="btn btn-outline-dark" href="/administrativo/produtos/cadastrar" role="button" style="margin-top: 45px">
+				<span>Cadastro de Produto</span>
+			</a>
+		</div>
+	    <br/>
 	
 	        <div class="container">
 	
 	            <p>
 	                <i class="oi oi-magnifying-glass"></i><span></span>
-	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
+	                <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseNome"
 	                        aria-controls="collapseNome">Nome
 	                </button>
 	            </p>
@@ -62,10 +62,10 @@
 								<td th:text="${produto.quantEstoque}"></td>
 								<td><img th:src="@{/administrativo/produtos/mostrarImagem/{imagem}(imagem=${produto.nomeImagem})}" width="100"></td>
 
-								<td colspan="2"><a class="btn btn-info btn-sm" th:href="@{/administrativo/produtos/editar/{id}(id=${produto.id})}" role="button"><span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
+								<td colspan="2"><a class="btn btn-outline-primary" th:href="@{/administrativo/produtos/editar/{id}(id=${produto.id})}" role="button"><span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
 								</a>
 
-								<a class="btn btn-danger btn-sm" th:href="@{/administrativo/produtos/remover/{id}(id=${produto.id})}"  role="button"><span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
+								<a class="btn btn-outline-danger" th:href="@{/administrativo/produtos/remover/{id}(id=${produto.id})}"  role="button"><span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
 
 								</a>
 

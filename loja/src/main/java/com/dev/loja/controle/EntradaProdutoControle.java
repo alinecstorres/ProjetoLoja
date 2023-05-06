@@ -47,6 +47,14 @@ public class EntradaProdutoControle {
         return mv;
     }  
 
+    @GetMapping("/administrativo/entrada/listar")
+    public ModelAndView listar() {
+        ModelAndView mv = new ModelAndView("administrativo/entrada/lista");
+        mv.addObject("listaEntradas",entradaProdutoRepositorio.findAll());
+        mv.addObject("listaProdutos", entradaItensRepositorio.findAll());
+        return mv;
+    }
+
     @PostMapping("administrativo/entrada/salvar")
     public ModelAndView salvar(String acao, EntradaProduto entradaProduto, EntradaItens entradaItens) {
 

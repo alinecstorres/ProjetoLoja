@@ -5,25 +5,25 @@
 </head>
 <body>
 	<section class="layout-content" layout:fragment="corpo">
-			<div class="page-header">
-				<div class="tituloConteudo">
-					Lista de Funcionários
-				</div>
-	
-				<a class="atalho" href="/administrativo/funcionarios/cadastrar" role="button">
-					<span>Cadastrar Funcionários</span>
-				</a>				
+		<div class="page-header">
+			<div class="tituloConteudo">
+				Lista de Funcionários
 			</div>
-	        
+
+			<a class="btn btn-outline-dark" href="/administrativo/funcionarios/cadastrar" role="button" style="margin-top: 45px">
+				<span>Novo Funcionário</span>
+			</a>
+		</div>
+	    <br/>
 	
 	        <div class="container">
 	
 	            <p>
 	                <i class="oi oi-magnifying-glass"></i><span></span>
-	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
+	                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
 	                        aria-controls="collapseNome">Nome
 	                </button>
-	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseCargo"
+	                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseCargo"
 	                        aria-controls="collapseCargo">Cargo
 	                </button>
 	            </p>
@@ -81,10 +81,10 @@
 								<td th:text="${funcionario.nome}"></td>
 								<td th:text="${funcionario.cargo}"></td>
 
-								<td colspan="2"><a class="btn btn-info btn-sm" th:href="@{/administrativo/funcionarios/editar/{id}(id=${funcionario.id})}" role="button"><span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
+								<td colspan="2"><a class="btn btn-outline-primary" th:href="@{/administrativo/funcionarios/editar/{id}(id=${funcionario.id})}" role="button"><span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
 								</a>
 
-								<a class="btn btn-danger btn-sm" href="#caixa" rel="modal:open" role="button"><span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
+								<a class="btn btn-outline-danger" href="#caixa" rel="modal:open" role="button"><span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
 
 								</a>
 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{administrativo/fragments/layout}">
+<head>
+	<title>Página do Financeiro</title>
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+		<div class="page-header">
+			<div class="tituloConteudo">
+				Financeiro
+			</div>
+		</div>
+	    <br/>
+	
+		<div class="container">
+	
+			<div class="row">
+				<div class="col-4">
+
+					<div class="table-responsive">
+						<table class="table table-striped table-hover table-sm">
+							<thead>
+							<tr>
+								<th>Saldo Caixa</th>
+								<th>Saldo Bancário</th>
+							</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td th:text="${saldoCaixa}"></td>
+									<td th:text="${saldoBancario}"></td>
+									<td><a class="btn btn-outline-primary" href="/administrativo/financeiro/atualizacao" role="button">
+										<span class="oi oi-loop-circular"></span>
+									</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+			
+		</div>
+	</section>
+</body>
+</html>		

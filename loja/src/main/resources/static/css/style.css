@@ -17,14 +17,17 @@ header {
     width: 100%;
     display: flex;
     flex-flow: row wrap;
+    height: 80px;
 }
 
-.botaoMenu {
+#botaoMenu {
     width: 5%;
     margin-left: 25px;
+    margin-top: 20px;
 }
 
 .tituloPagina {
+    margin-top: 20px;
     width: 70%;
 }
 
@@ -82,8 +85,7 @@ header {
     padding: 0%;
     height: 30px;
     float: right;
-    margin-top: 30px;
-    margin-left: 135px;
+    margin-top: 25px;
 }
 
 #form-row-bottom {
@@ -155,7 +157,7 @@ ul {
 
 a {
     text-decoration: none;
-    color:#fff;
+    color: #fff;
     display: block;
 }
 

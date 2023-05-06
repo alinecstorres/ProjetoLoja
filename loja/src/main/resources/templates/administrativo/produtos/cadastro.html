@@ -6,19 +6,16 @@
 <body>
 	<section layout:fragment="corpo">
 	        
-		<div class="row">
-			<div class="col-9">
-				<div class="tituloConteudo">
-					Cadastro de Novo Produto
-				</div>
+		<div class="page-header">
+			<div class="tituloConteudo">
+				Cadastro de Produtos
 			</div>
-			<div class="col-1" id="atalho">
-				<a class="btn btn-primary" href="/administrativo/produtos/listar" role="button">
-					<span>Listar Produtos</span>
-				</a>
-			</div>
+
+			<a class="btn btn-outline-dark" href="/administrativo/produtos/listar" role="button" style="margin-top: 45px">
+				<span>Listar Produtos</span>
+			</a>
 		</div>
-			
+		<br/>
 		<div class="row" id="cadastro">
 
 			<form action="/administrativo/produtos/salvar" enctype="multipart/form-data" th:object="${produto}" method="POST">
@@ -106,7 +103,7 @@
 				<br/>
 
 				<input type="hidden" id="id" th:field="*{id}" value=""/>
-				<button type="submit" class="btn btn-primary" style="margin-top: 10px; width: 95%;">Salvar</button>
+				<button type="submit" class="btn btn-outline-primary" style="margin-top: 10px; width: 91%;">Salvar</button>
 			</form>
 		</div>
 	</section>
