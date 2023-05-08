@@ -58,7 +58,7 @@
 								<td th:text="${produto.id}"></td>
 								<td th:text="${produto.nomeProduto}"></td>
 								<td th:text="${produto.tamanhoProduto}"></td>
-								<td th:text="${produto.valorProduto}"></td>
+								<td th:text="${#numbers.formatCurrency(produto.valorProduto)}"></td>
 								<td th:text="${produto.quantEstoque}"></td>
 								<td><img th:src="@{/administrativo/produtos/mostrarImagem/{imagem}(imagem=${produto.nomeImagem})}" width="100"></td>
 

@@ -28,6 +28,7 @@ public class VendaItens implements Serializable {
     @ManyToOne
     private Produto produto;
     private int quantidade;
+    private Double total;
     
     public Long getId() {
         return id;
@@ -53,6 +54,13 @@ public class VendaItens implements Serializable {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
+    public Double getTotal() {
+        return total;
+    }
+    public void setTotal(Double total) {
+        this.total = total;
+    }
 
+    
     
 }

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{administrativo/fragments/layout}">
+<head>
+<title>Página de Despesas da loja virtual</title>
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+		<div class="page-header">
+			<div class="tituloConteudo">
+				Despesas
+			</div>
+		</div>
+		
+		<div class="col-12" id="cadastro">
+
+			<form action="/administrativo/despesas/salvar" th:object="${despesa}" method="POST">
+				
+				<div class="row" >
+
+					<div class="col-4">
+						<label for="nome">Nome</label> <input type="text"
+							class="form-control" id="nome" th:field="*{nome}" value="" />
+						<div class="invalid-feedback"></div>
+					</div>
+
+					<div class="col-2">
+						<label for="valor">Valor</label> <input type="text"
+							class="form-control" id="valor" th:field="*{valor}" data-mask="##0.00"
+							data-mask-reverse="true" value="" />
+						<div class="invalid-feedback"></div>
+					</div>
+
+					<div class="col-2">
+						<label for="data">Data</label>
+						<input type="date" class="form-control" id="data" th:field="*{data}" value=""/>
+						<div class="invalid-feedback">
+
+						</div>
+					</div>
+
+					<div class="col-1"><button type="submit" name="acao" th:value="salvar" class="btn btn-outline-primary" style="margin-top: 23px">Salvar</button></div>
+					
+				</div>
+				<br/>
+				
+				<input type="hidden" id="id" th:field="*{id}" value="" />
+			</form>
+			<form action="/administrativo/despesas/salvar" th:object="${listaDespesas}" method="POST">
+				<table class="table table-striped table-hover table-sm" >
+					<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Valor</th>
+						<th>Data</th>
+						<th>Ação</th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr th:each="despesa : ${listaDespesas}">
+							<td th:text="${despesa.nome}"></td>
+							<td th:text="${#numbers.formatCurrency(despesa.valor)}"></td>
+							<td th:text="${#dates.format(despesa.data, 'dd-MM-yyyy')}"></td>
+							<td>
+								<button type="submit" name="acao" th:value="${despesa.id}" class="btn btn-outline-danger"><span class="oi oi-circle-x" title="Excluir"></span></button>
+							</td>
+					</tbody>
+				</table>
+			</form>
+		</div>
+		<div class="table-responsive">
+			
+		</div>
+	</section>
+</body>
+</html>	

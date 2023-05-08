@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ public class ProdutoControle {
 
     @Autowired
     private ProdutoRepositorio produtoRepositorio;
+
+    private List<Produto> listaProdutos;
 
     @GetMapping("/administrativo/produtos/cadastrar")
     public ModelAndView cadastrar(Produto produto) {
@@ -71,13 +74,41 @@ public class ProdutoControle {
 
     @PostMapping("administrativo/produtos/salvar")
     public ModelAndView salvar(@Validated Produto produto, BindingResult result, @RequestParam("file") MultipartFile arquivo) {
+
+        listaProdutos = produtoRepositorio.findAll();
+        String nomeCompleto = produto.getNomeProduto().concat(" - ").concat(produto.getTamanhoProduto());        
+
         if(result.hasErrors()) {
             return cadastrar(produto);
         }
 
-        
-        produtoRepositorio.saveAndFlush(produto);
-        produto.setNomeCompletoProduto(produto.getNomeProduto().concat(" - ").concat(produto.getTamanhoProduto()));
+        if (listaProdutos.isEmpty()) {
+            produtoRepositorio.saveAndFlush(produto);
+            produto.setNomeCompletoProduto(nomeCompleto);
+        } else {
+            
+        }
+
+        for (Produto produto2 : listaProdutos) {
+            int estoque = produto2.getQuantEstoque();
+            if (produto2.getNomeCompletoProduto().equals(nomeCompleto)) {
+                if (produto.getNomeImagem() == null) {
+                    produtoRepositorio.flush();
+                    System.out.println("---------------->" + produto2.getNomeImagem());
+                    produto.setNomeImagem(produto2.getNomeImagem());
+                    produto.setQuantEstoque(estoque);
+                    produto.setNomeCompletoProduto(nomeCompleto);
+                } else {
+                    produtoRepositorio.flush();
+                    produto.setQuantEstoque(estoque);
+                    produto.setNomeCompletoProduto(nomeCompleto);
+                }
+    
+            } else {
+                produtoRepositorio.saveAndFlush(produto);
+                produto.setNomeCompletoProduto(nomeCompleto);
+            } 
+        }
         
 
         try {
@@ -95,7 +126,6 @@ public class ProdutoControle {
             e.printStackTrace();
         }
 
-        
         return cadastrar(new Produto());
     }
 }

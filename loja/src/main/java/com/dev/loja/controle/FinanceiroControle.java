@@ -3,6 +3,7 @@ package com.dev.loja.controle;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -18,22 +19,20 @@ import com.dev.loja.repositorios.FinanceiroRepositorio;
 @Controller
 public class FinanceiroControle {
 
-    List<Despesa> listaDespesas = new ArrayList<Despesa>();
-
+    @Autowired
     private DespesaRepositorio despesaRepositorio;
+
+    @Autowired
     private FinanceiroRepositorio financeiroRepositorio;
+
+    List<Despesa> listaDespesas = new ArrayList<Despesa>();
 
     @GetMapping("/administrativo/despesas/cadastrar")
     public ModelAndView cadastrar(Despesa despesa) {
-        ModelAndView mv = new ModelAndView("administrativo/despesas/cadastro");
+        ModelAndView mv = new ModelAndView("administrativo/financeiro/cadastro");
         mv.addObject("despesa", despesa);
-        return mv;
-    }
-
-    @GetMapping("/administrativo/despesas/listar")
-    public ModelAndView listarDespesas() {
-        ModelAndView mv = new ModelAndView("administrativo/despesas/lista");
-        mv.addObject("listaDespesas",despesaRepositorio.findAll());
+        listaDespesas = despesaRepositorio.findAll();
+        mv.addObject("listaDespesas", listaDespesas);
         return mv;
     }
 
@@ -53,4 +52,22 @@ public class FinanceiroControle {
         financeiroRepositorio.saveAndFlush(saldo);
         return dadosFinanceiros(saldo);
     }
+
+    @PostMapping("administrativo/despesas/salvar")
+    public ModelAndView salvar(Despesa despesa, String acao) {
+
+        if (acao.equals("salvar")) {
+            despesaRepositorio.saveAndFlush(despesa);
+            this.listaDespesas.add(despesa);
+        } else {
+            for (Despesa despesa1 : listaDespesas) {
+                if (despesa1.getId().equals(Long.parseLong(acao))) {
+                    despesaRepositorio.deleteById(Long.parseLong(acao));
+                }
+            }
+        }
+        System.out.println("--------------->"+acao);
+        return cadastrar(new Despesa());
+    }
 }
+

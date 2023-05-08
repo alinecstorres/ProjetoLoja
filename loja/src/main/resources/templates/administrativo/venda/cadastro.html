@@ -45,6 +45,12 @@
 						<div class="invalid-feedback"></div>
 					</div>
 
+					<div class="col-1"th:object="${venda}">
+						<label for="desconto">Desconto</label> <input type="number"
+							class="form-control" id="desconto" th:field="*{desconto}" value="" />
+						<div class="invalid-feedback"></div>
+					</div>
+
 				</div>
 				<div class="row">
 
@@ -97,8 +103,8 @@
 									<td th:text="${itens.produto.id}"></td>
 									<td th:text="${itens.produto.nomeCompletoProduto}"></td>
 									<td th:text="${itens.quantidade}"></td>
-									<td th:text="${itens.produto.valorProduto}"></td>
-									<td th:text="${itens.produto.valorProduto * itens.quantidade}"></td>
+									<td th:text="${#numbers.formatCurrency(itens.produto.valorProduto)}"></td>
+									<td th:text="${#numbers.formatCurrency(itens.produto.valorProduto * itens.quantidade)}"></td>
 									<td th:text="${itens.produto.quantEstoque}"></td>
 									<td>
 										<button class="btn btn-danger btn-sm" name="acao" th:value="${itens.produto.nomeCompletoProduto}"><span class="oi oi-circle-x" title="Excluir"></span></button>
@@ -106,7 +112,9 @@
 								</tr>
 								<tr th:object="${venda}">
 									<th>Valor Total da Venda</th>
-									<th th:text="${valorVenda}" th:field="*{valorTotal}"></th>
+									<th th:text="${#numbers.formatCurrency(valorVenda)}" th:field="*{valorTotal}"></th>
+									<th>Valor com Desconto</th>
+									<th th:text="${#numbers.formatCurrency(valorComDesconto)}" th:field="*{valorComDesconto}"></th>
 								</tr>
 							</tbody>
 						</table>

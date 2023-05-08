@@ -23,7 +23,8 @@ import com.dev.loja.repositorios.VendaRepositorio;
 @Controller
 public class VendaControle {
     
-    Double valorVenda = 0d;
+    Double valorVenda = 0%.2d;
+    Double valorComDesconto = 0%.2d;
 
     List<VendaItens> listaItens = new ArrayList<VendaItens>();
 
@@ -52,6 +53,7 @@ public class VendaControle {
         mv.addObject("listaClientes", clienteRepositorio.findAll());
 		mv.addObject("listaProdutos", produtoRepositorio.findAll());
         mv.addObject("valorVenda", this.valorVenda);
+        mv.addObject("valorComDesconto", this.valorComDesconto);
         return mv;
     }
 
@@ -72,7 +74,6 @@ public class VendaControle {
     @PostMapping("administrativo/venda/salvar")
     public ModelAndView salvar(String acao, Venda venda, VendaItens vendaItens) {
 
-        valorVenda += (vendaItens.getProduto().getValorProduto()*vendaItens.getQuantidade());
 
         if (acao.equals("itens")) {
 
@@ -81,35 +82,50 @@ public class VendaControle {
                     return cadastrar(venda, vendaItens);
                 }
             }
+            Double totalPorProduto = vendaItens.getProduto().getValorProduto()*vendaItens.getQuantidade();
+            vendaItens.setTotal(totalPorProduto);
             this.listaItens.add(vendaItens);
+            valorVenda += (vendaItens.getProduto().getValorProduto()*vendaItens.getQuantidade());
+            valorComDesconto = (valorVenda-(valorVenda*(venda.getDesconto()/100)));
+            return cadastrar(venda, vendaItens);
             
 		} else if(acao.equals("salvar")) {
-			vendaRepositorio.saveAndFlush(venda);
-            venda.setValorTotal(valorVenda);
-            
-			for(VendaItens it : listaItens) {
-				it.setVenda(venda);
-				vendaItensRepositorio.saveAndFlush(it);
-				Optional<Produto> prod = produtoRepositorio.findById(it.getProduto().getId());
-				Produto produto = prod.get();
-                produto.setQuantEstoque(produto.getQuantEstoque() - it.getQuantidade());
-				produtoRepositorio.saveAndFlush(produto);
-				this.listaItens = new ArrayList<>();
 
-			};
-            valorVenda = 0d;
-			return cadastrar(new Venda(), new VendaItens());
+            if (this.listaItens.isEmpty()) {
+                return cadastrar(new Venda(), new VendaItens());
+            } else {
+                vendaRepositorio.saveAndFlush(venda);
+                venda.setValorTotal(valorVenda);
+                venda.setValorComDesconto(valorComDesconto);
+            
+                for(VendaItens it : listaItens) {
+                    it.setVenda(venda);
+                    vendaItensRepositorio.saveAndFlush(it);
+                    Optional<Produto> prod = produtoRepositorio.findById(it.getProduto().getId());
+                    Produto produto = prod.get();
+                    produto.setQuantEstoque(produto.getQuantEstoque() - it.getQuantidade());
+                    produtoRepositorio.saveAndFlush(produto);
+                    this.listaItens = new ArrayList<>();
+
+                };
+                valorComDesconto = 0d;
+                valorVenda = 0d;
+                return cadastrar(new Venda(), new VendaItens());
+            }
+			
 		} else if(acao.contains("-")) {
             for (VendaItens it : listaItens) {
                 if (acao.equals(it.getProduto().getNomeCompletoProduto())) {
                     listaItens.remove(it);
                     valorVenda -= (it.getProduto().getValorProduto()*it.getQuantidade());
+                    valorComDesconto = (valorVenda-(valorVenda*(venda.getDesconto()/100)));
                     return cadastrar(venda, vendaItens);
                 }
             }
         } else if(acao.equals("clear")) {
             listaItens.clear();
             valorVenda = 0d;
+            valorComDesconto = 0d;
             return cadastrar(new Venda(), new VendaItens());
         }
 

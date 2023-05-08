@@ -1,7 +1,8 @@
 package com.dev.loja.modelos;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
+import java.util.Calendar;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,9 +30,29 @@ public class Venda implements Serializable {
     @ManyToOne
     private Cliente cliente;
     
-    private Date dataEntrada = new Date();
+    private Date dataEntrada = new Date(Calendar.getInstance().getTimeInMillis());
 
     private Double valorTotal;
+
+    private Double desconto;
+
+    private Double valorComDesconto;
+
+    public Double getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(Double desconto) {
+        this.desconto = desconto;
+    }
+
+    public Double getValorComDesconto() {
+        return valorComDesconto;
+    }
+
+    public void setValorComDesconto(Double valorComDesconto) {
+        this.valorComDesconto = valorComDesconto;
+    }
 
     public Long getId() {
         return id;

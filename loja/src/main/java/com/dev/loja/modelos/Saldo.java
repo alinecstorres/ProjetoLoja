@@ -20,8 +20,8 @@ public class Saldo implements Serializable{
 
     private Date data = new Date();
 
-    private Double caixa;
-    private Double saldoBancario;
+    private Double caixa = 0d;
+    private Double saldoBancario = 0d;
 
     public Long getId() {
         return id;
@@ -54,8 +54,5 @@ public class Saldo implements Serializable{
     public void setSaldoBancario(Double saldoBancario) {
         this.saldoBancario = saldoBancario;
     }
-
-   
-
     
 }

@@ -31,9 +31,9 @@
 	                    <tbody>
 							<tr th:each="item : ${itens}">
 								<td th:text="${item.id}"></td>
-								<td th:text="${item.produto.nomeProduto}"></td>
+								<td th:text="${item.produto.nomeCompletoProduto}"></td>
 								<td th:text="${item.quantidade}"></td>
-								<td th:text="${item.produto.valorProduto*item.quantidade}"></td>
+								<td th:text="${#numbers.formatCurrency(item.total)}"></td>
 							</tr>
 	                    </tbody>
 	                </table>

@@ -27,8 +27,8 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td th:text="${saldoCaixa}"></td>
-									<td th:text="${saldoBancario}"></td>
+									<td th:text="${#numbers.formatCurrency(saldoCaixa)}"></td>
+									<td th:text="${#numbers.formatCurrency(saldoBancario)}"></td>
 									<td><a class="btn btn-outline-primary" href="/administrativo/financeiro/atualizacao" role="button">
 										<span class="oi oi-loop-circular"></span>
 									</a></td>
@@ -36,6 +36,9 @@
 							</tbody>
 						</table>
 					</div>
+
+				</div>
+				<div class="col-4">
 
 				</div>
 			</div>

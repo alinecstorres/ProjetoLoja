@@ -14,7 +14,7 @@
 					<span>Nova Venda</span>
 				</a>
 			</div>
-	        
+	        <br/>
 	        <div class="container">
 	
 	            <p>
@@ -67,6 +67,8 @@
 	                        <th>Funcionário</th>
 	                        <th>Data</th>
 							<th>Valor</th>
+							<th>Desconto</th>
+							<th>Valor com Desconto</th>
 							<th>Produtos</th>
 	                    </tr>
 	                    </thead>
@@ -75,8 +77,10 @@
 								<td th:text="${venda.id}"></td>
 								<td th:text="${venda.cliente.nome}"></td>
 								<td th:text="${venda.funcionario.nome}"></td>
-								<td th:text="${venda.dataEntrada}"></td>
-								<td th:text="${venda.valorTotal}"></td>
+								<td th:text="${#dates.format(venda.dataEntrada, 'dd-MM-yyyy')}"></td>
+								<td th:text="${#numbers.formatCurrency(venda.valorTotal)}"></td>
+								<td th:text="${#numbers.formatPercent(venda.desconto/100,0,0)}"></td>
+								<td th:text="${#numbers.formatCurrency(venda.valorComDesconto)}"></td>
 								<td colspan="2"><a style="margin-left: 15px" class="btn btn-outline-dark" th:href="@{/administrativo/venda/itens/{id}(id=${venda.id})}" role="button"><span class="oi oi-eye" title="Editar" aria-hidden="true"></span>
 								</a>
 							</tr>

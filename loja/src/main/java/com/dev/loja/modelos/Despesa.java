@@ -1,6 +1,7 @@
 package com.dev.loja.modelos;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +24,8 @@ public class Despesa implements Serializable{
 
     private String nome;
     private Double valor;
-    private String data;
+    private Date data;
+    
     public Long getId() {
         return id;
     }
@@ -42,10 +44,10 @@ public class Despesa implements Serializable{
     public void setValor(Double valor) {
         this.valor = valor;
     }
-    public String getData() {
+    public Date getData() {
         return data;
     }
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
