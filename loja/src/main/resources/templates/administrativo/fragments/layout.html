@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
@@ -10,90 +10,91 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<link rel="icon" href="/image/favicon.png" />
-
+	<!--caixa modal -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script type="text/javascript" src="../../../static/js/js.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 	<!-- Bootstrap core CSS -->
 	<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet" />
-	
+
 	<!-- Custom styles for this template -->
 	<link href="/css/style.css" rel="stylesheet" />
 </head>
 <body>
 	<header>
-		<div class="topoPagina">
-			<div class="navber-hear" id="botaoMenu">
-				<button type="button" class="btn btn-dark navbar-toggle pull-left">
-					<i class="oi oi-menu"></i>
-				</button>
+		<nav class="navbar navbar-inverse navbar navbar-dark bg-dark fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="btn btn-dark navbar-toggle pull-left" style="margin-bottom: 10px">
+						<i class="oi oi-menu"></i>
+					</button>
+					<a class="navbar-brand " href="#">Painel Administrativo da Loja Virtual</a>
+				</div>
 			</div>
-			<div class="tituloPagina">
-				<p>Painel de controle administrativo</p>
-			</div>
-		</div>
-	</header>
-	
-	<div class="layout-main">	
-		
-		<nav class="nav-menu">
-			<ul id="ul-principal">
-				<li class="li-p"><a href="/administrativo">Home</a></li>
-				<li class="li-p">
-					<a class="bt1" href="javascript://">Clientes</a>
-					<ul class="ul-clientes">
-						<li><a href="/administrativo/clientes/cadastrar">Novo cliente</a></li>
-						<li><a href="/administrativo/clientes/listar">Lista de clientes</a></li>
-					</ul>
-				</li>
-				<li class="li-p">
-					<a class="bt1" href="javascript://">Funcionários</a>
-					<ul class="ul-funcionarios">
-						<li><a href="/administrativo/funcionarios/cadastrar">Novo funcionário</a></li>
-						<li><a href="/administrativo/funcionarios/listar">Lista de funcionários</a></li>
-					</ul>
-				</li>
-				<li class="li-p">
-					<a class="bt2" href="javascript://">Produtos</a>
-					<ul class="ul-produtos">
-						<li><a href="/administrativo/produtos/cadastrar">Cadastrar Novo</a></li>
-						<li><a href="/administrativo/produtos/listar">Listar Produtos</a></li>
-						<li><a href="/administrativo/entrada/cadastrar">Entrada no Estoque</a></li>
-						<li><a href="/administrativo/entrada/listar">Lista de Entradas</a></li>
-					</ul>
-				</li>
-				<li class="li-p">
-					<a class="bt1" href="javascript://">Venda</a>
-					<ul class="ul-vendas">
-						<li><a href="/administrativo/venda/cadastrar">Nova venda</a></li>
-						<li><a href="/administrativo/venda/listar">Lista de vendas</a></li>
-					</ul>
-				</li>
-				<li class="li-p">
-					<a class="bt1" href="javascript://">Financeiro</a>
-					<ul class="ul-financeiro">
-						<li><a href="/administrativo/despesas/cadastrar">Despesas</a></li>
-						<li><a href="/administrativo/financeiro">Controle</a></li>
-					</ul>
-				</li>
-			</ul>
 		</nav>
-		
-			
-		<section class="layout-content" layout:fragment="corpo">
-			Principal		
-		</section>		
-	
-	</div>
+	</header>
 
+	<div class="layout-main">	
+	
+		<aside>
+			<nav class="sidebar sidebar-open">
+
+				<ul class="nav nav-pills">
+					<li class="nav-item"><a class="nav-link" href="/administrativo"><span>Home</span>
+					</a></li>
+					<li class="nav-item dropdown">
+						<a class="bt1 nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript://">Clientes</a>
+						<ul class="ul-1 dropdown-menu">
+							<li><a class="nav-link dropdown-item" href="/administrativo/clientes/cadastrar">Novo cliente</a></li>
+							<li><a class="nav-link dropdown-item" href="/administrativo/clientes/listar">Lista de clientes</a></li>
+						</ul>
+					</li>
+					<li class="nav-item" id="li-p">
+						<a class="bt2 nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript://">Funcionários</a>
+						<ul class="ul-2 dropdown-menu" id="ul-secundario">
+							<li><a class="nav-link dropdown-item" href="/administrativo/funcionarios/cadastrar">Novo funcionário</a></li>
+							<li><a class="nav-link dropdown-item" href="/administrativo/funcionarios/listar">Lista de funcionários</a></li>
+						</ul>
+					</li>
+					<li class="nav-item" id="li-p">
+						<a class="bt3 nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript://">Produtos</a>
+						<ul class="ul-3 dropdown-menu" id="ul-secundario">
+							<li><a class="nav-link dropdown-item" href="/administrativo/produtos/cadastrar">Cadastrar Novo</a></li>
+							<li><a class="nav-link dropdown-item" href="/administrativo/produtos/listar">Listar Produtos</a></li>
+							<li><a class="nav-link dropdown-item" href="/administrativo/entrada/cadastrar">Entrada no Estoque</a></li>
+							<li><a class="nav-link dropdown-item" href="/administrativo/entrada/listar">Lista de Entradas</a></li>
+						</ul>
+					</li>
+					<li class="nav-item" id="li-p">
+						<a class="bt4 nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript://">Venda</a>
+						<ul class="ul-4 dropdown-menu" id="ul-secundario">
+							<li><a class="nav-link dropdown-item" href="/administrativo/venda/cadastrar">Nova venda</a></li>
+							<li><a class="nav-link dropdown-item" href="/administrativo/venda/listar">Lista de vendas</a></li>
+						</ul>
+					</li>
+					<li class="nav-item" id="li-p">
+						<a class="bt5 nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript://">Financeiro</a>
+						<ul class="ul-5 dropdown-menu" id="ul-secundario">
+							<li><a class="nav-link dropdown-item" href="/administrativo/despesas/cadastrar">Despesas</a></li>
+							<li><a class="nav-link dropdown-item" href="/administrativo/financeiro">Controle</a></li>
+						</ul>
+					</li>
+
+				</ul>
+			</nav>
+		</aside>
+
+		<section class="layout-content" layout:fragment="corpo">
+			Principal
+		</section>
+
+	</div>
 	<footer class="layout-footer">
 		<div class="container">
 			<span class="footer-copy">&copy; 2023 ACST. Todos os direitos reservados.</span>
 		</div>
-	</footer> 
+	</footer>
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
@@ -102,18 +103,82 @@
 	<script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script type="text/javascript">
 
-	
-	    
 		$(function() {
 			$('[data-toggle="popover"]').popover();
 		});
-		
+
 		$(document).ready(function(){
 		    $(".navbar-toggle").click(function(){
 		        $(".sidebar").toggleClass("sidebar-open");
 		    })
+		});
+
+		$(document).ready(function() {
+			var botao = $('.bt1');
+			var dropDown = $('.ul-1');    
+		
+			botao.on('click', function(event){
+				dropDown.stop(true,true).slideToggle();
+				event.stopPropagation();
+			});
+		});
+
+		$(document).ready(function() {
+			var botao = $('.bt2');
+			var dropDown = $('.ul-2');    
+		
+			botao.on('click', function(event){
+				dropDown.stop(true,true).slideToggle();
+				event.stopPropagation();
+			});
+		});
+
+		$(document).ready(function() {
+			var botao = $('.bt3');
+			var dropDown = $('.ul-3');    
+		
+			botao.on('click', function(event){
+				dropDown.stop(true,true).slideToggle();
+				event.stopPropagation();
+			});
+		});
+
+		$(document).ready(function() {
+			var botao = $('.bt4');
+			var dropDown = $('.ul-4');    
+		
+			botao.on('click', function(event){
+				dropDown.stop(true,true).slideToggle();
+				event.stopPropagation();
+			});
+		});
+
+		$(document).ready(function() {
+			var botao = $('.bt5');
+			var dropDown = $('.ul-5');    
+		
+			botao.on('click', function(event){
+				dropDown.stop(true,true).slideToggle();
+				event.stopPropagation();
+			});
+		});
+
+		$(document). read(function associaInput() {
+			var variavel;
+			//pega o value do select
+			var e = document.getElementById("tipo_entrada");
+			var itemSelecionado = e.options[e.selectedIndex].value;
+			//injeta no value do input
+			if (itemSelecionado=="produto novo"){
+				variavel="NOVO";
+			}else if (itemSelecionado=="produto quebrado"){
+				variavel="QUEBRADO";
+			}
+			document.getElementById('camada').value = variavel;
+			console.log(variavel);
 		});
 
 	</script>

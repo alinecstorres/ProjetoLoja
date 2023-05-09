@@ -22,19 +22,22 @@
 </head>
 <body>
 	<section class="layout-content" layout:fragment="corpo">
-		<div class="page-header">
-			<div class="tituloConteudo">
+
+		<div class="row" style="margin-bottom: 10px;">
+			<div class="col-9" style="font-style:oblique; font-size: xx-large;">
 				Nova Entrada no Estoque
 			</div>
-
-			<a class="btn btn-outline-dark" href="/administrativo/entrada/listar" role="button" style="margin-top: 45px">
-				<span>Listar Entradas</span>
-			</a>
+			<div class="col-2" style="margin-top: 10px;">
+				<a class="btn btn-outline-dark" href="/administrativo/entrada/listar" role="button">
+					<span>Listar Entradas</span>
+				</a>
+			</div>
 		</div>
+		<br/>
 		
-		<div class="col-12" id="cadastro">
+		<div id="cadastro">
 
-			<div class="obs">
+			<div class="obs col-6">
 				<label for="tipo_entrada">Tipo de entrada<span class="required"></span></label>
 				<select class="form-control" name="tipo_entrada" id="tipo_entrada" onchange="associaInput()" autofocus="autofocus">
 				   <option value="">Selecione</option>
@@ -42,7 +45,7 @@
 				   <option value="quebrado">PRODUTO QUEBRADO</option>
 				</select>
 			</div>
-
+			<br/>
 			<form action="/administrativo/entrada/salvar" th:object="${entrada}"
 				method="POST">
 				
@@ -82,7 +85,8 @@
 							class="btn btn-outline-primary">Adicionar</button>
 					</div>
 
-					<div class="col-1" id="btnClear">
+					<div class="col-2" >
+						<br/>
 						<button id="clear" name="acao" th:value="clear" type="submit"
 						class="btn btn-outline-danger">Limpar lista</button>
 					</div>

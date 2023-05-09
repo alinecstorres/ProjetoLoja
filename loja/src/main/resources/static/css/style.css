@@ -1,70 +1,18 @@
 /*
  * Base structure
  */
-html, body {
+ html, body {
 	height: 100%;
 }
 
-header {
-    color: #fff;
-    font-size: x-large;
-    background-color: #212529;
-}
-
-/* header */
-
-.topoPagina {
-    width: 100%;
-    display: flex;
-    flex-flow: row wrap;
-    height: 80px;
-}
-
-#botaoMenu {
-    width: 5%;
-    margin-left: 25px;
-    margin-top: 20px;
-}
-
-.tituloPagina {
-    margin-top: 20px;
-    width: 70%;
-}
-
+body {
+	padding-top: 56px;
+	padding-left: 0;
+} 
 
 /*
  * main layout
  */
-
-.page-header {
-    height: 50px;
-    width: 100%;
-    display: flex;
-    flex-flow: row wrap;
-    color: #000;
-    line-height: 50px;
-    font-size: large;
-}
-
-.obs {
-    width: 20%;
-}
-
-.tituloConteudo {
-    width: 80%;
-    margin-left: 30px;
-    margin-top: 10px;
-    font-size: x-large;
-}
-
-#atalho {
-    height: 40px;
-    width: 20%;
-    margin-top: 10px;
-    margin-right: 0;
-    margin-left: 20px;
-}
-
 .layout-main {
     display: flex;
     min-height: calc(100vh - 52px);
@@ -75,33 +23,19 @@ header {
  * Content
  */
 .layout-content {
+    margin-left: 10px;
+    margin-top: 20px;
     width: 100%;
     padding-top: 0px;
-    margin-bottom: 50px;
+    font-size: large;
 }
 
-
-#btnClear {
-    padding: 0%;
-    height: 30px;
-    float: right;
-    margin-top: 25px;
+.container {
+	width: 100%;
+	padding-top: 20px;
 }
 
-#form-row-bottom {
-    width: 102%;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    float: left;
-}
-
-#cadastro {
-    margin-left: 20px;
-    margin-top: 50px;
-    width: 100%;
-}
-
-.modalMeu {
+.modal {
     display:none;
     vertical-align:middle;
     position:relative;
@@ -143,46 +77,71 @@ header {
     box-shadow:         1px 1px 5px rgba(0,0,0,0.5);
   }
 
-  #linha1 {
-    margin-bottom: 20px;
-  }
 /*
  * Sidebar
  */
-
-ul {
-    list-style: none;
-    color: #fff;
+.sidebar {
+    width: 0px;
+    height: 100vh; 
+    background-color: #212529;
+    flex-shrink: 0;
+    overflow: hidden;
+    transition: width .5s;
 }
 
-a {
-    text-decoration: none;
-    color: #fff;
-    display: block;
+.sidebar .nav {
+	margin-bottom: 0px;
 }
 
-a:hover {
+.sidebar .nav-item {
+	width: 100%;
+}
+
+.sidebar .nav-item {
+	margin-left: 0;
+}
+
+.sidebar .nav-link {
+	border-radius: 0;
+} 
+
+.sidebar ul li:hover a, .menu ul li.active a{
     color: #777777;
 }
 
-.nav-menu {
-    background-color: #212529;   
-    width: 20%;
+.sidebar ul{
+    list-style: none;
+    padding: 10px 0px;
+    margin-left: 10px;
 }
 
-.li-p {
-    line-height: 50px;
+.sidebar ul li a{
+    display: block;
+    color:#fff;
+    padding: 10px 15px;
+    white-space: nowrap;
 }
 
-ul ul {
-    display:none;
+.sidebar.sidebar-open {
+    width: 200px;
 }
 
-ul li:hover > ul {
-    display:block;    
+/*
+ * nav-pills home
+ */
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+	color: #fff;
+	background-color: transparent;
 }
 
+/*
+ * toogle do navbar do menu
+ */ 
 
+.navbar-toggle {
+    display: inline-block;
+    margin-left: 10px;
+}
 
 /*
  * Footer
@@ -202,4 +161,171 @@ ul li:hover > ul {
 	color: #777777;
 	text-align: center;
 }
+
+
+/*
+ * Base structure
+ */
+/* html, body {
+	height: 100%;
+}
+
+header {
+    color: #fff;
+    font-size: x-large;
+    background-color: #212529;
+} */
+
+/* header */
+
+/* .topoPagina {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    height: 80px;
+}
+
+#botaoMenu {
+    width: 5%;
+    margin-left: 25px;
+    margin-top: 20px;
+}
+
+.tituloPagina {
+    margin-top: 20px;
+    width: 70%;
+} */
+
+
+/*
+ * main layout
+ */
+
+/* .page-header {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    color: #000;
+    line-height: 50px;
+    font-size: large;
+}
+
+.obs {
+    width: 20%;
+}
+
+.tituloConteudo {
+    width: 80%;
+    margin-left: 30px;
+    margin-top: 10px;
+    font-size: x-large;
+}
+
+#atalho {
+    height: 40px;
+    width: 20%;
+    margin-top: 10px;
+    margin-right: 0;
+    margin-left: 20px;
+}
+
+.layout-main {
+    display: flex;
+    min-height: calc(100vh - 52px);
+    overflow: hidden;
+} */
+
+/*
+ * Content
+ */
+/* .layout-content {
+    width: 100%;
+    padding-top: 0px;
+    margin-bottom: 50px;
+}
+
+
+#btnClear {
+    padding: 0%;
+    height: 30px;
+    float: right;
+    margin-top: 25px;
+}
+
+#form-row-bottom {
+    width: 102%;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    float: left;
+}
+
+#cadastro {
+    margin-left: 20px;
+    margin-top: 50px;
+    width: 100%;
+}
+
+
+
+  #linha1 {
+    margin-bottom: 20px;
+  } */
+/*
+ * Sidebar
+ */
+
+/* ul {
+    list-style: none;
+    color: #101010;
+}
+
+a {
+    text-decoration: none;
+    color: #0b0b0b;
+    display: block;
+}
+
+a:hover {
+    color: #777777;
+}
+
+#nav-menu {
+    background-color: #212529;   
+    width: 20%;
+    height: 100%;
+}
+
+.li-p {
+    line-height: 50px;
+}
+
+ul ul {
+    display:none;
+}
+
+ul li:hover > ul {
+    display:block;    
+} */
+
+
+
+/*
+ * Footer
+ */
+/* .layout-footer {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 0;
+	height: 50px;
+}
+
+.footer-copy {
+	font-size: 92%;
+	display: block;
+	color: #777777;
+	text-align: center;
+} */
 

@@ -4,16 +4,17 @@
 	<title>Página de Cadastro de Clientes do Administrativo</title>
 </head>
 <body>
-	<section layout:fragment="corpo">
+	<section class="layout-content" layout:fragment="corpo">
 
-		<div class="page-header">
-			<div class="tituloConteudo">
+		<div class="row" style="margin-bottom: 10px;">
+			<div class="col-9" style="font-style:oblique; font-size: xx-large;">
 				Novo Cliente
 			</div>
-
-			<a class="btn btn-outline-dark" href="/administrativo/clientes/listar" role="button" style="margin-top: 45px">
-				<span>Listar Clientes</span>
-			</a>
+			<div class="col-2" style="margin-top: 10px;">
+				<a class="btn btn-outline-dark" href="/administrativo/clientes/listar" role="button">
+					<span>Listar Clientes</span>
+				</a>
+			</div>
 		</div>
 
 		<div class="row" id="cadastro">

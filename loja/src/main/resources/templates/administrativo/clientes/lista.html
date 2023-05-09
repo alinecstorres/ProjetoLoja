@@ -5,94 +5,95 @@
 </head>
 <body>
 	<section class="layout-content" layout:fragment="corpo">
-		<div class="page-header">
-			<div class="tituloConteudo">
+
+		<div class="row" style="margin-bottom: 10px;">
+			<div class="col-9" style="font-style:oblique; font-size: xx-large;">
 				Lista de Clientes
 			</div>
-
-			<a class="btn btn-outline-dark" href="/administrativo/clientes/cadastrar" role="button" style="margin-top: 45px">
-				<span>Novo Cliente</span>
-			</a>
+			<div class="col-2" style="margin-top: 10px;">
+				<a class="btn btn-outline-dark" href="/administrativo/clientes/cadastrar" role="button">
+					<span>Novo Cliente</span>
+				</a>
+			</div>
 		</div>
-	    <br/>
 	
-	        <div class="container">
-	
-	            <p>
-	                <i class="oi oi-magnifying-glass"></i><span></span>
-	                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
-	                        aria-controls="collapseNome">Nome
-	                </button>
-	                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseDocumento"
-	                        aria-controls="collapseDocumento">Documento
-	                </button>
-	            </p>
-	            <div class="row">
-	                <div class="col">
-	                    <div class="collapse" id="collapseNome">
-	
-	                        <nav class="navbar navbar-light bg-light">
-	                            <form class="form-inline" method="GET" action="/administrativo/clientes/buscar/nome">
-	                                <input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
-	                                       name="nome" />
-	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
-	                            </form>
-	                        </nav>
-	
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="row">
-	                <div class="col">
-	                    <div class="collapse" id="collapseDocumento">
-	
-	                        <nav class="navbar navbar-light bg-light">
-	                            <form class="form-inline" method="GET" action="/administrativo/clientes/buscar/documento">
-									<input class="form-control mr-sm-2" type="search" aria-label="Search"
-									name="documento" />
-							 		<button class="btn btn-outline-success my-2 my-sm-0">Search</button>
-	                            </form>
-	                        </nav>
-	
-	                    </div>
-	                </div>
-	            </div>
-	
-	
-	            <div class="table-responsive">
-	                <table class="table table-striped table-hover table-sm">
-	                    <thead>
-	                    <tr>
-	                        <th>#</th>
-	                        <th>Nome</th>
-	                        <th>Documento</th>
-							<th>Ação</th>
-	                    </tr>
-	                    </thead>
-	                    <tbody>
-							<tr th:each="cliente : ${listaClientes}">
-								<td th:text="${cliente.id}"></td>
-								<td th:text="${cliente.nome}"></td>
-								<td th:text="${cliente.documento}"></td>
+		<div class="container">
 
-								<td colspan="2"><a class="btn btn-outline-primary" th:href="@{/administrativo/clientes/editar/{id}(id=${cliente.id})}" role="button"><span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
-								</a>
+			<p>
+				<button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
+						aria-controls="collapseNome"><i class="oi oi-magnifying-glass"></i>Nome
+				</button>
+				<button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseDocumento"
+						aria-controls="collapseDocumento"><i class="oi oi-magnifying-glass"></i>Documento
+				</button>
+			</p>
+			
+			<div class="row">
+				<div class="col">
+					<div class="collapse" id="collapseNome">
 
-								<a class="btn btn-outline-danger" href="#caixa" rel="modal:open" role="button"><span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
+						<nav class="navbar navbar-light bg-light">
+							<form class="form-inline" method="GET" action="/administrativo/clientes/buscar/nome">
+								<input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
+										name="nome" />
+								<button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+							</form>
+						</nav>
 
-								</a>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="collapse" id="collapseDocumento">
 
-								<div id="caixa" class="modalMeu">
-									<p>Tem certeza que deseja excluir?</p>
-									<a class="modalButton" th:href="@{/administrativo/clientes/listar}">Não</a>
-									<a class="modalButton" th:href="@{/administrativo/clientes/remover/{id}(id=${cliente.id})}">Sim</a>
-								</div>
-								</td>
-							</tr>
-	                    </tbody>
-	                </table>
-	            </div>
-	        </div>
-	    </section>
+						<nav class="navbar navbar-light bg-light">
+							<form class="form-inline" method="GET" action="/administrativo/clientes/buscar/documento">
+								<input class="form-control mr-sm-2" type="search" aria-label="Search"
+								name="documento" />
+								<button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+							</form>
+						</nav>
+
+					</div>
+				</div>
+			</div>
+
+
+			<div class="table-responsive">
+				<table class="table table-striped table-hover table-sm">
+					<thead>
+					<tr>
+						<th>#</th>
+						<th>Nome</th>
+						<th>Documento</th>
+						<th>Ação</th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr th:each="cliente : ${listaClientes}">
+							<td th:text="${cliente.id}"></td>
+							<td th:text="${cliente.nome}"></td>
+							<td th:text="${cliente.documento}"></td>
+
+							<td colspan="2"><a class="btn btn-outline-primary" th:href="@{/administrativo/clientes/editar/{id}(id=${cliente.id})}" role="button"><span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
+							</a>
+
+							<a class="btn btn-outline-danger" href="#caixa" rel="modal:open" role="button"><span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
+
+							</a>
+
+							<div id="caixa" class="modal">
+								<p>Tem certeza que deseja excluir?</p>
+								<a class="modalButton" th:href="@{/administrativo/clientes/listar}">Não</a>
+								<a class="modalButton" th:href="@{/administrativo/clientes/remover/{id}(id=${cliente.id})}">Sim</a>
+							</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
 </body>
 </html>		

@@ -5,89 +5,89 @@
 </head>
 <body>
 	<section class="layout-content" layout:fragment="corpo">
-			<div class="page-header">
-				<div class="tituloConteudo">
-					Lista de Vendas de Produtos
-				</div>
-
-				<a class="btn btn-outline-dark" href="/administrativo/venda/cadastrar" role="button" style="margin-top: 45px">
+		<div class="row" style="margin-bottom: 10px;">
+			<div class="col-9" style="font-style:oblique; font-size: xx-large;">
+				Lista de Vendas
+			</div>
+			<div class="col-2" style="margin-top: 10px;">
+				<a class="btn btn-outline-dark" href="/administrativo/venda/cadastrar" role="button">
 					<span>Nova Venda</span>
 				</a>
 			</div>
-	        <br/>
-	        <div class="container">
-	
-	            <p>
-	                <i class="oi oi-magnifying-glass"></i><span></span>
-	                <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseCliente"
-	                        aria-controls="collapseCliente">Cliente
-	                </button>
-	                <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseFuncionario"
-	                        aria-controls="collapseFuncionario">Funcionário
-	                </button>
-	            </p>
-	            <div class="row">
-	                <div class="col">
-	                    <div class="collapse" id="collapseNome">
-	
-	                        <nav class="navbar navbar-light bg-light">
-	                            <form class="form-inline" method="GET" action="/administrativo/venda/buscar/nomeCliente">
-	                                <input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
-	                                       name="nomeCliente" />
-	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
-	                            </form>
-	                        </nav>
-	
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="row">
-	                <div class="col">
-	                    <div class="collapse" id="collapseCargo">
-	
-	                        <nav class="navbar navbar-light bg-light">
-	                            <form class="form-inline" method="GET" action="/administrativo/venda/buscar/nomeFuncionario">
-	                                <input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
-	                                       name="nomeCliente" />
-	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
-	                            </form>
-	                        </nav>
-	
-	                    </div>
-	                </div>
-	            </div>
-	
-	
-	            <div class="table-responsive">
-	                <table class="table table-striped table-hover table-sm">
-	                    <thead>
-	                    <tr>
-	                        <th>#</th>
-	                        <th>Cliente</th>
-	                        <th>Funcionário</th>
-	                        <th>Data</th>
-							<th>Valor</th>
-							<th>Desconto</th>
-							<th>Valor com Desconto</th>
-							<th>Produtos</th>
-	                    </tr>
-	                    </thead>
-	                    <tbody>
-							<tr th:each="venda : ${listaVendas}">
-								<td th:text="${venda.id}"></td>
-								<td th:text="${venda.cliente.nome}"></td>
-								<td th:text="${venda.funcionario.nome}"></td>
-								<td th:text="${#dates.format(venda.dataEntrada, 'dd-MM-yyyy')}"></td>
-								<td th:text="${#numbers.formatCurrency(venda.valorTotal)}"></td>
-								<td th:text="${#numbers.formatPercent(venda.desconto/100,0,0)}"></td>
-								<td th:text="${#numbers.formatCurrency(venda.valorComDesconto)}"></td>
-								<td colspan="2"><a style="margin-left: 15px" class="btn btn-outline-dark" th:href="@{/administrativo/venda/itens/{id}(id=${venda.id})}" role="button"><span class="oi oi-eye" title="Editar" aria-hidden="true"></span>
-								</a>
-							</tr>
-	                    </tbody>
-	                </table>
-	            </div>
-	        </div>
-	    </section>
+		</div>
+			
+		<div class="container">
+
+			<p>
+				<button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseCliente"
+						aria-controls="collapseCliente"><i class="oi oi-magnifying-glass"></i>Cliente
+				</button>
+				<button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseFuncionario"
+						aria-controls="collapseFuncionario"><i class="oi oi-magnifying-glass"></i>Funcionário
+				</button>
+			</p>
+			<div class="row">
+				<div class="col">
+					<div class="collapse" id="collapseNome">
+
+						<nav class="navbar navbar-light bg-light">
+							<form class="form-inline" method="GET" action="/administrativo/venda/buscar/nomeCliente">
+								<input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
+										name="nomeCliente" />
+								<button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+							</form>
+						</nav>
+
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="collapse" id="collapseCargo">
+
+						<nav class="navbar navbar-light bg-light">
+							<form class="form-inline" method="GET" action="/administrativo/venda/buscar/nomeFuncionario">
+								<input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
+										name="nomeCliente" />
+								<button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+							</form>
+						</nav>
+
+					</div>
+				</div>
+			</div>
+
+
+			<div class="table-responsive">
+				<table class="table table-striped table-hover table-sm">
+					<thead>
+					<tr>
+						<th>#</th>
+						<th>Cliente</th>
+						<th>Funcionário</th>
+						<th>Data</th>
+						<th>Valor</th>
+						<th>Desconto</th>
+						<th>Valor com Desconto</th>
+						<th>Produtos</th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr th:each="venda : ${listaVendas}">
+							<td th:text="${venda.id}"></td>
+							<td th:text="${venda.cliente.nome}"></td>
+							<td th:text="${venda.funcionario.nome}"></td>
+							<td th:text="${#dates.format(venda.dataEntrada, 'dd-MM-yyyy')}"></td>
+							<td th:text="${#numbers.formatCurrency(venda.valorTotal)}"></td>
+							<td th:text="${#numbers.formatPercent(venda.desconto/100,0,0)}"></td>
+							<td th:text="${#numbers.formatCurrency(venda.valorComDesconto)}"></td>
+							<td colspan="2"><a style="margin-left: 15px" class="btn btn-outline-dark" th:href="@{/administrativo/venda/itens/{id}(id=${venda.id})}" role="button"><span class="oi oi-eye" title="Editar" aria-hidden="true"></span>
+							</a>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
 </body>
 </html>		

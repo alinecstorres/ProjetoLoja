@@ -4,18 +4,19 @@
 	<title>Página de Cadastro de Funcionários do Administrativo</title>
 </head>
 <body>
-	<section layout:fragment="corpo">
+	<section class="layout-content" layout:fragment="corpo">
 
-		<div class="page-header">
-			<div class="tituloConteudo">
+		<div class="row" style="margin-bottom: 10px;">
+			<div class="col-9" style="font-style:oblique; font-size: xx-large;">
 				Novo Funcionário
 			</div>
-
-			<a class="btn btn-outline-dark" href="/administrativo/funcionarios/listar" role="button" style="margin-top: 45px">
-				<span>Listar Funcionários</span>
-			</a>
+			<div class="col-2" style="margin-top: 10px;">
+				<a class="btn btn-outline-dark" href="/administrativo/funcionarios/listar" role="button">
+					<span>Listar Funcionários</span>
+				</a>
+			</div>
 		</div>
-
+		<br/>
 		<div class="row" id="cadastro">
 
 			<form action="/administrativo/funcionarios/salvar" th:object="${funcionario}" method="POST">

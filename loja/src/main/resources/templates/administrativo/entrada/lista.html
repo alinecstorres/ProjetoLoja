@@ -5,77 +5,77 @@
 </head>
 <body>
 	<section class="layout-content" layout:fragment="corpo">
-		<div class="page-header">
-			<div class="tituloConteudo">
+
+		<div class="row" style="margin-bottom: 10px;">
+			<div class="col-9" style="font-style:oblique; font-size: xx-large;">
 				Lista de Entradas de Produtos
 			</div>
-
-			<a class="btn btn-outline-dark" href="/administrativo/entrada/cadastrar" role="button" style="margin-top: 45px">
-				<span>Nova Entrada</span>
-			</a>
+			<div class="col-2" style="margin-top: 10px;">
+				<a class="btn btn-outline-dark" href="/administrativo/entrada/cadastrar" role="button">
+					<span>Nova Entrada</span>
+				</a>
+			</div>
 		</div>
-	    <br/>
 	
-	        <div class="container">
-	
-	            <p>
-	                <i class="oi oi-magnifying-glass"></i><span></span>
-	                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
-	                        aria-controls="collapseNome">Data
-	                </button>
-	                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseCargo"
-	                        aria-controls="collapseCargo">Produto
-	                </button>
-	            </p>
-	            <div class="row">
-	                <div class="col">
-	                    <div class="collapse" id="collapseNome">
-	
-	                        <nav class="navbar navbar-light bg-light">
-	                            <form class="form-inline" method="GET" action="/administrativo/entrada/buscar/data">
-	                                <input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
-	                                       name="data" />
-	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
-	                            </form>
-	                        </nav>
+		<div class="container">
 
-							<nav class="navbar navbar-light bg-light">
-	                            <form class="form-inline" method="GET" action="/administrativo/entrada/buscar/produto">
-	                                <input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
-	                                       name="produto" />
-	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
-	                            </form>
-	                        </nav>
-	
-	                    </div>
-	                </div>
-	            </div>	
-	
-	            <div class="table-responsive">
-	                <table class="table table-striped table-hover table-sm">
-	                    <thead>
-	                    <tr>
-	                        <th>#</th>
-	                        <th>Funcionario</th>
-	                        <th>Data</th>
-	                        <th>Produto</th>
-							<th>Quantidade</th>
-							<th>Obs</th>
-	                    </tr>
-	                    </thead>
-	                    <tbody>
-							<tr th:each="entrada : ${listaProdutos}">
-								<td th:text="${entrada.entradaProduto.id}"></td>
-								<td th:text="${entrada.entradaProduto.funcionario.nome}"></td>
-								<td th:text="${entrada.entradaProduto.dataEntrada}"></td>
-								<td th:text="${entrada.produto.nomeCompletoProduto}"></td>
-								<td th:text="${entrada.quantidade}"></td>
-								<td th:text="${entrada.observacao}"></td>
-							</tr>
-	                    </tbody>
-	                </table>
-	            </div>
-	        </div>
-	    </section>
+			<p>
+				<button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
+						aria-controls="collapseNome"><i class="oi oi-magnifying-glass"></i>Data
+				</button>
+				<button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseCargo"
+						aria-controls="collapseCargo"><i class="oi oi-magnifying-glass"></i>Produto
+				</button>
+			</p>
+			<div class="row">
+				<div class="col">
+					<div class="collapse" id="collapseNome">
+
+						<nav class="navbar navbar-light bg-light">
+							<form class="form-inline" method="GET" action="/administrativo/entrada/buscar/data">
+								<input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
+										name="data" />
+								<button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+							</form>
+						</nav>
+
+						<nav class="navbar navbar-light bg-light">
+							<form class="form-inline" method="GET" action="/administrativo/entrada/buscar/produto">
+								<input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
+										name="produto" />
+								<button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+							</form>
+						</nav>
+
+					</div>
+				</div>
+			</div>	
+
+			<div class="table-responsive">
+				<table class="table table-striped table-hover table-sm">
+					<thead>
+					<tr>
+						<th>#</th>
+						<th>Funcionario</th>
+						<th>Data</th>
+						<th>Produto</th>
+						<th>Quantidade</th>
+						<th>Obs</th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr th:each="entrada : ${listaProdutos}">
+							<td th:text="${entrada.entradaProduto.id}"></td>
+							<td th:text="${entrada.entradaProduto.funcionario.nome}"></td>
+							<td th:text="${entrada.entradaProduto.dataEntrada}"></td>
+							<td th:text="${entrada.produto.nomeCompletoProduto}"></td>
+							<td th:text="${entrada.quantidade}"></td>
+							<td th:text="${entrada.observacao}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
 </body>
 </html>		
