@@ -56,7 +56,7 @@
 						</div>
 					</div>
 
-					<div class="col-2">
+					<div class="col-1">
 						<label for="genero">Gênero</label>
 						<input type="text" class="form-control" id="genero" th:field="*{genero}" value=""/>
 						<div class="invalid-feedback">
@@ -124,6 +124,18 @@
 				<input type="hidden" id="id" th:field="*{id}" value=""/>
 				<br/>
 				<button type="submit" class="btn btn-outline-primary" style="width: 95%;">Salvar</button>
+                <br/>
+				<br/>
+
+				<a class="btn btn-outline-danger" id="botaoExcluir" href="#caixa" rel="modal:open" role="button">Excluir
+
+				</a>
+
+				<div id="caixa" class="modal">
+					<p>Tem certeza que deseja excluir?</p>
+					<a class="modalButton" th:href="@{/administrativo/funcionarios/listar}">Não</a>
+					<a class="modalButton" th:href="@{/administrativo/funcionarios/remover/{id}(id=${id})}">Sim</a>
+				</div>
 			</form>
 
 		</div>

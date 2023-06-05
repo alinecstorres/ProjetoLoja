@@ -36,8 +36,10 @@ public class FuncionarioControle {
 
     @GetMapping("/administrativo/funcionarios/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Long id) {
+        ModelAndView mv = new ModelAndView("administrativo/funcionarios/editar");
         Optional<Funcionario> funcionario = funcionarioRepositorio.findById(id);
-        return cadastrar(funcionario.get());
+        mv.addObject("funcionario", funcionario);
+        return mv;
     }
 
     @GetMapping("/administrativo/funcionarios/remover/{id}")

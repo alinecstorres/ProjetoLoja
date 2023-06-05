@@ -9,11 +9,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-	<link rel="icon" href="/image/favicon.png" />
+	<link rel="icon" href="" />
 	<!--caixa modal -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- Bootstrap core CSS -->
 	<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet" />
@@ -22,68 +23,47 @@
 	<link href="/css/style.css" rel="stylesheet" />
 </head>
 <body>
-	<header>
-		<nav class="navbar navbar-inverse navbar navbar-dark bg-dark fixed-top">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="btn btn-dark navbar-toggle pull-left" style="margin-bottom: 10px">
-						<i class="oi oi-menu"></i>
-					</button>
-					<a class="navbar-brand " href="#">Painel Administrativo da Loja Virtual</a>
-				</div>
-			</div>
-		</nav>
-	</header>
 
-	<div class="layout-main">	
-	
-		<aside>
-			<nav class="sidebar sidebar-open">
+	<!-- Top Navigation Menu -->
+	<div class="topnav">
+	<a href="/administrativo" class="active"><h2>Painel Administrativo</h2></a>
+	<!-- Navigation links (hidden by default) -->
+	<div id="myLinks">
 
-				<ul class="nav nav-pills">
-					<li class="nav-item"><a class="nav-link" href="/administrativo"><span>Home</span>
-					</a></li>
-					<li class="nav-item dropdown">
-						<a class="bt1 nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript://">Clientes</a>
-						<ul class="ul-1 dropdown-menu">
-							<li><a class="nav-link dropdown-item" href="/administrativo/clientes/cadastrar">Novo cliente</a></li>
-							<li><a class="nav-link dropdown-item" href="/administrativo/clientes/listar">Lista de clientes</a></li>
-						</ul>
-					</li>
-					<li class="nav-item" id="li-p">
-						<a class="bt2 nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript://">Funcionários</a>
-						<ul class="ul-2 dropdown-menu" id="ul-secundario">
-							<li><a class="nav-link dropdown-item" href="/administrativo/funcionarios/cadastrar">Novo funcionário</a></li>
-							<li><a class="nav-link dropdown-item" href="/administrativo/funcionarios/listar">Lista de funcionários</a></li>
-						</ul>
-					</li>
-					<li class="nav-item" id="li-p">
-						<a class="bt3 nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript://">Produtos</a>
-						<ul class="ul-3 dropdown-menu" id="ul-secundario">
-							<li><a class="nav-link dropdown-item" href="/administrativo/produtos/cadastrar">Cadastrar Novo</a></li>
-							<li><a class="nav-link dropdown-item" href="/administrativo/produtos/listar">Listar Produtos</a></li>
-							<li><a class="nav-link dropdown-item" href="/administrativo/entrada/cadastrar">Entrada no Estoque</a></li>
-							<li><a class="nav-link dropdown-item" href="/administrativo/entrada/listar">Lista de Entradas</a></li>
-						</ul>
-					</li>
-					<li class="nav-item" id="li-p">
-						<a class="bt4 nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript://">Venda</a>
-						<ul class="ul-4 dropdown-menu" id="ul-secundario">
-							<li><a class="nav-link dropdown-item" href="/administrativo/venda/cadastrar">Nova venda</a></li>
-							<li><a class="nav-link dropdown-item" href="/administrativo/venda/listar">Lista de vendas</a></li>
-						</ul>
-					</li>
-					<li class="nav-item" id="li-p">
-						<a class="bt5 nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript://">Financeiro</a>
-						<ul class="ul-5 dropdown-menu" id="ul-secundario">
-							<li><a class="nav-link dropdown-item" href="/administrativo/despesas/cadastrar">Despesas</a></li>
-							<li><a class="nav-link dropdown-item" href="/administrativo/financeiro">Controle</a></li>
-						</ul>
-					</li>
-
-				</ul>
-			</nav>
-		</aside>
+		<a href="/administrativo/clientes/listar" class="nav-link dropdown-item" >
+			Clientes
+		</a>
+		<a class="nav-link dropdown-item" href="/administrativo/funcionarios/listar" >
+			Funcionários
+		</a>
+			
+			<a href="javascript:void(0);" class="bt1 nav-link dropdown-toggle" onclick="itens('produtos')" >
+				Produtos
+			</a>
+			<ul id="produtosItens">
+				<li><a class="nav-link dropdown-item" href="/administrativo/produtos/listar">Listar Produtos</a></li>
+				<li><a class="nav-link dropdown-item" href="/administrativo/entrada/listar">Entradas de Produtos</a></li>
+			</ul>
+			<a href="javascript:void(0);" class="bt1 nav-link dropdown-toggle" onclick="itens('vendas')" >
+				Vendas
+			</a>
+			<ul id="vendasItens">
+				<li><a class="nav-link dropdown-item" href="/administrativo/venda/cadastrar">Nova venda</a></li>
+				<li><a class="nav-link dropdown-item" href="/administrativo/venda/listar">Lista de vendas</a></li>
+			</ul>
+			<a href="javascript:void(0);" class="bt1 nav-link dropdown-toggle" onclick="itens('financeiro')" >
+				Financeiro
+			</a>
+			<ul id="financeiroItens">
+				<li><a class="nav-link dropdown-item" href="/administrativo/despesas/cadastrar">Despesas</a></li>
+				<li><a class="nav-link dropdown-item" href="/administrativo/financeiro">Controle</a></li>
+			</ul>
+	</div>
+	<!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+	<a href="javascript:void(0);" class="icon" onclick="menu()">
+		<i class="fa fa-bars"></i>
+	</a>
+	</div>
 
 		<section class="layout-content" layout:fragment="corpo">
 			Principal
@@ -116,56 +96,6 @@
 		    })
 		});
 
-		$(document).ready(function() {
-			var botao = $('.bt1');
-			var dropDown = $('.ul-1');    
-		
-			botao.on('click', function(event){
-				dropDown.stop(true,true).slideToggle();
-				event.stopPropagation();
-			});
-		});
-
-		$(document).ready(function() {
-			var botao = $('.bt2');
-			var dropDown = $('.ul-2');    
-		
-			botao.on('click', function(event){
-				dropDown.stop(true,true).slideToggle();
-				event.stopPropagation();
-			});
-		});
-
-		$(document).ready(function() {
-			var botao = $('.bt3');
-			var dropDown = $('.ul-3');    
-		
-			botao.on('click', function(event){
-				dropDown.stop(true,true).slideToggle();
-				event.stopPropagation();
-			});
-		});
-
-		$(document).ready(function() {
-			var botao = $('.bt4');
-			var dropDown = $('.ul-4');    
-		
-			botao.on('click', function(event){
-				dropDown.stop(true,true).slideToggle();
-				event.stopPropagation();
-			});
-		});
-
-		$(document).ready(function() {
-			var botao = $('.bt5');
-			var dropDown = $('.ul-5');    
-		
-			botao.on('click', function(event){
-				dropDown.stop(true,true).slideToggle();
-				event.stopPropagation();
-			});
-		});
-
 		$(document). read(function associaInput() {
 			var variavel;
 			//pega o value do select
@@ -180,6 +110,47 @@
 			document.getElementById('camada').value = variavel;
 			console.log(variavel);
 		});
+
+		function menu() {
+			var x = document.getElementById("myLinks");
+			if (x.style.display === "block") {
+				x.style.display = "none";
+			} else {
+				x.style.display = "block";
+			}
+		}
+
+		function itens(id) {
+
+			let list = [];
+
+			switch (id) {
+				case "produtos":
+					y = document.getElementById("produtosItens");
+					a = document.getElementById("vendasItens");
+					b = document.getElementById("financeiroItens");
+				break;
+				case "vendas":
+					y = document.getElementById("vendasItens");
+					a = document.getElementById("produtosItens");
+					b = document.getElementById("financeiroItens");
+				break;
+				case "financeiro":
+					y = document.getElementById("financeiroItens");
+					a = document.getElementById("produtosItens");
+					b = document.getElementById("vendasItens");
+				break;
+				default:
+					break;
+			}
+			if (y.style.display === "block") {
+				y.style.display = "none";
+			} else {
+				y.style.display = "block";
+				a.style.display = "none";
+				b.style.display = "none";
+			}
+		}
 
 	</script>
 </body>

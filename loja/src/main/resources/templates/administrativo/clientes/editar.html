@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{administrativo/fragments/layout}">
 <head>
-	<title>Página de Cadastro de Clientes do Administrativo</title>
+	<title>Página para Editar Clientes do Administrativo</title>
 </head>
 <body>
 	<section class="layout-content" layout:fragment="corpo">
 
 		<div class="row" id="title">
 			<div class="col-10">
-				<h3>Novo Cliente</h3>
+				<h3>Editar Cliente</h3>
 			</div>
-			<div class="col-2" >
+			<div class="col-2">
 				<a class="btn btn-outline-dark" href="/administrativo/clientes/listar" role="button">
 					<span>Listar Clientes</span>
 				</a>
@@ -79,11 +79,22 @@
 
 				</div>
 
-				<input type="hidden" id="id" th:field="*{id}" value=""/>
+				<input type="hidden" id="id" th:field="*{id}"/>
 				
 				<br/>
 				<button type="submit" class="btn btn-outline-primary" style="width: 91.5%;">Salvar</button>
-				
+				<br/>
+				<br/>
+
+				<a class="btn btn-outline-danger" id="botaoExcluir" href="#caixa" rel="modal:open" role="button">Excluir
+
+				</a>
+
+				<div id="caixa" class="modal">
+					<p>Tem certeza que deseja excluir?</p>
+					<a class="modalButton" th:href="@{/administrativo/clientes/listar}">Não</a>
+					<a class="modalButton" th:href="@{/administrativo/clientes/remover/{id}(id=${id})}">Sim</a>
+				</div>
 			</form>
 
 		</div>

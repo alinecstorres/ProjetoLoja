@@ -11,11 +11,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -49,8 +48,10 @@ public class ProdutoControle {
 
     @GetMapping("/administrativo/produtos/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Long id) {
+        ModelAndView mv = new ModelAndView("administrativo/produtos/editar");
         Optional<Produto> produto = produtoRepositorio.findById(id);
-        return cadastrar(produto.get());
+        mv.addObject("produto", produto);
+        return mv;
     }
 
     @GetMapping("/administrativo/produtos/remover/{id}")
@@ -73,59 +74,92 @@ public class ProdutoControle {
     }
 
     @PostMapping("administrativo/produtos/salvar")
-    public ModelAndView salvar(@Validated Produto produto, BindingResult result, @RequestParam("file") MultipartFile arquivo) {
-
+    public ModelAndView salvar(@RequestPart String nomeProduto, String tamanhoProduto, Double valorProduto, Double alturaProduto, Double larguraProduto, Double profundidadeProduto, Double pesoProduto, BindingResult result, MultipartFile arquivo) {
+        
         listaProdutos = produtoRepositorio.findAll();
-        String nomeCompleto = produto.getNomeProduto().concat(" - ").concat(produto.getTamanhoProduto());        
+        String nomeCompleto = nomeProduto.concat(" - ").concat(tamanhoProduto);
+
+        Produto produto = new Produto();
+        produto.setNomeProduto(nomeProduto);
+        produto.setAlturaProduto(alturaProduto);
+        produto.setLarguraProduto(larguraProduto);
+        produto.setPesoProduto(pesoProduto);
+        produto.setProfundidadeProduto(profundidadeProduto);
+        produto.setTamanhoProduto(tamanhoProduto);
+        produto.setValorProduto(valorProduto);
+        produto.setNomeCompletoProduto(nomeCompleto);
 
         if(result.hasErrors()) {
-            return cadastrar(produto);
+            return listar();
         }
 
         if (listaProdutos.isEmpty()) {
-            produtoRepositorio.saveAndFlush(produto);
-            produto.setNomeCompletoProduto(nomeCompleto);
-        } else {
             
-        }
+            produtoRepositorio.save(produto);
 
-        for (Produto produto2 : listaProdutos) {
-            int estoque = produto2.getQuantEstoque();
-            if (produto2.getNomeCompletoProduto().equals(nomeCompleto)) {
-                if (produto.getNomeImagem() == null) {
+            try {
+                if (!arquivo.isEmpty()) {
+    
+                    byte[] bytes = arquivo.getBytes();
+                    Path caminho = Paths.get(caminhoImagens+String.valueOf(produto.getId())+arquivo.getOriginalFilename());
+                    Files.write(caminho, bytes);
+                    produto.setNomeImagem(String.valueOf(produto.getId())+arquivo.getOriginalFilename());
+                
                     produtoRepositorio.flush();
-                    System.out.println("---------------->" + produto2.getNomeImagem());
-                    produto.setNomeImagem(produto2.getNomeImagem());
-                    produto.setQuantEstoque(estoque);
-                    produto.setNomeCompletoProduto(nomeCompleto);
-                } else {
-                    produtoRepositorio.flush();
-                    produto.setQuantEstoque(estoque);
-                    produto.setNomeCompletoProduto(nomeCompleto);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+        } else {
+
+            if (listaProdutos.contains(produto)) {     
+                
+                Produto produto2 = produtoRepositorio.findByNomeCompletoProduto(nomeCompleto);
+                
+                produto2.setAlturaProduto(alturaProduto);
+                produto2.setLarguraProduto(larguraProduto);
+                produto2.setPesoProduto(pesoProduto);
+                produto2.setProfundidadeProduto(profundidadeProduto);
+                produto2.setValorProduto(valorProduto);
+            
+
+                try {
+                    if (!arquivo.isEmpty()) {
+        
+                        byte[] bytes = arquivo.getBytes();
+                        Path caminho = Paths.get(caminhoImagens+String.valueOf(produto2.getId())+arquivo.getOriginalFilename());
+                        Files.write(caminho, bytes);
+        
+                        produto2.setNomeImagem(String.valueOf(produto2.getId())+arquivo.getOriginalFilename());
+                    
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
     
             } else {
-                produtoRepositorio.saveAndFlush(produto);
-                produto.setNomeCompletoProduto(nomeCompleto);
-            } 
-        }
+
+                produtoRepositorio.save(produto);
+
+                try {
+                    if (!arquivo.isEmpty()) {
         
-
-        try {
-            if (!arquivo.isEmpty()) {
-
-                byte[] bytes = arquivo.getBytes();
-                Path caminho = Paths.get(caminhoImagens+String.valueOf(produto.getId())+arquivo.getOriginalFilename());
-                Files.write(caminho, bytes);
-
-                produto.setNomeImagem(String.valueOf(produto.getId())+arquivo.getOriginalFilename());
-               
-                produtoRepositorio.saveAndFlush(produto);
+                        byte[] bytes = arquivo.getBytes();
+                        Path caminho = Paths.get(caminhoImagens+String.valueOf(produto.getId())+arquivo.getOriginalFilename());
+                        Files.write(caminho, bytes);
+                        produto.setNomeImagem(String.valueOf(produto.getId())+arquivo.getOriginalFilename());
+                    
+                        produtoRepositorio.flush();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            
         }
 
-        return cadastrar(new Produto());
+        return listar();
     }
+
 }

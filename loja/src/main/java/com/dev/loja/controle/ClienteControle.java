@@ -36,8 +36,10 @@ public class ClienteControle {
 
     @GetMapping("/administrativo/clientes/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Long id) {
+        ModelAndView mv = new ModelAndView("administrativo/clientes/editar");
         Optional<Cliente> cliente = clienteRepositorio.findById(id);
-        return cadastrar(cliente.get());
+        mv.addObject("cliente", cliente);
+        return mv;
     }
 
     @GetMapping("/administrativo/clientes/remover/{id}")

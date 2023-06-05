@@ -22,7 +22,7 @@ public class Produto implements Serializable {
 
     private String nomeProduto;
     private String tamanhoProduto;
-    private String nomeCompletoProduto;
+    private String nomeCompletoProduto = "";
     private Double valorProduto;
     private Double alturaProduto;
     private Double larguraProduto;
@@ -96,6 +96,31 @@ public class Produto implements Serializable {
     }
     public void setNomeCompletoProduto(String nomeCompletoProduto) {
         this.nomeCompletoProduto = nomeCompletoProduto;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((nomeCompletoProduto == null) ? 0 : nomeCompletoProduto.hashCode());
+        return result;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Produto other = (Produto) obj;
+        if (nomeCompletoProduto == null) {
+            if (other.nomeCompletoProduto != null)
+                return false;
+        } else if (!nomeCompletoProduto.equals(other.nomeCompletoProduto))
+            return false;
+        return true;
     }
     
     

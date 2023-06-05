@@ -1,41 +1,33 @@
-/*
- * Base structure
- */
- html, body {
-	height: 100%;
-}
-
 body {
-	padding-top: 56px;
-	padding-left: 0;
-} 
-
-/*
- * main layout
- */
-.layout-main {
-    display: flex;
-    min-height: calc(100vh - 52px);
-    overflow: hidden;
-}
-
-/*
- * Content
- */
-.layout-content {
-    margin-left: 10px;
-    margin-top: 20px;
     width: 100%;
-    padding-top: 0px;
-    font-size: large;
 }
 
-.container {
-	width: 100%;
-	padding-top: 20px;
+.layout-content {
+    padding: 2%;
 }
 
-.modal {
+#title {
+    color: #000;
+    margin-left: 5%;
+}
+
+#cadastro {
+    margin-left: 5%;
+}
+
+#modalCadastro {
+    height: 80%;
+    margin-top: 80px;
+    margin-left: 500px;
+}
+
+#modalEditar {
+    height: 80%;
+    margin-top: 80px;
+    margin-left: 500px;
+}
+
+#caixa {
     display:none;
     vertical-align:middle;
     position:relative;
@@ -59,7 +51,7 @@ body {
     margin-right: 20px;
 }
 
-.modalButton {
+#caixaBotao {
     float: right;
     top: -10px;
     margin-right: 10px;
@@ -77,71 +69,51 @@ body {
     box-shadow:         1px 1px 5px rgba(0,0,0,0.5);
   }
 
-/*
- * Sidebar
- */
-.sidebar {
-    width: 0px;
-    height: 100vh; 
-    background-color: #212529;
-    flex-shrink: 0;
+
+  /* Style the navigation menu */
+.topnav {
     overflow: hidden;
-    transition: width .5s;
-}
-
-.sidebar .nav {
-	margin-bottom: 0px;
-}
-
-.sidebar .nav-item {
-	width: 100%;
-}
-
-.sidebar .nav-item {
-	margin-left: 0;
-}
-
-.sidebar .nav-link {
-	border-radius: 0;
-} 
-
-.sidebar ul li:hover a, .menu ul li.active a{
-    color: #777777;
-}
-
-.sidebar ul{
-    list-style: none;
-    padding: 10px 0px;
-    margin-left: 10px;
-}
-
-.sidebar ul li a{
+    background-color: black;
+    position: relative;
+  }
+  
+  /* Hide the links inside the navigation menu (except for logo/home) */
+  .topnav #myLinks {
+    display: none;
+  }
+  
+  /* Style navigation menu links */
+  .topnav a {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
     display: block;
-    color:#fff;
-    padding: 10px 15px;
-    white-space: nowrap;
-}
+  }
+  
+  /* Style the hamburger menu */
+  .topnav a.icon {
+    background: transparent;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  
+  /* Add a grey background color on mouse-over */
+  .topnav a:hover {
+    color: #777777;
+  }
+  
+  /* Style the active link (or home/logo) */
+  .active {
+    background-color: black;
+    color: white;
+  }
 
-.sidebar.sidebar-open {
-    width: 200px;
-}
-
-/*
- * nav-pills home
- */
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-	color: #fff;
-	background-color: transparent;
-}
-
-/*
- * toogle do navbar do menu
- */ 
-
-.navbar-toggle {
-    display: inline-block;
-    margin-left: 10px;
-}
+  ul {
+    display: none;
+  }
 
 /*
  * Footer
@@ -161,171 +133,4 @@ body {
 	color: #777777;
 	text-align: center;
 }
-
-
-/*
- * Base structure
- */
-/* html, body {
-	height: 100%;
-}
-
-header {
-    color: #fff;
-    font-size: x-large;
-    background-color: #212529;
-} */
-
-/* header */
-
-/* .topoPagina {
-    width: 100%;
-    display: flex;
-    flex-flow: row wrap;
-    height: 80px;
-}
-
-#botaoMenu {
-    width: 5%;
-    margin-left: 25px;
-    margin-top: 20px;
-}
-
-.tituloPagina {
-    margin-top: 20px;
-    width: 70%;
-} */
-
-
-/*
- * main layout
- */
-
-/* .page-header {
-    height: 50px;
-    width: 100%;
-    display: flex;
-    flex-flow: row wrap;
-    color: #000;
-    line-height: 50px;
-    font-size: large;
-}
-
-.obs {
-    width: 20%;
-}
-
-.tituloConteudo {
-    width: 80%;
-    margin-left: 30px;
-    margin-top: 10px;
-    font-size: x-large;
-}
-
-#atalho {
-    height: 40px;
-    width: 20%;
-    margin-top: 10px;
-    margin-right: 0;
-    margin-left: 20px;
-}
-
-.layout-main {
-    display: flex;
-    min-height: calc(100vh - 52px);
-    overflow: hidden;
-} */
-
-/*
- * Content
- */
-/* .layout-content {
-    width: 100%;
-    padding-top: 0px;
-    margin-bottom: 50px;
-}
-
-
-#btnClear {
-    padding: 0%;
-    height: 30px;
-    float: right;
-    margin-top: 25px;
-}
-
-#form-row-bottom {
-    width: 102%;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    float: left;
-}
-
-#cadastro {
-    margin-left: 20px;
-    margin-top: 50px;
-    width: 100%;
-}
-
-
-
-  #linha1 {
-    margin-bottom: 20px;
-  } */
-/*
- * Sidebar
- */
-
-/* ul {
-    list-style: none;
-    color: #101010;
-}
-
-a {
-    text-decoration: none;
-    color: #0b0b0b;
-    display: block;
-}
-
-a:hover {
-    color: #777777;
-}
-
-#nav-menu {
-    background-color: #212529;   
-    width: 20%;
-    height: 100%;
-}
-
-.li-p {
-    line-height: 50px;
-}
-
-ul ul {
-    display:none;
-}
-
-ul li:hover > ul {
-    display:block;    
-} */
-
-
-
-/*
- * Footer
- */
-/* .layout-footer {
-	position: fixed;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	margin: 0;
-	height: 50px;
-}
-
-.footer-copy {
-	font-size: 92%;
-	display: block;
-	color: #777777;
-	text-align: center;
-} */
 

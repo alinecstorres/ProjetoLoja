@@ -6,11 +6,11 @@
 <body>
 	<section layout:fragment="corpo">
 
-		<div class="row" style="margin-bottom: 10px;">
-			<div class="col-9" style="font-style:oblique; font-size: xx-large;">
-				Novo Produto
+		<div class="row" id="title">
+			<div class="col-10">
+				<h3>Novo Produto</h3>
 			</div>
-			<div class="col-2" style="margin-top: 10px;">
+			<div class="col-2">
 				<a class="btn btn-outline-dark" href="/administrativo/produtos/listar" role="button">
 					<span>Listar Produtos</span>
 				</a>
@@ -96,15 +96,28 @@
 
 					<div class="col-2">
 						Foto do Produto
-						<input type="file" name="file"/>
+						<input type="file" name="arquivo" accept="image/png, image/jpeg"/>
 					</div>
 
 				</div>
 					
 				<br/>
 
+                <input type="hidden" th:field="*{nomeImagem}">
 				<input type="hidden" id="id" th:field="*{id}" value=""/>
 				<button type="submit" class="btn btn-outline-primary" style="margin-top: 10px; width: 91%;">Salvar</button>
+                <br/>
+				<br/>
+
+				<a class="btn btn-outline-danger" id="botaoExcluir" href="#caixa" rel="modal:open" role="button">Excluir
+
+				</a>
+				
+				<div id="caixa" class="modal">
+					<p>Tem certeza que deseja excluir?</p>
+					<a class="modalButton" id="caixaBotao" th:href="@{/administrativo/produtos/listar}">Não</a>
+					<a class="modalButton" id="caixaBotao" th:href="@{/administrativo/produtos/remover/{id}(id=${id})}">Sim</a>
+				</div>
 			</form>
 		</div>
 	</section>

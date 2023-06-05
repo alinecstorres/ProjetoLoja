@@ -6,17 +6,18 @@
 <body>
 	<section class="layout-content" layout:fragment="corpo">
 
-		<div class="row" style="margin-bottom: 10px;">
-			<div class="col-9" style="font-style:oblique; font-size: xx-large;">
-				Lista de Clientes
+		<div class="row" id="title">
+			<div class="col-10">
+				<h3>Lista de Clientes</h3>
 			</div>
-			<div class="col-2" style="margin-top: 10px;">
+			<br/>
+			<div class="col-2">
 				<a class="btn btn-outline-dark" href="/administrativo/clientes/cadastrar" role="button">
 					<span>Novo Cliente</span>
 				</a>
 			</div>
 		</div>
-	
+		<br/>
 		<div class="container">
 
 			<p>
@@ -76,18 +77,8 @@
 							<td th:text="${cliente.nome}"></td>
 							<td th:text="${cliente.documento}"></td>
 
-							<td colspan="2"><a class="btn btn-outline-primary" th:href="@{/administrativo/clientes/editar/{id}(id=${cliente.id})}" role="button"><span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
+							<td colspan="2"><a class="btn btn-outline-primary" th:href="@{/administrativo/clientes/editar/{id}(id=${cliente.id})}" onclick="botaoExcluir()" role="button"><span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
 							</a>
-
-							<a class="btn btn-outline-danger" href="#caixa" rel="modal:open" role="button"><span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
-
-							</a>
-
-							<div id="caixa" class="modal">
-								<p>Tem certeza que deseja excluir?</p>
-								<a class="modalButton" th:href="@{/administrativo/clientes/listar}">Não</a>
-								<a class="modalButton" th:href="@{/administrativo/clientes/remover/{id}(id=${cliente.id})}">Sim</a>
-							</div>
 							</td>
 						</tr>
 					</tbody>
