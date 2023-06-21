@@ -6,15 +6,6 @@ body {
     padding: 2%;
 }
 
-#title {
-    color: #000;
-    margin-left: 5%;
-}
-
-#cadastro {
-    margin-left: 5%;
-}
-
 #modalCadastro {
     height: 80%;
     margin-top: 80px;

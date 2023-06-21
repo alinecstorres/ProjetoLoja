@@ -34,6 +34,20 @@ public class FuncionarioControle {
         return mv;
     }
 
+    @GetMapping("/administrativo/funcionarios/buscar/nome")
+    public ModelAndView buscarNome(String nome) {
+        ModelAndView mv = new ModelAndView("administrativo/funcionarios/busca");
+        mv.addObject("listaFuncionarios", funcionarioRepositorio.findAllByNome(nome));
+        return mv;
+    }
+
+    @GetMapping("/administrativo/funcionarios/buscar/cpf")
+    public ModelAndView editar(String cpf) {
+        ModelAndView mv = new ModelAndView("administrativo/funcionarios/busca");
+        mv.addObject("listaFuncionarios", funcionarioRepositorio.findAllByCpf(cpf));
+        return mv;
+    }
+
     @GetMapping("/administrativo/funcionarios/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Long id) {
         ModelAndView mv = new ModelAndView("administrativo/funcionarios/editar");

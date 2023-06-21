@@ -6,87 +6,90 @@
 <body>
 	<section class="layout-content" layout:fragment="corpo">
 
-		<div class="row" id="title">
-			<div class="col-10">
-				<h3>Novo Cliente</h3>
-			</div>
-			<div class="col-2" >
+		<div class="row">
+
+			<div class="col-2">
 				<a class="btn btn-outline-dark" href="/administrativo/clientes/listar" role="button">
-					<span>Listar Clientes</span>
+					<span class="bi bi-person-lines-fill"></span>
 				</a>
 			</div>
+
+			<div class="col-10" style="text-align: end;">
+				<h3>Novo Cliente</h3>
+			</div>
+			
 		</div>
 		<br/>
-		<div class="row" id="cadastro">
+		
 
-			<form action="/administrativo/clientes/salvar" th:object="${cliente}" method="POST">
+		<form action="/administrativo/clientes/salvar" th:object="${cliente}" method="POST">
 
-				<div class="row">
+			<div class="row">
 
-					<div class="col-8">
-						<label for="nome">Nome do Cliente</label>
-						<input type="text" class="form-control" id="nome" placeholder="Nome Completo"
-							autofocus="autofocus" th:field="*{nome}" value=""/>
-						<div class="invalid-feedback">
+				<div class="col-12">
+					<label for="nome">Nome do Cliente</label>
+					<input type="text" class="form-control" id="nome" placeholder="Nome Completo"
+						autofocus="autofocus" th:field="*{nome}" value=""/>
+					<div class="invalid-feedback">
 
-						</div>
-					</div>
-					
-					<div class="col-3">
-						<label for="documento">Documento</label>
-						<input type="text" class="form-control" id="documento" th:field="*{documento}" value=""/>
-						<div class="invalid-feedback">
-
-						</div>
-					</div>
-				
-				</div>
-				<div class="row">
-					<div class="col-3">
-						<label for="telefone">Telefone</label>
-						<input type="text" class="form-control" id="telefone" th:field="*{telefone}" value=""/>
-						<div class="invalid-feedback">
-
-						</div>
-					</div>
-
-					<div class="col-3">
-						<label for="dataNascimento">Data de Nascimento</label>
-						<input type="date" class="form-control" id="dataNascimento" th:field="*{dataNascimento}" value=""/>
-						<div class="invalid-feedback">
-
-						</div>
-					</div>
-
-					<div class="col-5">
-						<label for="email">Email</label>
-						<input type="text" class="form-control" id="email" th:field="*{email}" value=""/>
-						<div class="invalid-feedback">
-
-						</div>
 					</div>
 				</div>
-				<div class="row">
+			
+			</div>
+			<div class="row">
+				<div class="col-6">
+					<label for="documento">Documento</label>
+					<input type="text" class="form-control" id="documento" th:field="*{documento}" value=""/>
+					<div class="invalid-feedback">
 
-					<div class="col-11">
-						<label for="endereco">Endereço</label>
-						<input type="text" class="form-control" id="endereco"
-							autofocus="autofocus" th:field="*{endereco}" value=""/>
-						<div class="invalid-feedback">
-
-						</div>
 					</div>
+				</div>
+				<div class="col-6">
+					<label for="telefone">Telefone</label>
+					<input type="text" class="form-control" id="telefone" th:field="*{telefone}" value=""/>
+					<div class="invalid-feedback">
 
+					</div>
 				</div>
 
-				<input type="hidden" id="id" th:field="*{id}" value=""/>
-				
-				<br/>
-				<button type="submit" class="btn btn-outline-primary" style="width: 91.5%;">Salvar</button>
-				
-			</form>
+			</div>
+			<div class="row">
+				<div class="col-6">
+					<label for="dataNascimento">Nascimento</label>
+					<input type="date" class="form-control" id="dataNascimento" th:field="*{dataNascimento}" value=""/>
+					<div class="invalid-feedback">
 
-		</div>
+					</div>
+				</div>
+
+				<div class="col-6">
+					<label for="email">Email</label>
+					<input type="text" class="form-control" id="email" th:field="*{email}" value=""/>
+					<div class="invalid-feedback">
+
+					</div>
+				</div>
+			</div>
+			<div class="row">
+
+				<div class="col-12">
+					<label for="endereco">Endereço</label>
+					<input type="text" class="form-control" id="endereco"
+						autofocus="autofocus" th:field="*{endereco}" value=""/>
+					<div class="invalid-feedback">
+
+					</div>
+				</div>
+
+			</div>
+
+			<input type="hidden" id="id" th:field="*{id}" value=""/>
+			
+			<br/>
+			<button type="submit" class="btn btn-outline-primary" style="width: 100%;">Salvar</button>
+			
+		</form>
+
 	</section>
 </body>
 </html>		
