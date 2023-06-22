@@ -18,7 +18,7 @@ public class Saldo implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Date data = new Date();
+    private Date dataAtualizacao = new Date();
 
     private Double caixa = 0d;
     private Double saldoBancario = 0d;
@@ -32,11 +32,11 @@ public class Saldo implements Serializable{
     }
 
     public Date getData() {
-        return data;
+        return dataAtualizacao;
     }
 
     public void setData(Date data) {
-        this.data = data;
+        this.dataAtualizacao = data;
     }
 
     public Double getCaixa() {

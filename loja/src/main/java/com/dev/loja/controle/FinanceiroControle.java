@@ -1,5 +1,6 @@
 package com.dev.loja.controle;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +14,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dev.loja.modelos.Despesa;
 import com.dev.loja.modelos.Saldo;
+import com.dev.loja.modelos.Venda;
+import com.dev.loja.modelos.VendaItens;
 import com.dev.loja.repositorios.DespesaRepositorio;
-import com.dev.loja.repositorios.FinanceiroRepositorio;
+
+import com.dev.loja.repositorios.ProdutoRepositorio;
+import com.dev.loja.repositorios.SaldoRepositorio;
+import com.dev.loja.repositorios.VendaItensRepositorio;
+import com.dev.loja.repositorios.VendaRepositorio;
 
 @Controller
 public class FinanceiroControle {
@@ -23,9 +30,21 @@ public class FinanceiroControle {
     private DespesaRepositorio despesaRepositorio;
 
     @Autowired
-    private FinanceiroRepositorio financeiroRepositorio;
+    private ProdutoRepositorio produtoRepositorio;
+
+    @Autowired
+    private SaldoRepositorio saldoRepositorio;
+
+    @Autowired
+    private VendaRepositorio vendaRepositorio;
+
+    @Autowired
+    private VendaItensRepositorio vendaItensRepositorio;
 
     List<Despesa> listaDespesas = new ArrayList<Despesa>();
+    Date dataHoje;
+    Double faturamentoZero;
+    String produtoQualquer;
 
     @GetMapping("/administrativo/despesas/cadastrar")
     public ModelAndView cadastrar(Despesa despesa) {
@@ -37,20 +56,77 @@ public class FinanceiroControle {
     }
 
     @GetMapping("/administrativo/financeiro")
-    public ModelAndView dadosFinanceiros(Saldo saldo) {
+    public ModelAndView dadosFinanceiros(Date dataInicial, Date dataFinal, Double faturamentoPeriodo, Double faturamentoProduto,String produto) {
         ModelAndView mv = new ModelAndView("administrativo/financeiro/dados");
-        mv.addObject("saldoCaixa", saldo.getCaixa());
-        mv.addObject("saldoBancario", saldo.getSaldoBancario());
+        System.out.println(dataHoje);
+        Double saldoCaixa = 0%.2d;
+        Double saldoBancario = 0%.2d;
+        Saldo saldoAtual = saldoRepositorio.findLastSaldo();
+
+        if (!saldoRepositorio.findAll().isEmpty()) {
+            saldoBancario = saldoAtual.getSaldoBancario();
+            saldoCaixa = saldoAtual.getCaixa();
+        }
+
+        mv.addObject("produto", produto);
+        mv.addObject("faturamentoPeriodo", faturamentoPeriodo);
+        mv.addObject("faturamentoProduto", faturamentoProduto);
+        mv.addObject("dataInicial", dataInicial);
+        mv.addObject("dataFinal", dataFinal);
+        mv.addObject("saldoCaixa", saldoCaixa);
+        mv.addObject("saldoBancario", saldoBancario);
+        mv.addObject("saldo", saldoAtual);
+        mv.addObject("listaProdutos", produtoRepositorio.findAll());
+        mv.addObject("despesas", despesaRepositorio.findAll());
+        mv.addObject("vendas", vendaRepositorio.findAll());
         return mv;
     }
 
-    @PostMapping("administrativo/financeiro/atualizar")
-    public ModelAndView atualizar(@Validated Saldo saldo, BindingResult result) {
-        if(result.hasErrors()) {
-            return dadosFinanceiros(saldo);
+    @GetMapping("/administrativo/financeiro/faturamento/periodo")
+    public ModelAndView buscarFaturamentoPeriodo(Date dataInicial, Date dataFinal) {
+        List<Venda> listaVendas = vendaRepositorio.findAll();
+        Double faturamentoPeriodo = 0%.2d;
+
+        for (Venda venda : listaVendas) {
+            if ((venda.getDataEntrada().after(dataInicial)&&venda.getDataEntrada().before(dataFinal))||venda.getDataEntrada().equals(dataInicial)||venda.getDataEntrada().equals(dataFinal)) {
+                faturamentoPeriodo += venda.getValorComDesconto();
+            }
         }
-        financeiroRepositorio.saveAndFlush(saldo);
-        return dadosFinanceiros(saldo);
+
+        return dadosFinanceiros(dataInicial, dataFinal, faturamentoPeriodo, faturamentoZero, produtoQualquer);
+    }
+
+    @GetMapping("/administrativo/financeiro/faturamento/produto")
+    public ModelAndView buscarFaturamentoProduto(String produto) {
+        
+        List<VendaItens> listaVendas = vendaItensRepositorio.findAll();
+        Double faturamentoProduto = 0%.2d;
+
+        for (VendaItens item : listaVendas) {
+            if (item.getProduto().getNomeCompletoProduto().equals(produto)) {
+                faturamentoProduto += item.getTotalComDesconto();
+            }
+        }
+        
+        return dadosFinanceiros(dataHoje, dataHoje, faturamentoZero, faturamentoProduto, produto);
+    }
+
+    @PostMapping("administrativo/financeiro/atualizar")
+    public ModelAndView atualizar(@Validated Saldo novoSaldo, BindingResult result) {
+    
+        System.out.println(novoSaldo.getCaixa());
+        System.out.println(novoSaldo.getSaldoBancario());
+
+        if(novoSaldo.getSaldoBancario() == null) {
+            novoSaldo.setSaldoBancario(saldoRepositorio.findLastSaldo().getSaldoBancario());
+        }
+        if (novoSaldo.getCaixa() == null) {
+            novoSaldo.setCaixa(saldoRepositorio.findLastSaldo().getCaixa());
+        }
+
+        saldoRepositorio.saveAndFlush(novoSaldo);
+
+        return dadosFinanceiros(dataHoje, dataHoje, faturamentoZero, faturamentoZero, produtoQualquer);
     }
 
     @PostMapping("administrativo/despesas/salvar")
@@ -66,7 +142,6 @@ public class FinanceiroControle {
                 }
             }
         }
-        System.out.println("--------------->"+acao);
         return cadastrar(new Despesa());
     }
 }

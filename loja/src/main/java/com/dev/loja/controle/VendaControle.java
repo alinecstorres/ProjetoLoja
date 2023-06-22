@@ -1,5 +1,6 @@
 package com.dev.loja.controle;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -64,6 +65,43 @@ public class VendaControle {
         return mv;
     }
 
+    @GetMapping("/administrativo/venda/buscar/data")
+    public ModelAndView buscarPorData(Date date) {
+        ModelAndView mv = new ModelAndView("administrativo/venda/lista");
+        mv.addObject("listaVendas",vendaRepositorio.findAllByDataEntrada(date));
+        return mv;
+    }
+
+    @GetMapping("/administrativo/venda/buscar/funcionario")
+    public ModelAndView buscarPorFuncionario(String funcionario) {
+        ModelAndView mv = new ModelAndView("administrativo/venda/lista");
+        List<Venda> listaVendas = vendaRepositorio.findAll();
+        List<Venda> listaPorFuncionario = new ArrayList<>();
+
+        for (Venda venda : listaVendas) {
+            if (venda.getFuncionario().getNome().contains(funcionario)) {
+                listaPorFuncionario.add(venda);
+            }
+        }
+        mv.addObject("listaVendas", listaPorFuncionario);
+        return mv;
+    }
+
+    @GetMapping("/administrativo/venda/buscar/cliente")
+    public ModelAndView buscarPorCliente(String cliente) {
+        ModelAndView mv = new ModelAndView("administrativo/venda/lista");
+        List<Venda> listaVendas = vendaRepositorio.findAll();
+        List<Venda> listaPorCliente = new ArrayList<>();
+
+        for (Venda venda : listaVendas) {
+            if (venda.getCliente().getNome().contains(cliente)) {
+                listaPorCliente.add(venda);
+            }
+        }
+        mv.addObject("listaVendas", listaPorCliente);
+        return mv;
+    }
+
     @GetMapping("/administrativo/venda/itens/{id}")
     public ModelAndView listarItens(@PathVariable("id") Long id) {
         ModelAndView mv = new ModelAndView("administrativo/venda/itens");
@@ -84,6 +122,7 @@ public class VendaControle {
             }
             Double totalPorProduto = vendaItens.getProduto().getValorProduto()*vendaItens.getQuantidade();
             vendaItens.setTotal(totalPorProduto);
+            vendaItens.setTotalComDesconto(totalPorProduto-(totalPorProduto*(venda.getDesconto()/100)));
             this.listaItens.add(vendaItens);
             valorVenda += (vendaItens.getProduto().getValorProduto()*vendaItens.getQuantidade());
             valorComDesconto = (valorVenda-(valorVenda*(venda.getDesconto()/100)));

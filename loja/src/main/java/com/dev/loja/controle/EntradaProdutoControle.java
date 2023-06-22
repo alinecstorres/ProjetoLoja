@@ -1,5 +1,6 @@
 package com.dev.loja.controle;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -50,8 +51,28 @@ public class EntradaProdutoControle {
     @GetMapping("/administrativo/entrada/listar")
     public ModelAndView listar() {
         ModelAndView mv = new ModelAndView("administrativo/entrada/lista");
-        mv.addObject("listaEntradas",entradaProdutoRepositorio.findAll());
         mv.addObject("listaProdutos", entradaItensRepositorio.findAll());
+        return mv;
+    }
+
+    @GetMapping("/administrativo/entrada/buscar/data")
+    public ModelAndView buscarEntradasPorData(String date) {
+        ModelAndView mv = new ModelAndView("administrativo/entrada/lista");
+        Date dataSelecionada = Date.valueOf(date);
+        int diaPosterior = Integer.parseInt(date.substring(8, 10))+1;
+        String dia = String.valueOf(diaPosterior);
+        String mesEAno = date.substring(0, 7);
+        String dataPosteriorCompleta = mesEAno.concat("-"+dia);
+        Date dataPosterior = Date.valueOf(dataPosteriorCompleta);
+        List<EntradaItens> itens = entradaItensRepositorio.findAll();
+        List<EntradaItens> itensPorData = new ArrayList<>();
+        
+        for (EntradaItens entradaItens : itens) {
+            if (entradaItens.getEntradaProduto().getDataEntrada().after(dataSelecionada)&&entradaItens.getEntradaProduto().getDataEntrada().before(dataPosterior)) {
+                itensPorData.add(entradaItens);
+            }
+        }
+        mv.addObject("listaProdutos", itensPorData);
         return mv;
     }
 

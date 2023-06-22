@@ -29,6 +29,7 @@ public class VendaItens implements Serializable {
     private Produto produto;
     private int quantidade;
     private Double total;
+    private Double totalComDesconto;
     
     public Long getId() {
         return id;
@@ -59,6 +60,12 @@ public class VendaItens implements Serializable {
     }
     public void setTotal(Double total) {
         this.total = total;
+    }
+    public Double getTotalComDesconto() {
+        return totalComDesconto;
+    }
+    public void setTotalComDesconto(Double totalComDesconto) {
+        this.totalComDesconto = totalComDesconto;
     }
 
     

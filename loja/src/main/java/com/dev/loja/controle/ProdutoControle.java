@@ -46,6 +46,13 @@ public class ProdutoControle {
         return mv;
     }
 
+    @GetMapping("/administrativo/produtos/buscar/nome")
+    public ModelAndView buscarNome(String nome) {
+        ModelAndView mv = new ModelAndView("administrativo/produtos/busca");
+        mv.addObject("listaProdutos",produtoRepositorio.findAllByNomeProduto(nome));
+        return mv;
+    }
+
     @GetMapping("/administrativo/produtos/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Long id) {
         ModelAndView mv = new ModelAndView("administrativo/produtos/editar");

@@ -89,8 +89,8 @@
 				</div>
 				<div class="col-6">
 					<label for="salarioBruto">Salário Bruto</label>
-					<input type="text" class="form-control" id="salario" data-mask="##0.00"
-						data-mask-reverse="true" th:field="*{salarioBruto}" value=""/>
+					<input type="number" class="form-control" id="salario" data-mask="##0.00"
+						data-mask-reverse="true" th:field="*{salarioBruto}" step="0.01" value=""/>
 					<div class="invalid-feedback">
 
 					</div>

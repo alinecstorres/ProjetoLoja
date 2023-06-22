@@ -34,7 +34,7 @@ public class Venda implements Serializable {
 
     private Double valorTotal;
 
-    private Double desconto;
+    private Double desconto = 0d;
 
     private Double valorComDesconto;
 

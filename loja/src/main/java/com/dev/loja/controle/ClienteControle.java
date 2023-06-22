@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dev.loja.modelos.Cliente;
-import com.dev.loja.modelos.Funcionario;
 import com.dev.loja.repositorios.ClienteRepositorio;
 
 @Controller
