@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{administrativo/fragments/layout}">
 <head>
-	<title>Página de Cadastro de Produtos do Administrativo</title>
+	<title>ACST Administrativo - Produtos</title>
 </head>
 <body>
 	<section layout:fragment="corpo">
@@ -53,8 +53,7 @@
 
 				<div class="col-6">
 					<label for="valorProduto">Valor</label>
-					<input type="text" class="form-control" id="valorProduto" th:field="*{valorProduto}" data-mask="###.0"
-					data-mask-reverse="true"value=""/>
+					<input type="number" class="form-control" id="valorProduto" th:field="*{valorProduto}" step="0.01" data-mask-reverse="true" value=""/>
 					<div class="invalid-feedback">
 
 					</div>

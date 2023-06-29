@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedido</title>
+</head>
+<body>
+    <!--/*@thymesVar id="dado" type="br.com.vitormarcal.thymelafpdfexample.DadoDeclaracao"*/-->
+    
+    <h1>Orçamento</h1>
+
+    <p>Requerente: <strong th:text="${venda.cliente.nome}"></strong></p>
+    <p>Data: <strong th:text="${venda.dataEntrada}"></strong></p>
+
+    <div >
+        <table class="table table-striped table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantidade</th>
+                    <th>Valor Unitário</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="itens : ${listaVendaItens}">
+                    <td th:text="${itens.produto.nomeCompletoProduto}"></td>
+                    <td th:text="${itens.quantidade}"></td>
+                    <td th:text="${#numbers.formatCurrency(itens.produto.valorProduto)}"></td>
+                    <td th:text="${#numbers.formatCurrency(itens.produto.valorProduto * itens.quantidade)}"></td>
+                </tr>
+                <tr></tr>
+                <tr th:object="${venda}">
+                    <th>Valor Total da Venda</th>
+                    <th th:text="${#numbers.formatCurrency(valorVenda)}" th:field="*{valorTotal}"></th>
+                    <th>Valor com Desconto</th>
+                    <th th:text="${#numbers.formatCurrency(valorComDesconto)}" th:field="*{valorComDesconto}"></th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

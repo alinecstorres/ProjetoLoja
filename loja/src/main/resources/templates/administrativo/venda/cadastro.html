@@ -2,7 +2,7 @@
 <html xmlns:layout="http://www.w3.org/1999/xhtml"
 	layout:decorate="~{administrativo/fragments/layout}">
 <head>
-<title>Página Venda de Produtos da loja virtual</title>
+<title>ACST Administrativo - Vendas</title>
 </head>
 <body>
 	<section class="layout-content" layout:fragment="corpo">
@@ -52,7 +52,7 @@
 				</div>
 				<div class="col-2"th:object="${venda}">
 					<label for="desconto">Desconto</label> <input type="number"
-						class="form-control" id="desconto" th:field="*{desconto}" value="" />
+						class="form-control" id="desconto" th:field="*{desconto}" />
 					<div class="invalid-feedback"></div>
 				</div>
 			</div>
@@ -112,6 +112,7 @@
 									<button class="btn btn-danger btn-sm" name="acao" th:value="${itens.produto.nomeCompletoProduto}"><span class="bi bi-trash3" title="Excluir"></span></button>
 								</td>
 							</tr>
+							<tr></tr>
 							<tr th:object="${venda}">
 								<th>Valor Total da Venda</th>
 								<th th:text="${#numbers.formatCurrency(valorVenda)}" th:field="*{valorTotal}"></th>
@@ -125,6 +126,9 @@
 			</div>
 			
 			<input type="hidden" id="id" th:field="*{id}" value="" />
+			<button type="submit" class="btn btn-outline-success" style="width: 100%;" name="acao" th:value="gerarPDF">Gerar Pedido em PDF</button>
+			<br/>
+			<br/>
 			<button type="submit" class="btn btn-outline-primary" style="width: 100%;" name="acao" th:value="salvar">Confirmar Venda</button>
 		</form>
 

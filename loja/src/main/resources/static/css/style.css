@@ -66,6 +66,7 @@ body {
     overflow: hidden;
     background-color: black;
     position: relative;
+    text-align: end;
   }
   
   /* Hide the links inside the navigation menu (except for logo/home) */
@@ -88,7 +89,7 @@ body {
     display: block;
     position: absolute;
     right: 0;
-    top: 0;
+    top: 10px;
   }
   
   /* Add a grey background color on mouse-over */

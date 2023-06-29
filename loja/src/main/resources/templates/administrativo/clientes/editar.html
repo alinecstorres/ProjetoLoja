@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{administrativo/fragments/layout}">
 <head>
-	<title>Página para Editar Clientes do Administrativo</title>
+	<title>ACST Administrativo - Clientes</title>
 </head>
 <body>
 	<section class="layout-content" layout:fragment="corpo">
@@ -44,7 +44,7 @@
 				</div>
 				<div class="col-6">
 					<label for="telefone">Telefone</label>
-					<input type="text" class="form-control" id="telefone" th:field="*{telefone}" value=""/>
+					<input type="text" class="form-control" id="telefone" th:field="*{telefone}" value="" data-mask="(##)#.####.####"/>
 					<div class="invalid-feedback">
 
 					</div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{administrativo/fragments/layout}">
 <head>
-	<title>Página de Cadastro de Funcionários do Administrativo</title>
+	<title>ACST Administrativo - Funcionários</title>
 </head>
 <body>
 	<section class="layout-content" layout:fragment="corpo">
@@ -36,7 +36,7 @@
 				
 				<div class="col-6">
 					<label for="cpf">CPF</label>
-					<input type="text" class="form-control" id="cpf" placeholder="Digite o CPF" th:field="*{cpf}" value=""/>
+					<input type="text" class="form-control" id="cpf" placeholder="Digite somente números" th:field="*{cpf}" value="" data-mask="###.###.###-##"/>
 					<div class="invalid-feedback">
 
 					</div>

@@ -113,9 +113,6 @@ public class FinanceiroControle {
 
     @PostMapping("administrativo/financeiro/atualizar")
     public ModelAndView atualizar(@Validated Saldo novoSaldo, BindingResult result) {
-    
-        System.out.println(novoSaldo.getCaixa());
-        System.out.println(novoSaldo.getSaldoBancario());
 
         if(novoSaldo.getSaldoBancario() == null) {
             novoSaldo.setSaldoBancario(saldoRepositorio.findLastSaldo().getSaldoBancario());
@@ -132,9 +129,13 @@ public class FinanceiroControle {
     @PostMapping("administrativo/despesas/salvar")
     public ModelAndView salvar(Despesa despesa, String acao) {
 
+        listaDespesas = despesaRepositorio.findAll();
+
         if (acao.equals("salvar")) {
-            despesaRepositorio.saveAndFlush(despesa);
-            this.listaDespesas.add(despesa);
+            if (!listaDespesas.contains(despesa)) {
+                despesaRepositorio.saveAndFlush(despesa);
+            }
+            
         } else {
             for (Despesa despesa1 : listaDespesas) {
                 if (despesa1.getId().equals(Long.parseLong(acao))) {
@@ -142,6 +143,7 @@ public class FinanceiroControle {
                 }
             }
         }
+
         return cadastrar(new Despesa());
     }
 }

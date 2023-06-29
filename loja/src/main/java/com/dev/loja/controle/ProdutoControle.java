@@ -73,7 +73,7 @@ public class ProdutoControle {
     public byte[] retornarImagem(@PathVariable("imagem") String imagem) throws IOException {
         File imagemArquivo = new File(caminhoImagens+imagem);  
         
-        if (imagem != null || imagem.trim().length()>0) { 
+        if (imagem != null && imagem.trim().length()>0) { 
             return Files.readAllBytes(imagemArquivo.toPath());
         }
         

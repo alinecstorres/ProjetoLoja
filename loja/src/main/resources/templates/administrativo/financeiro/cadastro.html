@@ -2,7 +2,7 @@
 <html xmlns:layout="http://www.w3.org/1999/xhtml"
 	layout:decorate="~{administrativo/fragments/layout}">
 <head>
-<title>Página de Despesas da loja virtual</title>
+<title>ACST Administrativo - Financeiro</title>
 </head>
 <body>
 	<section class="layout-content" layout:fragment="corpo">
@@ -65,7 +65,7 @@
 						<td th:text="${#numbers.formatCurrency(despesa.valor)}"></td>
 						<td th:text="${#dates.format(despesa.data, 'dd-MM-yyyy')}"></td>
 						<td>
-							<button type="submit" name="acao" th:value="${despesa.id}" class="btn btn-outline-danger"><span class="oi oi-circle-x" title="Excluir"></span></button>
+							<button type="submit" name="acao" th:value="${despesa.id}" class="btn btn-outline-danger"><span class="bi bi-trash3" title="Excluir"></span></button>
 						</td>
 				</tbody>
 			</table>
