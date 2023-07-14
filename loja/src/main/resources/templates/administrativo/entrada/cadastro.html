@@ -5,19 +5,19 @@
 <title>ACST Administrativo - Entradas</title>
 <script>
 	function associaInput() {
-    var variavel;
-    //pega o value do select
-    var e = document.getElementById("tipo_entrada");
-    var itemSelecionado = e.options[e.selectedIndex].value;
-     //injeta no value no input
-    if (itemSelecionado=="novo"){
-        variavel="NOVO";
-    }else if (itemSelecionado=="quebrado"){
-        variavel="QUEBRADO";
-    }
-    document.getElementById('observacao').value = variavel;
-    console.log(variavel);
-}
+		var variavel;
+		//pega o value do select
+		var e = document.getElementById("tipo_entrada");
+		var itemSelecionado = e.options[e.selectedIndex].value;
+		//injeta no value no input
+		if (itemSelecionado=="novo"){
+			variavel="NOVO";
+		}else if (itemSelecionado=="quebrado"){
+			variavel="QUEBRADO";
+		}
+		document.getElementById('observacao').value = variavel;
+		console.log(variavel);
+	}
 </script>
 </head>
 <body>

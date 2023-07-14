@@ -3,6 +3,16 @@
 	layout:decorate="~{administrativo/fragments/layout}">
 <head>
 <title>ACST Administrativo - Vendas</title>
+<script>
+	function descontar() {
+		
+		var e = document.getElementById("desconto").value;
+		
+		document.getElementById('desconto1').value = e;
+		
+	}
+</script>
+
 </head>
 <body>
 	<section class="layout-content" layout:fragment="corpo">
@@ -31,6 +41,7 @@
 					<label>Funcionário</label> 
 					<select th:field="*{funcionario}"
 						class="form-control" >
+						<option value=""></option>
 						<option th:each="fun: ${listaFuncionarios}" th:value="${fun.id}"
 							th:text="${fun.nome}"></option>
 					</select>
@@ -44,16 +55,18 @@
 					<label>Cliente</label> 
 					<select th:field="*{cliente}"
 						class="form-control" >
-						<option th:each="fun: ${listaClientes}" th:value="${fun.id}"
-							th:text="${fun.nome}"></option>
+						<option value=""></option>
+						<option th:each="cliente: ${listaClientes}" th:value="${cliente.id}"
+							th:text="${cliente.nome}"></option>
 					</select>
 
 					<div class="invalid-feedback"></div>
 				</div>
 				<div class="col-2"th:object="${venda}">
 					<label for="desconto">Desconto</label> <input type="number"
-						class="form-control" id="desconto" th:field="*{desconto}" />
+						class="form-control" id="desconto" onchange="descontar()" th:value="${desconto}" />
 					<div class="invalid-feedback"></div>
+					<input type="hidden" th:field="*{desconto}" id="desconto1">
 				</div>
 			</div>
 			<div class="row">
@@ -62,6 +75,7 @@
 					<label>Produto</label> 
 					<select autofocus="autofocus" th:field="*{produto}"
 						class="form-control">
+						<option value=""></option>
 						<option th:each="prod: ${listaProdutos}" th:value="${prod.id}"
 							th:text="${prod.nomeCompletoProduto}"></option>
 					</select>
@@ -86,7 +100,24 @@
 			</div>
 			<br/>
 			<div class="col-12">
-
+				<div class="row">
+					<div class="col-10" style="text-align: end;">
+						<p><strong>Valor Total da Venda</strong></p>
+					</div>
+				
+					<div class="col-2" style="text-align: end;">
+						<p><strong th:text="${#numbers.formatCurrency(valorVenda)}"></strong></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-10" style="text-align: end;">
+						<h5><strong>Valor com Desconto</strong></h5>
+					</div>
+				
+					<div class="col-2" style="text-align: end;">
+						<h5><strong th:text="${#numbers.formatCurrency(valorComDesconto)}"></strong></h5>
+					</div>
+				</div>
 				<div >
 					<table class="table table-striped table-hover table-sm">
 						<thead>
@@ -112,26 +143,25 @@
 									<button class="btn btn-danger btn-sm" name="acao" th:value="${itens.produto.nomeCompletoProduto}"><span class="bi bi-trash3" title="Excluir"></span></button>
 								</td>
 							</tr>
-							<tr></tr>
-							<tr th:object="${venda}">
-								<th>Valor Total da Venda</th>
-								<th th:text="${#numbers.formatCurrency(valorVenda)}" th:field="*{valorTotal}"></th>
-								<th>Valor com Desconto</th>
-								<th th:text="${#numbers.formatCurrency(valorComDesconto)}" th:field="*{valorComDesconto}"></th>
-							</tr>
+							
 						</tbody>
 					</table>
+					
 				</div>
 				
 			</div>
 			
 			<input type="hidden" id="id" th:field="*{id}" value="" />
-			<button type="submit" class="btn btn-outline-success" style="width: 100%;" name="acao" th:value="gerarPDF">Gerar Pedido em PDF</button>
+			
+			<a class="btn btn-outline-success" style="width: 100%;" href="pedido">Gerar Pedido em PDF</a>
 			<br/>
 			<br/>
 			<button type="submit" class="btn btn-outline-primary" style="width: 100%;" name="acao" th:value="salvar">Confirmar Venda</button>
 		</form>
+		<br/>
+		<br/>
 
 	</section>
+
 </body>
 </html>	

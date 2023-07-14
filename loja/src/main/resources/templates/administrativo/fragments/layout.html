@@ -10,6 +10,7 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<link rel="icon" href="" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<!--caixa modal -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
@@ -86,31 +87,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script type="text/javascript">
 
-		$(function() {
-			$('[data-toggle="popover"]').popover();
-		});
-
-		$(document).ready(function(){
-		    $(".navbar-toggle").click(function(){
-		        $(".sidebar").toggleClass("sidebar-open");
-		    })
-		});
-
-		$(document). read(function associaInput() {
-			var variavel;
-			//pega o value do select
-			var e = document.getElementById("tipo_entrada");
-			var itemSelecionado = e.options[e.selectedIndex].value;
-			//injeta no value do input
-			if (itemSelecionado=="produto novo"){
-				variavel="NOVO";
-			}else if (itemSelecionado=="produto quebrado"){
-				variavel="QUEBRADO";
-			}
-			document.getElementById('camada').value = variavel;
-			console.log(variavel);
-		});
-
 		function menu() {
 			var x = document.getElementById("myLinks");
 			if (x.style.display === "block") {
@@ -150,6 +126,19 @@
 				a.style.display = "none";
 				b.style.display = "none";
 			}
+		}
+
+		function gerarPDF() {
+		const item = document.querySelector("#pdf");
+
+		var opt = {
+			margin: 0.5,
+			filename: "pedido.pdf",
+			html2canvas: { scale: 2 },
+			jsPDF: { unit: "in", format: "a4", orientation: "portrait"},
+		};
+
+		html2pdf().set(opt).from(item).save();
 		}
 
 	</script>

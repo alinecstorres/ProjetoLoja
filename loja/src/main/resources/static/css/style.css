@@ -126,3 +126,19 @@ body {
 	text-align: center;
 }
 
+
+#pdf::after {
+  position: relative;   
+}
+
+#pdf::before {
+  content: "";
+  background-image: url("../image/CHICO.png");
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.05;
+}

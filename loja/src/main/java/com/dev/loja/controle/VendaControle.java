@@ -1,5 +1,8 @@
 package com.dev.loja.controle;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dev.loja.modelos.Produto;
@@ -26,8 +30,16 @@ public class VendaControle {
     
     Double valorVenda = 0%.2d;
     Double valorComDesconto = 0%.2d;
+    Double desconto = 0%.2d;
+
+    String nomeCliente = "";
+
+    String logoNome = "Logo9.png";
+    String logoImagem = "Logo8.png";
 
     List<VendaItens> listaItens = new ArrayList<VendaItens>();
+
+    private static String caminhoImagens = "C:/Users/aline/Workspace/Meus projetos/loja/loja/src/main/resources/static/image/";
 
     @Autowired
     private VendaRepositorio vendaRepositorio;
@@ -47,6 +59,33 @@ public class VendaControle {
     @GetMapping("/administrativo/venda/cadastrar")
     public ModelAndView cadastrar(Venda venda, VendaItens vendaItens) {
         ModelAndView mv = new ModelAndView("administrativo/venda/cadastro");
+        
+        
+        mv.addObject("nomeCliente", this.nomeCliente);
+        mv.addObject("venda", venda);
+        mv.addObject("desconto", this.desconto);
+		mv.addObject("listaVendaItens", this.listaItens);
+        mv.addObject("vendaItens", vendaItens);
+		mv.addObject("listaFuncionarios", funcionarioRepositorio.findAll());
+        mv.addObject("listaClientes", clienteRepositorio.findAll());
+		mv.addObject("listaProdutos", produtoRepositorio.findAll());
+        mv.addObject("valorVenda", this.valorVenda);
+        mv.addObject("valorComDesconto", this.valorComDesconto);
+
+        return mv;
+    }
+
+    @GetMapping("/administrativo/venda/pedido")
+    public ModelAndView gerarPedido(Venda venda, VendaItens vendaItens) throws IOException {
+
+        ModelAndView mv = new ModelAndView("administrativo/venda/pedido");
+        int quantItens = this.listaItens.size();
+
+        mv.addObject("quantItens", quantItens);
+        mv.addObject("desconto", this.desconto);
+        mv.addObject("logoNome", this.logoNome);
+        mv.addObject("logoImagem", this.logoImagem);
+        mv.addObject("cliente", this.nomeCliente);
         mv.addObject("venda", venda);
 		mv.addObject("listaVendaItens", this.listaItens);
         mv.addObject("vendaItens", vendaItens);
@@ -56,6 +95,18 @@ public class VendaControle {
         mv.addObject("valorVenda", this.valorVenda);
         mv.addObject("valorComDesconto", this.valorComDesconto);
         return mv;
+    }
+
+    @GetMapping("/administrativo/venda/mostrarImagem/{imagem}")
+    @ResponseBody
+    public byte[] retornarImagem(@PathVariable("imagem") String imagem) throws IOException {
+        File imagemArquivo = new File(caminhoImagens+imagem);  
+        
+        if (imagem != null && imagem.trim().length()>0) { 
+            return Files.readAllBytes(imagemArquivo.toPath());
+        }
+        
+        return null;
     }
 
     @GetMapping("/administrativo/venda/listar")
@@ -113,19 +164,22 @@ public class VendaControle {
     public ModelAndView salvar(String acao, Venda venda, VendaItens vendaItens) {
 
 
-        if (acao.equals("itens")) {
+        if (acao.equals("itens") && vendaItens.getProduto() != null && vendaItens.getQuantidade() != 0) {
 
             for (VendaItens it : listaItens) {
                 if (it.getProduto().getId().equals(vendaItens.getProduto().getId())) {
                     return cadastrar(venda, vendaItens);
                 }
             }
+
             Double totalPorProduto = vendaItens.getProduto().getValorProduto()*vendaItens.getQuantidade();
             vendaItens.setTotal(totalPorProduto);
             vendaItens.setTotalComDesconto(totalPorProduto-(totalPorProduto*(venda.getDesconto()/100)));
             this.listaItens.add(vendaItens);
             valorVenda += (vendaItens.getProduto().getValorProduto()*vendaItens.getQuantidade());
             valorComDesconto = (valorVenda-(valorVenda*(venda.getDesconto()/100)));
+            nomeCliente = venda.getCliente().getNome();
+            desconto = venda.getDesconto();
             return cadastrar(venda, vendaItens);
             
 		} else if(acao.equals("salvar")) {
@@ -136,7 +190,8 @@ public class VendaControle {
                 vendaRepositorio.saveAndFlush(venda);
                 venda.setValorTotal(valorVenda);
                 venda.setValorComDesconto(valorComDesconto);
-            
+                venda.setDesconto(desconto);
+
                 for(VendaItens it : listaItens) {
                     it.setVenda(venda);
                     vendaItensRepositorio.saveAndFlush(it);
@@ -149,6 +204,8 @@ public class VendaControle {
                 };
                 valorComDesconto = 0d;
                 valorVenda = 0d;
+                desconto = 0d;
+                nomeCliente = "";
                 return cadastrar(new Venda(), new VendaItens());
             }
 			
@@ -157,7 +214,7 @@ public class VendaControle {
                 if (acao.equals(it.getProduto().getNomeCompletoProduto())) {
                     listaItens.remove(it);
                     valorVenda -= (it.getProduto().getValorProduto()*it.getQuantidade());
-                    valorComDesconto = (valorVenda-(valorVenda*(venda.getDesconto()/100)));
+                    valorComDesconto = (valorVenda-(valorVenda*(desconto/100)));
                     return cadastrar(venda, vendaItens);
                 }
             }
@@ -165,6 +222,7 @@ public class VendaControle {
             listaItens.clear();
             valorVenda = 0d;
             valorComDesconto = 0d;
+            desconto = 0d;
             return cadastrar(new Venda(), new VendaItens());
         }
 
