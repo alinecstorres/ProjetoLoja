@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dev.loja.modelos.Cliente;
 import com.dev.loja.modelos.Produto;
 import com.dev.loja.modelos.Venda;
 import com.dev.loja.modelos.VendaItens;
@@ -85,7 +86,7 @@ public class VendaControle {
         mv.addObject("desconto", this.desconto);
         mv.addObject("logoNome", this.logoNome);
         mv.addObject("logoImagem", this.logoImagem);
-        mv.addObject("cliente", this.nomeCliente);
+        mv.addObject("nomeCliente", this.nomeCliente);
         mv.addObject("venda", venda);
 		mv.addObject("listaVendaItens", this.listaItens);
         mv.addObject("vendaItens", vendaItens);
@@ -160,6 +161,14 @@ public class VendaControle {
         return mv;
     }
 
+    @GetMapping("/administrativo/venda/cliente/buscar")
+    public ModelAndView buscarCliente(String documento, Venda venda) {
+        Cliente clienteAchado = clienteRepositorio.findByDocumento(documento);
+        venda.setCliente(clienteAchado);
+        nomeCliente = clienteAchado.getNome();
+        return cadastrar(venda, new VendaItens());
+    }
+
     @PostMapping("administrativo/venda/salvar")
     public ModelAndView salvar(String acao, Venda venda, VendaItens vendaItens) {
 
@@ -178,7 +187,6 @@ public class VendaControle {
             this.listaItens.add(vendaItens);
             valorVenda += (vendaItens.getProduto().getValorProduto()*vendaItens.getQuantidade());
             valorComDesconto = (valorVenda-(valorVenda*(venda.getDesconto()/100)));
-            nomeCliente = venda.getCliente().getNome();
             desconto = venda.getDesconto();
             return cadastrar(venda, vendaItens);
             
@@ -223,6 +231,7 @@ public class VendaControle {
             valorVenda = 0d;
             valorComDesconto = 0d;
             desconto = 0d;
+            nomeCliente = "";
             return cadastrar(new Venda(), new VendaItens());
         }
 

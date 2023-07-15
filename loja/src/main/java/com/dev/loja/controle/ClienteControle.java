@@ -47,7 +47,7 @@ public class ClienteControle {
     }
 
     @GetMapping("/administrativo/clientes/buscar/documento")
-    public ModelAndView editar(String documento) {
+    public ModelAndView buscarDocumento(String documento) {
         ModelAndView mv = new ModelAndView("administrativo/clientes/busca");
         mv.addObject("listaClientes", clienteRepositorio.findAllByDocumento(documento));
         return mv;

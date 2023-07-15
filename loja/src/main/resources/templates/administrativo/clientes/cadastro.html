@@ -2,6 +2,122 @@
 <html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{administrativo/fragments/layout}">
 <head>
 	<title>ACST Administrativo - Clientes</title>
+	<script>
+		function mudarDocumento() {
+			var selected = document.getElementById("tipoDocumento");
+			var itemSelecionado = selected.options[selected.selectedIndex].value;
+			const inputCPF = document.getElementById("inputCPF");
+			const inputCPNJ = document.getElementById("inputCNPJ");
+
+			if (itemSelecionado == "cpf") {
+				inputCPF.type = "text";
+				inputCPF.setAttribute('required', 'required');
+				inputCPNJ.type = "hidden";
+				inputCPNJ.removeAttribute('required', 'required');
+			} else if (itemSelecionado == "cnpj") {
+				inputCPNJ.type = "text";
+				inputCPNJ.setAttribute('required', 'required');
+				inputCPF.type = "hidden";
+				inputCPF.removeAttribute('required', 'required');
+			}
+		}
+
+		function validaDocumento(strDOC) {
+
+			var documento = strDOC.value.toString().replace(/\.|-|\//gm,'');
+
+			if (documento.length == 11) {
+				var documentoValido = TestaCPF(documento);
+			} else if (documento.length == 14) {
+				var documentoValido = validarCNPJ(documento);
+			} else {
+				var documentoValido = false;
+			}
+			
+
+			if (documentoValido == false) {
+				window.alert("Digite um documento válido!");
+				strDOC.value = "";
+			}
+		}
+
+		function validarCNPJ(cnpj) {
+ 
+			if (cnpj == "00000000000000" || 
+				cnpj == "11111111111111" || 
+				cnpj == "22222222222222" || 
+				cnpj == "33333333333333" || 
+				cnpj == "44444444444444" || 
+				cnpj == "55555555555555" || 
+				cnpj == "66666666666666" || 
+				cnpj == "77777777777777" || 
+				cnpj == "88888888888888" || 
+				cnpj == "99999999999999")
+				return false;
+
+			tamanho = cnpj.length - 2
+			numeros = cnpj.substring(0,tamanho);
+			digitos = cnpj.substring(tamanho);
+			soma = 0;
+			pos = tamanho - 7;
+			for (i = tamanho; i >= 1; i--) {
+			soma += numeros.charAt(tamanho - i) * pos--;
+			if (pos < 2)
+					pos = 9;
+			}
+			resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+			if (resultado != digitos.charAt(0))
+				return false;
+				
+			tamanho = tamanho + 1;
+			numeros = cnpj.substring(0,tamanho);
+			soma = 0;
+			pos = tamanho - 7;
+			for (i = tamanho; i >= 1; i--) {
+			soma += numeros.charAt(tamanho - i) * pos--;
+			if (pos < 2)
+					pos = 9;
+			}
+			resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+			if (resultado != digitos.charAt(1))
+				return false;
+			
+				return true;
+    
+		}
+
+		function TestaCPF(strCPF) {
+
+			var Soma;
+			var Resto;
+			Soma = 0;
+			if (strCPF == "00000000000") return false;
+			if (strCPF == "11111111111") return false;
+			if (strCPF == "22222222222") return false;
+			if (strCPF == "33333333333") return false;
+			if (strCPF == "44444444444") return false;
+			if (strCPF == "55555555555") return false;
+			if (strCPF == "66666666666") return false;
+			if (strCPF == "77777777777") return false;
+			if (strCPF == "88888888888") return false;
+			if (strCPF == "99999999999") return false;
+
+			for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+			Resto = (Soma * 10) % 11;
+
+			if ((Resto == 10) || (Resto == 11))  Resto = 0;
+			if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
+
+			Soma = 0;
+			for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+			Resto = (Soma * 10) % 11;
+
+			if ((Resto == 10) || (Resto == 11))  Resto = 0;
+			if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+			return true;
+		}
+		
+	</script>
 	
 </head>
 <body>
@@ -23,71 +139,72 @@
 		<br/>
 		
 
-		<form action="/administrativo/clientes/salvar" th:object="${cliente}" method="POST">
+		<form class="row g-2 needs-validation" novalidate action="/administrativo/clientes/salvar" th:object="${cliente}" method="POST">
 
-			<div class="row">
-
-				<div class="col-12">
-					<label for="nome">Nome do Cliente</label>
-					<input type="text" class="form-control" id="nome" placeholder="Nome Completo"
-						autofocus="autofocus" th:field="*{nome}" value=""/>
-					<div class="invalid-feedback">
-
+			<div class="col-md-3">
+				<label class="form-label" for="tipoDocumento">Tipo de cliente</label>
+				<select autofocus="autofocus" class="form-select" id="tipoDocumento" required onchange="mudarDocumento()">
+					<option selected disabled value=""></option>
+					<option value="cpf">Pessoa Física</option>
+					<option value="cnpj">Pessoa Jurídica</option>
+				</select>
+				<div class="invalid-feedback">
+					Escolha o tipo de cliente
 					</div>
+			</div>
+
+			<div class="col-md-4">
+				<label class="form-label">Documento</label>
+				<input type="hidden" class="form-control" id="inputCPF" th:field="*{documento}" value="" onchange="validaDocumento(this)" data-mask="###.###.###-##" size=14 maxlength=14/>
+				<input type="hidden" class="form-control" id="inputCNPJ" th:field="*{documento}" value="" onchange="validaDocumento(this)" data-mask="##.###.###/####-##" size=18 maxlength=18/>
+				<div class="invalid-feedback">
+					Informe o número do documento
 				</div>
+			</div>
+		
 			
-			</div>
-			<div class="row">
-				<div class="col-6">
-					<label for="documento">Documento</label>
-					<input type="text" class="form-control" id="documento" th:field="*{documento}" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
-				</div>
-				<div class="col-6">
-					<label for="telefone">Telefone</label>
-					<input type="tel" class="form-control" id="telefone" th:field="*{telefone}" value="" data-mask="(##)#.####.####"/>
-					<div class="invalid-feedback">
-
-					</div>
-				</div>
-
-			</div>
-			<div class="row">
-				<div class="col-6">
-					<label for="dataNascimento">Nascimento</label>
-					<input type="date" class="form-control" id="dataNascimento" th:field="*{dataNascimento}" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
-				</div>
-
-				<div class="col-6">
-					<label for="email">Email</label>
-					<input type="email" class="form-control" id="email" th:field="*{email}" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
+			<div class="col-md-6">
+				<label class="form-label" for="nome">Nome do Cliente</label>
+				<input type="text" class="form-control" id="nome" placeholder="Nome Completo"
+					th:field="*{nome}" value="" required/>
+				<div class="invalid-feedback">
+					Informe o nome do cliente
 				</div>
 			</div>
-			<div class="row">
-
-				<div class="col-12">
-					<label for="endereco">Endereço</label>
-					<input type="text" class="form-control" id="endereco"
-						autofocus="autofocus" th:field="*{endereco}" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
+			<div class="col-md-6">
+				<label class="form-label" for="telefone">Telefone</label>
+				<input type="tel" class="form-control" id="telefone" th:field="*{telefone}" value="" data-mask="(##)#.####.####" required/>
+				<div class="invalid-feedback">
+					Adicione um telefone para contato
 				</div>
-
 			</div>
+
+		
+			<div class="col-md-6">
+				<label class="form-label" for="dataNascimento">Nascimento</label>
+				<input type="date" class="form-control" id="dataNascimento" th:field="*{dataNascimento}" value=""/>
+			</div>
+
+			<div class="col-md-6">
+				<label class="form-label" for="email">Email</label>
+				<input type="email" class="form-control" id="email" th:field="*{email}" value=""/>
+			</div>
+		
+
+			<div class="col-md-12">
+				<label class="form-label" for="endereco">Endereço</label>
+				<input type="text" class="form-control" id="endereco"
+					autofocus="autofocus" th:field="*{endereco}" value=""/>
+			</div>
+
+			
 
 			<input type="hidden" id="id" th:field="*{id}" value=""/>
 			
-			<br/>
-			<button type="submit" class="btn btn-outline-primary" style="width: 100%;">Salvar</button>
+			<div class="col-12">
+				<br/>
+				<button type="submit" class="btn btn-outline-primary" style="width: 100%;">Salvar</button>
+			</div>
 			
 		</form>
 

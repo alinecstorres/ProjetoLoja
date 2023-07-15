@@ -31,73 +31,77 @@
 		</div>
 		<br/>
 		
+		<div class="col-2">
+			<form action="/administrativo/venda/cliente/buscar" method="GET">
+				<label>Documento do cliente</label> 
+				<div class="input-group mb-3">
+					
+					<input type="text" class="form-control" placeholder="Somente números" aria-label="SearchDocument" aria-describedby="button-addon2" name="documento">
+					<button type="submit" class="btn btn-outline-secondary"><span class="bi bi-search"></span></button>
+					
+				</div>
+	
+			</form>
+		</div>
 
-		<form action="/administrativo/venda/salvar" th:object="${venda}"
+		<form class="row g-2 needs-validation" action="/administrativo/venda/salvar" th:object="${venda}"
 			method="POST">
+
+
+			<div class="col-md-2" th:object="${venda}">
+				<label for="cliente">Cliente</label> 
+				<input class="form-control" id="cliente" type="text" th:value="${nomeCliente}" disabled required/>
+				<input type="hidden" class="form-control" th:field="*{cliente}" />
+
+			</div>
+
 			
-			<div class="row" >
-
-				<div class="col-12" th:object="${venda}">
-					<label>Funcionário</label> 
-					<select th:field="*{funcionario}"
-						class="form-control" >
-						<option value=""></option>
-						<option th:each="fun: ${listaFuncionarios}" th:value="${fun.id}"
-							th:text="${fun.nome}"></option>
-					</select>
-
-					<div class="invalid-feedback"></div>
-				</div>
-
+			<div class="col-md-2" th:object="${venda}">
+				<label for="desconto">Desconto</label> <input type="number"
+					class="form-control" id="desconto" onchange="descontar()" th:value="${desconto}" />
+				<div class="invalid-feedback"></div>
+				<input type="hidden" th:field="*{desconto}" id="desconto1">
 			</div>
-			<div class="row">
-				<div class="col-10" th:object="${venda}">
-					<label>Cliente</label> 
-					<select th:field="*{cliente}"
-						class="form-control" >
-						<option value=""></option>
-						<option th:each="cliente: ${listaClientes}" th:value="${cliente.id}"
-							th:text="${cliente.nome}"></option>
-					</select>
+		
+			<div class="col-mod-12" th:object="${venda}">
+				<label>Funcionário</label> 
+				<select th:field="*{funcionario}"
+					class="form-control" >
+					<option value=""></option>
+					<option th:each="fun: ${listaFuncionarios}" th:value="${fun.id}"
+						th:text="${fun.nome}"></option>
+				</select>
 
-					<div class="invalid-feedback"></div>
-				</div>
-				<div class="col-2"th:object="${venda}">
-					<label for="desconto">Desconto</label> <input type="number"
-						class="form-control" id="desconto" onchange="descontar()" th:value="${desconto}" />
-					<div class="invalid-feedback"></div>
-					<input type="hidden" th:field="*{desconto}" id="desconto1">
-				</div>
+				<div class="invalid-feedback"></div>
 			</div>
-			<div class="row">
 
-				<div class="col-2" th:object="${vendaItens}">
-					<label>Produto</label> 
-					<select autofocus="autofocus" th:field="*{produto}"
-						class="form-control">
-						<option value=""></option>
-						<option th:each="prod: ${listaProdutos}" th:value="${prod.id}"
-							th:text="${prod.nomeCompletoProduto}"></option>
-					</select>
+			<div class="col-2" th:object="${vendaItens}">
+				<label>Produto</label> 
+				<select autofocus="autofocus" th:field="*{produto}"
+					class="form-control">
+					<option value=""></option>
+					<option th:each="prod: ${listaProdutos}" th:value="${prod.id}"
+						th:text="${prod.nomeCompletoProduto}"></option>
+				</select>
 
-					<div class="invalid-feedback"></div>
-				</div>
-
-				<div class="col-2"th:object="${vendaItens}">
-					<label for="quantidade">Quantidade</label> <input type="number"
-						class="form-control" id="quantidade" placeholder="Quantidade" th:field="*{quantidade}" value="" />
-					<div class="invalid-feedback"></div>
-				</div>
-
-				<div class="col-8">
-					<br />
-					<button id="add" name="acao" th:value="itens" type="submit"
-					class="btn btn-outline-primary">Adicionar</button>
-					<button id="clear" name="acao" th:value="clear" type="submit"
-					class="btn btn-outline-danger">Limpar lista</button>
-				</div>
-
+				<div class="invalid-feedback"></div>
 			</div>
+
+			<div class="col-2"th:object="${vendaItens}">
+				<label for="quantidade">Quantidade</label> <input type="number"
+					class="form-control" id="quantidade" placeholder="Quantidade" th:field="*{quantidade}" value="" />
+				<div class="invalid-feedback"></div>
+			</div>
+
+			<div class="col-8">
+				<br />
+				<button id="add" name="acao" th:value="itens" type="submit"
+				class="btn btn-outline-primary">Adicionar</button>
+				<button id="clear" name="acao" th:value="clear" type="submit"
+				class="btn btn-outline-danger">Limpar lista</button>
+			</div>
+
+			
 			<br/>
 			<div class="col-12">
 				<div class="row">

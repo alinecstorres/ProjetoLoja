@@ -128,18 +128,26 @@
 			}
 		}
 
-		function gerarPDF() {
-		const item = document.querySelector("#pdf");
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+		(function () {
+		'use strict'
 
-		var opt = {
-			margin: 0.5,
-			filename: "pedido.pdf",
-			html2canvas: { scale: 2 },
-			jsPDF: { unit: "in", format: "a4", orientation: "portrait"},
-		};
+		// Fetch all the forms we want to apply custom Bootstrap validation styles to
+		var forms = document.querySelectorAll('.needs-validation')
 
-		html2pdf().set(opt).from(item).save();
-		}
+		// Loop over them and prevent submission
+		Array.prototype.slice.call(forms)
+			.forEach(function (form) {
+			form.addEventListener('submit', function (event) {
+				if (!form.checkValidity()) {
+				event.preventDefault()
+				event.stopPropagation()
+				}
+
+				form.classList.add('was-validated')
+			}, false)
+			})
+		})()
 
 	</script>
 </body>

@@ -20,72 +20,69 @@
 		</div>
 		<br/>
 		
-		<form action="/administrativo/clientes/salvar" th:object="${cliente}" method="POST">
+		<form class="row g-2 needs-validation" action="/administrativo/clientes/salvar" th:object="${cliente}" method="POST">
 
-			<div class="row">
+			<div class="col-md-12">
+				<label class="form-label" for="nome">Nome do Cliente</label>
+				<input type="text" class="form-control" id="nome" placeholder="Nome Completo"
+					autofocus="autofocus" th:field="*{nome}" value=""/>
+				<div class="invalid-feedback">
 
-				<div class="col-12">
-					<label for="nome">Nome do Cliente</label>
-					<input type="text" class="form-control" id="nome" placeholder="Nome Completo"
-						autofocus="autofocus" th:field="*{nome}" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
-				</div>
-			
-			</div>
-			<div class="row">
-				<div class="col-6">
-					<label for="documento">Documento</label>
-					<input type="text" class="form-control" id="documento" th:field="*{documento}" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
-				</div>
-				<div class="col-6">
-					<label for="telefone">Telefone</label>
-					<input type="text" class="form-control" id="telefone" th:field="*{telefone}" value="" data-mask="(##)#.####.####"/>
-					<div class="invalid-feedback">
-
-					</div>
 				</div>
 			</div>
-			<div class="row">
+		
+		
+		
+			<div class="col-md-6">
+				<label class="form-label" for="documento">Documento</label>
+				<input type="text" class="form-control" id="documento" th:field="*{documento}" value="" disabled/>
+				<div class="invalid-feedback">
 
-				<div class="col-6">
-					<label for="dataNascimento">Nascimento</label>
-					<input type="date" class="form-control" id="dataNascimento" th:field="*{dataNascimento}" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
-				</div>
-
-				<div class="col-6">
-					<label for="email">Email</label>
-					<input type="text" class="form-control" id="email" th:field="*{email}" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
 				</div>
 			</div>
 
-			<div class="row">
+			<div class="col-md-6">
+				<label class="form-label" for="telefone">Telefone</label>
+				<input type="text" class="form-control" id="telefone" th:field="*{telefone}" value="" data-mask="(##)#.####.####"/>
+				<div class="invalid-feedback">
 
-				<div class="col-12">
-					<label for="endereco">Endereço</label>
-					<input type="text" class="form-control" id="endereco"
-						autofocus="autofocus" th:field="*{endereco}" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
 				</div>
+			</div>
+		
 
+			<div class="col-md-6">
+				<label class="form-label" for="dataNascimento">Nascimento</label>
+				<input type="date" class="form-control" id="dataNascimento" th:field="*{dataNascimento}" value=""/>
+				<div class="invalid-feedback">
+
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<label class="form-label" for="email">Email</label>
+				<input type="text" class="form-control" id="email" th:field="*{email}" value=""/>
+				<div class="invalid-feedback">
+
+				</div>
+			</div>
+		
+
+			<div class="col-md-12">
+				<label class="form-label" for="endereco">Endereço</label>
+				<input type="text" class="form-control" id="endereco"
+					autofocus="autofocus" th:field="*{endereco}" value=""/>
+				<div class="invalid-feedback">
+
+				</div>
 			</div>
 
 			<input type="hidden" id="id" th:field="*{id}"/>
 			
-			<br/>
-			<button type="submit" class="btn btn-outline-primary" style="width: 100%;">Salvar</button>			
+			<div class="col-12">
+				<br/>
+				<button type="submit" class="btn btn-outline-primary" style="width: 100%;">Salvar</button>
+			</div>
+						
 		</form>
 
 	</section>

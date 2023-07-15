@@ -47,8 +47,8 @@
             <h6>Requerente:</h6>
             <div class="row">
                 <div class="col-9">
-                    <h6 ><strong th:text="${cliente}"></strong></h6>
-                    <input id="cliente"  type="hidden" th:value="${cliente}">
+                    <h6 ><strong th:text="${nomeCliente}"></strong></h6>
+                    <input id="cliente"  type="hidden" th:value="${nomeCliente}">
                 </div>
                 <div class="col-3" style="text-align: end; ">
                     <h6><strong th:text="${#dates.format(venda.dataEntrada, 'dd/MM/yyyy')}"></strong></h6>

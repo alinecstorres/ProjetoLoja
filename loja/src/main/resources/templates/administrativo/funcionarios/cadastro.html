@@ -2,6 +2,56 @@
 <html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{administrativo/fragments/layout}">
 <head>
 	<title>ACST Administrativo - Funcionários</title>
+	<script>
+
+		function validaDocumento(strDOC) {
+
+			var documento = strDOC.value.toString().replace(/\.|-|\//gm,'');
+
+			if (documento.length == 11) {
+				var documentoValido = TestaCPF(documento);
+			} else {
+				var documentoValido = false;
+			}
+
+
+			if (documentoValido == false) {
+				window.alert("Digite um documento válido!");
+				strDOC.value = "";
+			}
+		}
+
+		function TestaCPF(strCPF) {
+
+			var Soma;
+			var Resto;
+			Soma = 0;
+			if (strCPF == "00000000000") return false;
+			if (strCPF == "11111111111") return false;
+			if (strCPF == "22222222222") return false;
+			if (strCPF == "33333333333") return false;
+			if (strCPF == "44444444444") return false;
+			if (strCPF == "55555555555") return false;
+			if (strCPF == "66666666666") return false;
+			if (strCPF == "77777777777") return false;
+			if (strCPF == "88888888888") return false;
+			if (strCPF == "99999999999") return false;
+
+			for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+			Resto = (Soma * 10) % 11;
+
+			if ((Resto == 10) || (Resto == 11))  Resto = 0;
+			if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
+
+			Soma = 0;
+			for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+			Resto = (Soma * 10) % 11;
+
+			if ((Resto == 10) || (Resto == 11))  Resto = 0;
+			if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+			return true;
+		}
+	</script>
 </head>
 <body>
 	<section class="layout-content" layout:fragment="corpo">
@@ -21,114 +71,108 @@
 
 		
 
-		<form action="/administrativo/funcionarios/salvar" th:object="${funcionario}" method="POST">
+		<form class="row g-2 needs-validation" action="/administrativo/funcionarios/salvar" th:object="${funcionario}" method="POST">
 
-			<div class="row">
-
-				<div class="col-6">
-					<label for="nome">Nome do Funcionário</label>
-					<input type="text" class="form-control" id="nome" placeholder="Nome Completo"
-						autofocus="autofocus" th:field="*{nome}" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
+			<div class="col-md-6">
+				<label class="form-label" for="nome">Nome do Funcionário</label>
+				<input type="text" class="form-control" id="nome" placeholder="Nome Completo"
+					autofocus="autofocus" th:field="*{nome}" value="" required/>
+				<div class="invalid-feedback">
+					Digite o nome
 				</div>
-				
-				<div class="col-6">
-					<label for="cpf">CPF</label>
-					<input type="text" class="form-control" id="cpf" placeholder="Digite somente números" th:field="*{cpf}" value="" data-mask="###.###.###-##"/>
-					<div class="invalid-feedback">
-
-					</div>
-				</div>
+			</div>
 			
-			</div>
-			<div class="row">
-				<div class="col-6">
-					<label for="pis">PIS</label>
-					<input type="text" class="form-control" id="pis" placeholder="Digite o PIS" th:field="*{pis}" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
-				</div>
-
-				<div class="col-6">
-					<label for="nascimento">Nascimento</label>
-					<input type="date" class="form-control" id="nascimento" th:field="*{nascimento}" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
-				</div>
-
-			</div>
-			<div class="row">
-
-				<div class="col-12">
-					<label for="cargo">Cargo</label>
-					<select id="cargo" class="form-control" th:field="*{cargo}">
-						<option value="">Selecione...</option>
-						<option value="Aux de Produção">Auxiliar de Produção</option>
-						<option value="Aux Administrativo">Auxiliar Administrativo</option>
-						<option value="Contador">Contador</option>
-						<option value="Administrador">Administrador</option>
-						<option value="Dev Java Senior">Desenvolvedor Java Senior</option>
-					</select>
-					<div class="invalid-feedback">
-
-					</div>
-				</div>
-
-			</div>
-			<div class="row">
-				<div class="col-6">
-					<label for="genero">Gênero</label>
-					<input type="text" class="form-control" id="genero" th:field="*{genero}" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
-				</div>
-				<div class="col-6">
-					<label for="salarioBruto">Salário Bruto</label>
-					<input type="number" class="form-control" id="salario" data-mask="##0.00"
-						data-mask-reverse="true" th:field="*{salarioBruto}" step="0.01" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
+			<div class="col-md-6">
+				<label class="form-label" for="cpf">CPF</label>
+				<input type="text" class="form-control" id="cpf" placeholder="Digite somente números" th:field="*{cpf}" value="" data-mask="###.###.###-##" onchange="validaDocumento(this)" required/>
+				<div class="invalid-feedback">
+					Digite o CPF
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-6">
-					<label for="dataEntrada">Data de Entrada</label>
-					<input type="date" class="form-control" id="dataEntrada" th:field="*{dataEntrada}" value=""/>
-					<div class="invalid-feedback">
+		
+		
+			<div class="col-md-6">
+				<label class="form-label" for="pis">PIS</label>
+				<input type="text" class="form-control" id="pis" placeholder="Digite o PIS" th:field="*{pis}" value=""/>
+				<div class="invalid-feedback">
 
-					</div>
-				</div>
-
-				<div class="col-6">
-					<label for="dataSaida">Data de Saída</label>
-					<input type="date" class="form-control" id="dataSaida" th:field="*{dataSaida}" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
 				</div>
 			</div>
-			<div class="row">
 
-				<div class="col-12">
-					<label for="endereco">Endereço</label>
-					<input type="text" class="form-control" id="endereco"
-						autofocus="autofocus" th:field="*{endereco}" value=""/>
-					<div class="invalid-feedback">
+			<div class="col-md-6">
+				<label class="form-label" for="nascimento">Nascimento</label>
+				<input type="date" class="form-control" id="nascimento" th:field="*{nascimento}" value=""/>
+				<div class="invalid-feedback">
 
-					</div>
 				</div>
+			</div>
 
+		
+
+			<div class="col-md-12">
+				<label class="form-label" for="cargo">Cargo</label>
+				<select id="cargo" class="form-select" th:field="*{cargo}" required>
+					<option selected value="">Selecione...</option>
+					<option value="Aux de Produção">Auxiliar de Produção</option>
+					<option value="Aux Administrativo">Auxiliar Administrativo</option>
+					<option value="Contador">Contador</option>
+					<option value="Administrador">Administrador</option>
+					<option value="Dev Java Senior">Desenvolvedor Java Senior</option>
+				</select>
+				<div class="invalid-feedback">
+
+				</div>
+			</div>
+
+		
+			<div class="col-md-6">
+				<label class="form-label" for="genero">Gênero</label>
+				<input type="text" class="form-control" id="genero" th:field="*{genero}" value=""/>
+				<div class="invalid-feedback">
+
+				</div>
+			</div>
+			<div class="col-md-6">
+				<label class="form-label" for="salarioBruto">Salário Bruto</label>
+				<input type="number" class="form-control" id="salario" data-mask="##0.00"
+					data-mask-reverse="true" th:field="*{salarioBruto}" step="0.01" value=""/>
+				<div class="invalid-feedback">
+
+				</div>
+			</div>
+	
+			<div class="col-md-6">
+				<label class="form-label" for="dataEntrada">Data de Entrada</label>
+				<input type="date" class="form-control" id="dataEntrada" th:field="*{dataEntrada}" value=""/>
+				<div class="invalid-feedback">
+
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<label class="form-label" for="dataSaida">Data de Saída</label>
+				<input type="date" class="form-control" id="dataSaida" th:field="*{dataSaida}" value=""/>
+				<div class="invalid-feedback">
+
+				</div>
+			</div>
+		
+
+			<div class="col-md-12">
+				<label class="form-label" for="endereco">Endereço</label>
+				<input type="text" class="form-control" id="endereco"
+					autofocus="autofocus" th:field="*{endereco}" value=""/>
+				<div class="invalid-feedback">
+
+				</div>
 			</div>
 
 			<input type="hidden" id="id" th:field="*{id}" value=""/>
-			<br/>
-			<button type="submit" class="btn btn-outline-primary" style="width: 100%;">Salvar</button>
+			<div class="col-12">
+				<br/>
+				<button type="submit" class="btn btn-outline-primary" style="width: 100%;">Salvar</button>
+			</div>
+			
 		</form>
 
 		
