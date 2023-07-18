@@ -54,7 +54,7 @@
 					<tr th:each="entrada : ${listaProdutos}">
 						<td th:text="${entrada.entradaProduto.id}"></td>
 						<td th:text="${entrada.entradaProduto.funcionario.nome}"></td>
-						<td th:text="${entrada.entradaProduto.dataEntrada}"></td>
+						<td th:text="${#dates.format(entrada.entradaProduto.dataEntrada, 'dd-MM-yyyy HH:mm')}"></td>
 						<td th:text="${entrada.produto.nomeCompletoProduto}"></td>
 						<td th:text="${entrada.quantidade}"></td>
 						<td th:text="${entrada.observacao}"></td>

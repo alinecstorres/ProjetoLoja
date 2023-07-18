@@ -28,7 +28,7 @@
 										<div class="col-12">
 											<label for="nome">Nome do Produto</label>
 											<input type="text" class="form-control" name="nomeProduto" placeholder="Nome"
-													autofocus="autofocus"  value=""/>
+													autofocus="autofocus"  value="" required/>
 											<div class="invalid-feedback">
 					
 											</div>
@@ -45,6 +45,8 @@
 												<option value="M">M</option>
 												<option value="G">G</option>
 												<option value="U">U</option>
+												<option value="A4">A4</option>
+												<option value="A3">A3</option>
 											</select>
 											<div class="invalid-feedback">
 					
@@ -54,7 +56,7 @@
 										<div class="col-6">
 											<label for="valorProduto">Valor</label>
 											<input type="number" class="form-control" name="valorProduto" data-mask="###.00"
-											data-mask-reverse="true" step="0.01" value=""/>
+											data-mask-reverse="true" step="0.01" value="" required/>
 											<div class="invalid-feedback">
 					
 											</div>
@@ -104,7 +106,7 @@
 					
 										<div class="col-6">
 											Foto do Produto
-											<input type="file" name="arquivo"/>
+											<input type="file" name="arquivo" required/>
 										</div>
 					
 									</div>

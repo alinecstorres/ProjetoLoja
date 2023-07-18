@@ -144,12 +144,10 @@
                 var nCliente = document.getElementById("cliente").value;
                 doc.setFontSize(12);
                 doc.text(11,100,nCliente);
-
-                var data = document.getElementById("data").value;
                 
-                var dia = data.slice(8);
-                var mes = data.slice(5,7);
-                var ano = data.slice(0,4);
+                var dia = documentoData.slice(8);
+                var mes = documentoData.slice(5,7);
+                var ano = documentoData.slice(0,4);
                 var dataFormatada = dia+"/"+mes+"/"+ano;
                 
                 doc.setFontSize(12);

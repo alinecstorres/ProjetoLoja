@@ -34,31 +34,36 @@
 		<a href="/administrativo/clientes/listar" class="nav-link dropdown-item" >
 			Clientes
 		</a>
-		<a class="nav-link dropdown-item" href="/administrativo/funcionarios/listar" >
+		<a href="javascript:void(0);" class="bt1 nav-link dropdown-toggle" onclick="itens('funcionarios')" >
 			Funcionários
 		</a>
+		<ul id="funcionariosItens">
+			<li><a class="nav-link dropdown-item" href="/administrativo/funcionarios/listar">Listar funcionários</a></li>
+			<li><a class="nav-link dropdown-item" href="/administrativo/permissoes/cadastrar">Permissões</a></li>
+			<li><a class="nav-link dropdown-item" href="/administrativo/roles/cadastrar">Papéis</a></li>
+		</ul>
 			
-			<a href="javascript:void(0);" class="bt1 nav-link dropdown-toggle" onclick="itens('produtos')" >
-				Produtos
-			</a>
-			<ul id="produtosItens">
-				<li><a class="nav-link dropdown-item" href="/administrativo/produtos/listar">Listar Produtos</a></li>
-				<li><a class="nav-link dropdown-item" href="/administrativo/entrada/listar">Entradas de Produtos</a></li>
-			</ul>
-			<a href="javascript:void(0);" class="bt1 nav-link dropdown-toggle" onclick="itens('vendas')" >
-				Vendas
-			</a>
-			<ul id="vendasItens">
-				<li><a class="nav-link dropdown-item" href="/administrativo/venda/cadastrar">Nova venda</a></li>
-				<li><a class="nav-link dropdown-item" href="/administrativo/venda/listar">Lista de vendas</a></li>
-			</ul>
-			<a href="javascript:void(0);" class="bt1 nav-link dropdown-toggle" onclick="itens('financeiro')" >
-				Financeiro
-			</a>
-			<ul id="financeiroItens">
-				<li><a class="nav-link dropdown-item" href="/administrativo/despesas/cadastrar">Despesas</a></li>
-				<li><a class="nav-link dropdown-item" href="/administrativo/financeiro">Controle</a></li>
-			</ul>
+		<a href="javascript:void(0);" class="bt1 nav-link dropdown-toggle" onclick="itens('produtos')" >
+			Produtos
+		</a>
+		<ul id="produtosItens">
+			<li><a class="nav-link dropdown-item" href="/administrativo/produtos/listar">Listar Produtos</a></li>
+			<li><a class="nav-link dropdown-item" href="/administrativo/entrada/listar">Entradas de Produtos</a></li>
+		</ul>
+		<a href="javascript:void(0);" class="bt1 nav-link dropdown-toggle" onclick="itens('vendas')" >
+			Vendas
+		</a>
+		<ul id="vendasItens">
+			<li><a class="nav-link dropdown-item" href="/administrativo/venda/cadastrar">Nova venda</a></li>
+			<li><a class="nav-link dropdown-item" href="/administrativo/venda/listar">Lista de vendas</a></li>
+		</ul>
+		<a href="javascript:void(0);" class="bt1 nav-link dropdown-toggle" onclick="itens('financeiro')" >
+			Financeiro
+		</a>
+		<ul id="financeiroItens">
+			<li><a class="nav-link dropdown-item" href="/administrativo/despesas/cadastrar">Despesas</a></li>
+			<li><a class="nav-link dropdown-item" href="/administrativo/financeiro">Controle</a></li>
+		</ul>
 	</div>
 	<!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
 	<a href="javascript:void(0);" class="icon" onclick="menu()">
@@ -105,17 +110,25 @@
 					y = document.getElementById("produtosItens");
 					a = document.getElementById("vendasItens");
 					b = document.getElementById("financeiroItens");
+					c = document.getElementById("funcionariosItens");
 				break;
 				case "vendas":
 					y = document.getElementById("vendasItens");
 					a = document.getElementById("produtosItens");
 					b = document.getElementById("financeiroItens");
+					c = document.getElementById("funcionariosItens");
 				break;
 				case "financeiro":
 					y = document.getElementById("financeiroItens");
 					a = document.getElementById("produtosItens");
 					b = document.getElementById("vendasItens");
+					c = document.getElementById("funcionariosItens");
 				break;
+				case "funcionarios":
+					y = document.getElementById("funcionariosItens");
+					a = document.getElementById("financeiroItens");
+					b = document.getElementById("produtosItens");
+					c = document.getElementById("vendasItens");
 				default:
 					break;
 			}

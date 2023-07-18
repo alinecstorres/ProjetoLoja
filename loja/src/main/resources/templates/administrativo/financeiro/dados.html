@@ -70,8 +70,8 @@
 					<form action="/administrativo/financeiro/faturamento/periodo" method="GET">
 
 						<div class="input-group mb-12">
-							<input type="date" class="form-control" aria-label="SearchDate" name="dataInicial" aria-describedby="button-addon2">
-							<input type="date" class="form-control" aria-label="SearchDate" name="dataFinal" aria-describedby="button-addon2">
+							<input type="date" class="form-control" aria-label="SearchDate" name="dataInicial" aria-describedby="button-addon2" required>
+							<input type="date" class="form-control" aria-label="SearchDate" name="dataFinal" aria-describedby="button-addon2" required>
 							<button type="submit" class="btn btn-outline-secondary"><span class="bi bi-search"></span></button>
 
 						</div>
@@ -110,7 +110,7 @@
 					<form action="/administrativo/financeiro/faturamento/produto" method="GET">
 
 						<div class="input-group mb-3">
-							<select class="form-control" name="produto" id="produto" onchange="associaInput()">
+							<select class="form-control" name="produto" id="produto" onchange="associaInput()" required>
 								<option value="">Selecione o produto</option>
 								<option th:each="prod: ${listaProdutos}"
 									th:text="${prod.nomeCompletoProduto}" name="produto"></option>

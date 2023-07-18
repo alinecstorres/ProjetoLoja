@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{administrativo/fragments/layout}">
+<head>
+<title>ACST Administrativo - Papéis</title>
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+
+		<div class="row">
+			<div class="col-12" style="text-align: end;">
+				<h3>Papéis</h3>
+			</div>
+		</div>
+		<br/>
+
+		<form action="/administrativo/roles/salvar" th:object="${role}" method="POST">
+			
+			<div class="row" >
+
+				<div class="col-6">
+					<label>Nome</label> 
+					<input class="form-control" th:field="*{nome}" type="text">
+				</div>
+
+
+				<div class="col-1"><br/><button type="submit" name="acao" th:value="salvar" class="btn btn-outline-primary"><i class="bi bi-check-lg"></i></button></div>
+
+			</div>
+			
+			<br/>
+			
+			<input type="hidden" id="id" th:field="*{id}" value="" />
+		</form>
+		<form action="/administrativo/roles/salvar" th:object="${listaRoles}" method="POST">
+			<table class="table table-striped table-hover table-sm" >
+				<thead>
+				<tr>
+					<th>ID</th>
+					<th>Papel</th>
+					<th>Ação</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr th:each="role : ${listaRoles}">
+						<td th:text="${role.id}"></td>
+						<td th:text="${role.nome}"></td>
+						<td>
+							<button type="submit" name="acao" th:value="${role.id}" class="btn btn-outline-danger"><span class="bi bi-trash3" title="Excluir"></span></button>
+						</td>
+				</tbody>
+			</table>
+		</form>
+		
+	</section>
+</body>
+</html>	

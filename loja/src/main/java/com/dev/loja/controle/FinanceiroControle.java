@@ -115,10 +115,20 @@ public class FinanceiroControle {
     public ModelAndView atualizar(@Validated Saldo novoSaldo, BindingResult result) {
 
         if(novoSaldo.getSaldoBancario() == null) {
-            novoSaldo.setSaldoBancario(saldoRepositorio.findLastSaldo().getSaldoBancario());
+            if (saldoRepositorio.findLastSaldo() != null) {
+                novoSaldo.setSaldoBancario(saldoRepositorio.findLastSaldo().getSaldoBancario());
+            } else {
+                return dadosFinanceiros(dataHoje, dataHoje, faturamentoZero, faturamentoZero, produtoQualquer);
+            }
+            
         }
         if (novoSaldo.getCaixa() == null) {
-            novoSaldo.setCaixa(saldoRepositorio.findLastSaldo().getCaixa());
+            if (saldoRepositorio.findLastSaldo() != null) {
+                novoSaldo.setCaixa(saldoRepositorio.findLastSaldo().getCaixa());
+            } else {
+                return dadosFinanceiros(dataHoje, dataHoje, faturamentoZero, faturamentoZero, produtoQualquer);
+            }
+            
         }
 
         saldoRepositorio.saveAndFlush(novoSaldo);

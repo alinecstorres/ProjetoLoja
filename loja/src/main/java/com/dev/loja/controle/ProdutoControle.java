@@ -58,6 +58,7 @@ public class ProdutoControle {
         ModelAndView mv = new ModelAndView("administrativo/produtos/editar");
         Optional<Produto> produto = produtoRepositorio.findById(id);
         mv.addObject("produto", produto);
+        mv.addObject("nomeCompletoProduto", produto.get().getNomeCompletoProduto());
         return mv;
     }
 

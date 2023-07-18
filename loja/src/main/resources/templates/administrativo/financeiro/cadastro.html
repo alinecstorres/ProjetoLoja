@@ -20,14 +20,14 @@
 
 				<div class="col-6">
 					<label for="nome">Nome</label> <input type="text"
-						class="form-control" id="nome" th:field="*{nome}" value="" autofocus="autofocus"/>
+						class="form-control" id="nome" th:field="*{nome}" value="" autofocus="autofocus" required/>
 					<div class="invalid-feedback"></div>
 				</div>
 
 				<div class="col-6">
 					<label for="valor">Valor</label> <input type="text"
 						class="form-control" id="valor" th:field="*{valor}" data-mask="##0.00"
-						data-mask-reverse="true" value="" />
+						data-mask-reverse="true" value="" required/>
 					<div class="invalid-feedback"></div>
 				</div>
 
@@ -36,7 +36,7 @@
 
 				<div class="col-3">
 					<label for="data">Data</label>
-					<input type="date" class="form-control" id="data" th:field="*{data}" value=""/>
+					<input type="date" class="form-control" id="data" th:field="*{data}" value="" required/>
 					<div class="invalid-feedback">
 
 					</div>

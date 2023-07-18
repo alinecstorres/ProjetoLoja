@@ -1,5 +1,7 @@
 package com.dev.loja.controle;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,12 @@ public class RoleControle {
     @Autowired
     private RoleRepositorio roleRepositorio;
 
+    List<Role> listaRoles = new ArrayList<>();
+
     @GetMapping("/administrativo/roles/cadastrar")
     public ModelAndView cadastrar(Role role) {
         ModelAndView mv = new ModelAndView("administrativo/roles/cadastro");
+        mv.addObject("listaRoles", roleRepositorio.findAll());
         mv.addObject("role", role);
         return mv;
     }
@@ -42,11 +47,22 @@ public class RoleControle {
     }
 
     @PostMapping("administrativo/roles/salvar")
-    public ModelAndView salvar(@Validated Role role, BindingResult result) {
-        if(result.hasErrors()) {
-            return cadastrar(role);
+    public ModelAndView salvar(@Validated Role role, String acao, BindingResult result) {
+
+        listaRoles = roleRepositorio.findAll();
+
+        if (acao.equals("salvar")) {
+            if (!listaRoles.contains(role)) {
+                roleRepositorio.saveAndFlush(role);
+            }
+
+        } else {
+            for (Role role1 : listaRoles) {
+                if (role1.getId().equals(Long.parseLong(acao))) {
+                    roleRepositorio.deleteById(Long.parseLong(acao));
+                }
+            }
         }
-        roleRepositorio.saveAndFlush(role);
         return cadastrar(new Role());
     }
     
