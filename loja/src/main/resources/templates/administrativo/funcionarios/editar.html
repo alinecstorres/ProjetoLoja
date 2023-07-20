@@ -20,115 +20,124 @@
 		<br/>
 		
 
-		<form action="/administrativo/funcionarios/salvar" th:object="${funcionario}" method="POST">
+		<form class="row g-2 needs-validation" action="/administrativo/funcionarios/salvar" th:object="${funcionario}" method="POST">
 
-			<div class="row">
 
-				<div class="col-6">
-					<label for="nome">Nome do Funcionário</label>
-					<input type="text" class="form-control" id="nome" placeholder="Nome Completo"
-						autofocus="autofocus" th:field="*{nome}" value=""/>
-					<div class="invalid-feedback">
+			<div class="col-md-6">
+				<label class="form-label" for="nome">Nome do Funcionário</label>
+				<input type="text" class="form-control" id="nome" placeholder="Nome Completo"
+					autofocus="autofocus" th:field="*{nome}" value=""/>
+				<div class="invalid-feedback">
 
-					</div>
 				</div>
-				
-				<div class="col-6">
-					<label for="cpf">CPF</label>
-					<input type="text" class="form-control" id="cpf" placeholder="Digite o CPF" th:field="*{cpf}" value="" data-mask="###.###.###-##"/>
-					<div class="invalid-feedback">
-
-					</div>
-				</div>
+			</div>
 			
-			</div>
-			<div class="row">
-				<div class="col-6">
-					<label for="pis">PIS</label>
-					<input type="text" class="form-control" id="pis" placeholder="Digite o PIS" th:field="*{pis}" value=""/>
-					<div class="invalid-feedback">
+			<div class="col-md-6">
+				<label class="form-label" for="cpf">CPF</label>
+				<input type="text" class="form-control" id="cpf" placeholder="Digite o CPF" th:field="*{cpf}" value="" data-mask="###.###.###-##"/>
+				<div class="invalid-feedback">
 
-					</div>
-				</div>
-
-				<div class="col-6">
-					<label for="nascimento">Nascimento</label>
-					<input type="date" class="form-control" id="nascimento" th:field="*{nascimento}" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-6">
-					<label for="genero">Gênero</label>
-					<input type="text" class="form-control" id="genero" th:field="*{genero}" value=""/>
-					<div class="invalid-feedback">
 
-					</div>
-				</div>
+			<div class="col-md-6">
+				<label class="form-label" for="pis">PIS</label>
+				<input type="text" class="form-control" id="pis" placeholder="Digite o PIS" th:field="*{pis}" value=""/>
+				<div class="invalid-feedback">
 
-				<div class="col-6">
-					<label for="salarioBruto">Salário Bruto</label>
-					<input type="text" class="form-control" id="salario" data-mask="##0.00"
-						data-mask-reverse="true" th:field="*{salarioBruto}" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
-				</div>
-			
-			</div>
-			<div class="row">
-				<div class="col-12">
-					<label for="cargo">Cargo</label>
-					<select id="cargo" class="form-control" th:field="*{cargo}">
-						<option value="">Selecione...</option>
-						<option value="Aux de Produção">Auxiliar de Produção</option>
-						<option value="Aux Administrativo">Auxiliar Administrativo</option>
-						<option value="Contador">Contador</option>
-						<option value="Administrador">Administrador</option>
-						<option value="Dev Java Senior">Desenvolvedor Java Senior</option>
-					</select>
-					<div class="invalid-feedback">
-
-					</div>
 				</div>
 			</div>
-			<div class="row">
 
-				<div class="col-6">
-					<label for="dataEntrada">Data de Entrada</label>
-					<input type="date" class="form-control" id="dataEntrada" th:field="*{dataEntrada}" value=""/>
-					<div class="invalid-feedback">
+			<div class="col-md-6">
+				<label class="form-label" for="nascimento">Nascimento</label>
+				<input type="date" class="form-control" id="nascimento" th:field="*{nascimento}" value=""/>
+				<div class="invalid-feedback">
 
-					</div>
 				</div>
-
-				<div class="col-6">
-					<label for="dataSaida">Data de Saída</label>
-					<input type="date" class="form-control" id="dataSaida" th:field="*{dataSaida}" value=""/>
-					<div class="invalid-feedback">
-
-					</div>
-				</div>
-
 			</div>
-			<div class="row">
 
-				<div class="col-12">
-					<label for="endereco">Endereço</label>
-					<input type="text" class="form-control" id="endereco"
-						autofocus="autofocus" th:field="*{endereco}" value=""/>
-					<div class="invalid-feedback">
+			<div class="col-md-6">
+				<label class="form-label" for="genero">Gênero</label>
+				<input type="text" class="form-control" id="genero" th:field="*{genero}" value=""/>
+				<div class="invalid-feedback">
 
-					</div>
 				</div>
+			</div>
 
+			<div class="col-md-6">
+				<label class="form-label" for="salarioBruto">Salário Bruto</label>
+				<input type="text" class="form-control" id="salario" data-mask="##0.00"
+					data-mask-reverse="true" th:field="*{salarioBruto}" value=""/>
+				<div class="invalid-feedback">
+
+				</div>
+			</div>
+		
+			<div class="col-md-12">
+				<label class="form-label" for="cargo">Cargo</label>
+				<select id="cargo" class="form-control" th:field="*{cargo}">
+					<option value="">Selecione...</option>
+					<option value="Aux de Produção">Auxiliar de Produção</option>
+					<option value="Aux Administrativo">Auxiliar Administrativo</option>
+					<option value="Contador">Contador</option>
+					<option value="Administrador">Administrador</option>
+					<option value="Dev Java Senior">Desenvolvedor Java Senior</option>
+				</select>
+				<div class="invalid-feedback">
+
+				</div>
+			</div>
+		
+
+			<div class="col-md-6">
+				<label class="form-label" for="dataEntrada">Data de Entrada</label>
+				<input type="date" class="form-control" id="dataEntrada" th:field="*{dataEntrada}" value=""/>
+				<div class="invalid-feedback">
+
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<label class="form-label" for="dataSaida">Data de Saída</label>
+				<input type="date" class="form-control" id="dataSaida" th:field="*{dataSaida}" value=""/>
+				<div class="invalid-feedback">
+
+				</div>
+			</div>
+
+
+			<div class="col-md-12">
+				<label class="form-label" for="endereco">Endereço</label>
+				<input type="text" class="form-control" id="endereco"
+					autofocus="autofocus" th:field="*{endereco}" value=""/>
+				<div class="invalid-feedback">
+
+				</div>
+			</div>
+
+
+			<div class="col-md-6">
+				<label class="form-label" for="email">Email</label>
+				<input type="email" class="form-control" id="email" th:field="*{email}" value="" required/>
+				<div class="invalid-feedback">
+					Digite um email
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<label class="form-label" for="senha">Senha</label>
+				<input type="password" class="form-control" id="senha" th:field="*{senha}" value="" required/>
+				<div class="invalid-feedback">
+
+				</div>
 			</div>
 
 			<input type="hidden" id="id" th:field="*{id}" value=""/>
-			<br/>
+
+			<div class="col-12">
+				<br/>
 			<button type="submit" class="btn btn-outline-primary" style="width: 100%;">Salvar</button>
+			</div>
 			
 		</form>
 		

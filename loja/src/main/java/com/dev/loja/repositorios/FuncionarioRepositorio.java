@@ -1,6 +1,7 @@
 package com.dev.loja.repositorios;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,6 +14,8 @@ public interface FuncionarioRepositorio extends JpaRepository<Funcionario, Long>
 List<Funcionario> findAllByNome(String nome);
 
 List<Funcionario> findAllByCpf(String cpf);
+
+Optional<Funcionario> findByEmail(String email);
 
 
 }

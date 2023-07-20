@@ -20,7 +20,7 @@
 
 				<div class="col-6">
 					<label>Nome</label> 
-					<input class="form-control" th:field="*{nome}" type="text">
+					<input class="form-control" th:field="*{roleName}" type="text">
 				</div>
 
 
@@ -30,7 +30,7 @@
 			
 			<br/>
 			
-			<input type="hidden" id="id" th:field="*{id}" value="" />
+			<input type="hidden" id="id" th:field="*{RoleId}" value="" />
 		</form>
 		<form action="/administrativo/roles/salvar" th:object="${listaRoles}" method="POST">
 			<table class="table table-striped table-hover table-sm" >
@@ -43,10 +43,10 @@
 				</thead>
 				<tbody>
 					<tr th:each="role : ${listaRoles}">
-						<td th:text="${role.id}"></td>
-						<td th:text="${role.nome}"></td>
+						<td th:text="${role.roleId}"></td>
+						<td th:text="${role.roleName}"></td>
 						<td>
-							<button type="submit" name="acao" th:value="${role.id}" class="btn btn-outline-danger"><span class="bi bi-trash3" title="Excluir"></span></button>
+							<button type="submit" name="acao" th:value="${role.roleId}" class="btn btn-outline-danger"><span class="bi bi-trash3" title="Excluir"></span></button>
 						</td>
 				</tbody>
 			</table>

@@ -1,5 +1,6 @@
 package com.dev.loja.controle;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dev.loja.modelos.Funcionario;
+import com.dev.loja.modelos.Role;
 import com.dev.loja.repositorios.FuncionarioRepositorio;
+import com.dev.loja.repositorios.RoleRepositorio;
 
 @Controller
 public class FuncionarioControle {
 
     @Autowired
     private FuncionarioRepositorio funcionarioRepositorio;
+
+    @Autowired
+    private RoleRepositorio roleRepositorio;
 
     @GetMapping("/administrativo/funcionarios/cadastrar")
     public ModelAndView cadastrar(Funcionario funcionario) {
@@ -71,4 +77,42 @@ public class FuncionarioControle {
         funcionarioRepositorio.saveAndFlush(funcionario);
         return cadastrar(new Funcionario());
     }
+
+    @GetMapping("administrativo/funcionarios/permissoes")
+    public ModelAndView listarPermissoes() {
+        ModelAndView mv = new ModelAndView("administrativo/funcionarios/permissoes");
+        
+        List<Funcionario> listaFuncionarios = funcionarioRepositorio.findAll();
+        List<Role> listaRoles = roleRepositorio.findAll();
+        
+        mv.addObject("listaRoles", listaRoles);
+        mv.addObject("listaFuncionarios", listaFuncionarios);
+        return mv;
+    }
+
+
+    @PostMapping("administrativo/funcionarios/permissoes/salvar")
+    public ModelAndView atualizarPermissoes(String acao, Long funcionarioId, Long roleId) {
+
+        Funcionario funcionario = funcionarioRepositorio.findById(funcionarioId).get();
+        List<Role> listaRoles = funcionario.getRoles();
+        Role role = roleRepositorio.findById(roleId).get();
+
+        if (!listaRoles.contains(role)) {
+            listaRoles.add(role);
+            funcionario.setRoles(listaRoles);
+            funcionarioRepositorio.saveAndFlush(funcionario);
+        }
+        
+        return listarPermissoes();
+    }
+
+    @GetMapping("/administrativo/funcionarios/permissoes/editar/{id}")
+    public ModelAndView excluirPermissoes(@PathVariable("id") Long id) {
+        Funcionario funcionario = funcionarioRepositorio.findById(id).get();
+        funcionario.getRoles().clear();
+        funcionarioRepositorio.saveAndFlush(funcionario);
+        return listarPermissoes();
+    }
+
 }

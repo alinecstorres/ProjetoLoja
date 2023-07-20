@@ -167,6 +167,22 @@
 				</div>
 			</div>
 
+			<div class="col-md-6">
+				<label class="form-label" for="email">Email</label>
+				<input type="email" class="form-control" id="email" th:field="*{email}" value="" required/>
+				<div class="invalid-feedback">
+					Digite um email
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<label class="form-label" for="senha">Senha</label>
+				<input type="password" class="form-control" id="senha" th:field="*{senha}" value=""/>
+				<div class="invalid-feedback">
+
+				</div>
+			</div>
+
 			<input type="hidden" id="id" th:field="*{id}" value=""/>
 			<div class="col-12">
 				<br/>

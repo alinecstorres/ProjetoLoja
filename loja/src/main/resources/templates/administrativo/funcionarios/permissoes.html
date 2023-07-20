@@ -14,23 +14,23 @@
 		</div>
 		<br/>
 
-		<form action="/administrativo/permissoes/salvar" th:object="${permissao}" method="POST">
+		<form action="/administrativo/funcionarios/permissoes/salvar" th:object="${funcionario}" method="POST">
 			
 			<div class="row" >
 
 				<div class="col-6">
 					<label>Funcionário</label> 
-					<select class="form-select" th:field="*{funcionario}" name="funcionario" autofocus="autofocus">
-						<option value="" disabled>Selecione</option>
+					<select class="form-select" name="funcionarioId" autofocus="autofocus" required>
+						<option value="" >Selecione</option>
 						<option th:each="fun: ${listaFuncionarios}" th:value="${fun.id}" th:text="${fun.nome}"></option>
 					</select>
 				</div>
 
 				<div class="col-5">
 					<label>Papel</label> 
-					<select class="form-select" th:field="*{role}" name="role" autofocus="autofocus">
-						<option value="" disabled>Selecione</option>
-						<option th:each="role: ${listaRoles}" th:value="${role.id}" th:text="${role.nome}"></option>
+					<select class="form-select" name="roleId" required>
+						<option value="" >Selecione</option>
+						<option th:each="role: ${listaRoles}" th:value="${role.roleId}" th:text="${role.roleName}"></option>
 					</select>
 				</div>
 
@@ -39,30 +39,30 @@
 			</div>
 			
 			<br/>
-			
-			<input type="hidden" id="id" th:field="*{id}" value="" />
 		</form>
-		<form action="/administrativo/permissoes/salvar" th:object="${listaPermissoes}" method="POST">
+		<div class="table-responsive">
 			<table class="table table-striped table-hover table-sm" >
 				<thead>
 				<tr>
 					<th>Funcionario</th>
-					<th>Papel</th>
-					<th>Data</th>
 					<th>Ação</th>
+					<th>Papel</th>
+					<th></th>
+					
 				</tr>
 				</thead>
 				<tbody>
-					<tr th:each="perm : ${listaPermissoes}">
-						<td th:text="${perm.funcionario.nome}"></td>
-						<td th:text="${perm.role.nome}"></td>
-						<td th:text="${#dates.format(perm.dataCadastro, 'dd-MM-yyyy')}"></td>
-						<td>
-							<button type="submit" name="acao" th:value="${perm.id}" class="btn btn-outline-danger"><span class="bi bi-trash3" title="Excluir"></span></button>
+					<tr th:each="func : ${listaFuncionarios}">
+						<td th:text="${func.nome}"></td>
+						<td><a class="btn btn-outline-danger" th:href="@{/administrativo/funcionarios/permissoes/editar/{id}(id=${func.id})}" role="button"><span class="bi bi-trash3" title="Editar" aria-hidden="true"></span>
+						</a>
 						</td>
+						<td th:each="role : ${func.roles}" th:text="${role.roleName}"></td>
+						<td></td>
+					</tr>
 				</tbody>
 			</table>
-		</form>
+		</div>		
 		
 	</section>
 </body>

@@ -1,16 +1,24 @@
 package com.dev.loja.modelos;
 
-import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "funcionario")
-public class Funcionario implements Serializable {
+public class Funcionario implements UserDetails {
 
     public Funcionario() {
         super();
@@ -21,8 +29,8 @@ public class Funcionario implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    private String nome;
-    private String cpf;
+    @Column(nullable = false) private String nome;
+    @Column(nullable = false) private String cpf;
     private String pis;
     private String nascimento;
     private String genero;
@@ -31,6 +39,14 @@ public class Funcionario implements Serializable {
     private String dataEntrada;
     private String dataSaida;
     private String endereco;
+    @Column(nullable = false, unique = true) private String email;
+    private String senha;
+
+    @ManyToMany
+    @JoinTable(name = "funcionarios_roles",
+        joinColumns = @JoinColumn(name="funcionario_id"),
+        inverseJoinColumns = @JoinColumn(name="role_id"))
+    private List<Role> roles;
 
     public Long getId() {
         return id;
@@ -98,6 +114,56 @@ public class Funcionario implements Serializable {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getSenha() {
+        return senha;
+    }
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    public List<Role> getRoles() {
+        return roles;
+    }
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles;
+    }
+    @Override
+    public String getPassword() {
+        return this.senha;
+    }
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    
     
    
 }

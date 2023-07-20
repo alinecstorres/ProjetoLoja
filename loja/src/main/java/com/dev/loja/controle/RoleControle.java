@@ -58,7 +58,7 @@ public class RoleControle {
 
         } else {
             for (Role role1 : listaRoles) {
-                if (role1.getId().equals(Long.parseLong(acao))) {
+                if (role1.getRoleId().equals(Long.parseLong(acao))) {
                     roleRepositorio.deleteById(Long.parseLong(acao));
                 }
             }

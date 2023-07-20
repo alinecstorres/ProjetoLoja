@@ -1,8 +1,13 @@
 package com.dev.loja.modelos;
 
-import java.io.Serializable;
+import org.springframework.security.core.GrantedAuthority;
 
+import com.dev.loja.enums.RoleName;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -10,7 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "role")
-public class Role implements Serializable {
+public class Role implements GrantedAuthority {
 
     public Role() {
         super();
@@ -19,25 +24,36 @@ public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long roleId;
     
-    private String nome;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, unique = true)
+    private RoleName roleName;
 
-    public Long getId() {
-        return id;
+    @Override
+    public String getAuthority() {
+        return this.roleName.toString();
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getRoleId() {
+        return roleId;
     }
 
-    public String getNome() {
-        return nome;
+    public void setRoleId(Long id) {
+        this.roleId = id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public RoleName getRoleName() {
+        return roleName;
     }
+
+    public void setRoleName(RoleName roleName) {
+        this.roleName = roleName;
+    }
+
+    
+
+    
     
 
 }
