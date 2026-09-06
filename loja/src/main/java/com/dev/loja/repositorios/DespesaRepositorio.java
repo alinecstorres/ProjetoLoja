@@ -10,6 +10,6 @@ import com.dev.loja.modelos.Despesa;
 public interface DespesaRepositorio extends JpaRepository<Despesa, Long>{
     
     @Override
-    @Query(value = "SELECT * FROM loja.debitos ORDER BY data DESC", nativeQuery = true)
+    @Query(value = "SELECT * FROM debitos ORDER BY data DESC", nativeQuery = true)
     List<Despesa> findAll();
 }

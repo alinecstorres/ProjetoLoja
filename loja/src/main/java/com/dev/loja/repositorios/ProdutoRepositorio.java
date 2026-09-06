@@ -12,7 +12,7 @@ public interface ProdutoRepositorio extends JpaRepository<Produto, Long>{
 
     Produto findByNomeCompletoProduto(String nomeCompleto);
 
-    @Query(value = "SELECT * FROM loja.produtos WHERE nome_produto LIKE %?%", nativeQuery = true)
+    @Query(value = "SELECT * FROM produtos WHERE nome_produto LIKE %?%", nativeQuery = true)
     List<Produto> findAllByNomeProduto(@Param("NOME") String NOME);
     
 }
